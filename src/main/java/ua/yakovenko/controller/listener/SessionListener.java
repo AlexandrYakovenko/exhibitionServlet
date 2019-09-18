@@ -20,14 +20,8 @@ public class SessionListener implements HttpSessionListener {
         String username = (String) httpSessionEvent.getSession()
                 .getAttribute("username");
 
-        System.out.println(username);
-        System.out.println(loggedUsers);
-
         loggedUsers.remove(username);
         httpSessionEvent.getSession().setAttribute("loggedUsers", loggedUsers);
-
-        System.out.println("listener works");
-        System.out.println(loggedUsers);
 
     }
 }

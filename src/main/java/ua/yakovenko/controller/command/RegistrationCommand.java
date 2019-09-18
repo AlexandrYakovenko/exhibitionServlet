@@ -7,10 +7,10 @@ import ua.yakovenko.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
-public class Registration implements Command {
+public class RegistrationCommand implements Command {
     private UserService userService;
 
-    public Registration(UserService userService) {
+    public RegistrationCommand(UserService userService) {
         this.userService = userService;
     }
 
@@ -26,11 +26,13 @@ public class Registration implements Command {
                 .password(password)
                 .role(Role.USER)
                 .build();
+
         try {
             userService.addUser(newUser);
         } catch (SQLException e) {
             request.setAttribute("error", true);
         }
+
         return "/registration.jsp";
     }
 }

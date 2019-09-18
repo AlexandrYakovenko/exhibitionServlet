@@ -23,9 +23,9 @@ public class Servlet extends HttpServlet {
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
 
-        commands.put("login", new Login(userService));
-        commands.put("registration", new Registration(userService));
-        commands.put("logout", new LogOut());
+        commands.put("login", new LoginCommand(userService));
+        commands.put("registration", new RegistrationCommand(userService));
+        commands.put("logout", new LogOutCommand());
         commands.put("exception", new ExceptionCommand());
         commands.put("admin", new AdminCommand());
         commands.put("user", new UserCommand());
@@ -33,22 +33,22 @@ public class Servlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse resp
+    ) throws ServletException, IOException {
         processRequest(req, resp);
-
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req
+            , HttpServletResponse resp
+    ) throws ServletException, IOException {
         processRequest(req, resp);
-
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println(request.getMethod());
-        System.out.println(request.getRequestURI());
-
+    private void processRequest(HttpServletRequest request,
+                                HttpServletResponse response
+    ) throws ServletException, IOException {
         String path = request.getRequestURI();
         path = path.replaceAll(".*/exhibition/", "");
 
@@ -60,7 +60,5 @@ public class Servlet extends HttpServlet {
         } else {
             request.getRequestDispatcher(page).forward(request, response);
         }
-//      response.sendRedirect("/welcome.jsp");
-//      request.getRequestDispatcher("/welcome.jsp").forward(request, response);
     }
 }

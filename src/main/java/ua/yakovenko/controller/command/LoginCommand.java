@@ -9,10 +9,10 @@ import java.util.Optional;
 
 import static java.util.Objects.nonNull;
 
-public class Login implements Command {
+public class LoginCommand implements Command {
     private UserService userService;
 
-    public Login(UserService userService) {
+    public LoginCommand(UserService userService) {
         this.userService = userService;
     }
 
@@ -21,13 +21,11 @@ public class Login implements Command {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (username == null) return "/login.jsp";
+        if (username == null)
+            return "/login.jsp";
 
-        System.out.println("user enter username: "+ username + " " + password);
-        System.out.println("entering DB : ");
-        userService.findAllUsers().forEach(System.out::println);
-
-        if (nonNull(request.getSession().getAttribute("username"))) return "/welcome.jsp";
+        if (nonNull(request.getSession().getAttribute("username")))
+            return "/welcome.jsp";
 
         Optional<User> user = userService.findUser(username, password);
 

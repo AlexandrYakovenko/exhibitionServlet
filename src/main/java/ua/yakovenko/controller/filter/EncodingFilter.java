@@ -1,28 +1,20 @@
 package ua.yakovenko.controller.filter;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class EncodingFilter implements Filter {
+public class EncodingFilter extends BaseFilter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest,
-                         ServletResponse servletResponse,
-                         FilterChain filterChain
+    public void doFilter(HttpServletRequest request,
+                         HttpServletResponse response,
+                         FilterChain chain
     ) throws IOException, ServletException {
-        servletRequest.setCharacterEncoding("UTF-8");
-        servletResponse.setCharacterEncoding("UTF-8");
-        servletResponse.setContentType("text/html;charset=UTF-8");//добавил charset=UTF-8
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
 
-        filterChain.doFilter(servletRequest,servletResponse);
-    }
-
-    @Override
-    public void destroy() {
-
+        chain.doFilter(request,response);
     }
 }

@@ -8,37 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AccessFilter implements Filter {
+public class AccessFilter extends BaseFilter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest,
-                         ServletResponse servletResponse,
-                         FilterChain filterChain
+    public void doFilter(HttpServletRequest request,
+                         HttpServletResponse response,
+                         FilterChain chain
     ) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-
         String path = request.getRequestURI();
+
         if (path.contains("admin")) {
             if (request.getSession().getAttribute("role") == Role.ADMIN) {
-                filterChain.doFilter(servletRequest, servletResponse);
+                chain.doFilter(request, response);
             } else {
                 request.setAttribute("error", true);
                 request.setAttribute("message", "AccessDenied");
-//              response.sendRedirect("/index.jsp");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         } else {
-            filterChain.doFilter(servletRequest, servletResponse);
+            chain.doFilter(request, response);
         }
-    }
-
-    @Override
-    public void destroy() {
-
     }
 }
