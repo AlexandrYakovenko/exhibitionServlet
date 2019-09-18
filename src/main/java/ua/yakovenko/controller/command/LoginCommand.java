@@ -7,8 +7,6 @@ import ua.yakovenko.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-import static java.util.Objects.nonNull;
-
 public class LoginCommand implements Command {
     private UserService userService;
 
@@ -24,8 +22,8 @@ public class LoginCommand implements Command {
         if (username == null)
             return "/login.jsp";
 
-        if (nonNull(request.getSession().getAttribute("username")))
-            return "/welcome.jsp";
+        /*if (nonNull(request.getSession().getAttribute("username")))
+            return "/welcome.jsp";*/
 
         Optional<User> user = userService.findUser(username, password);
 
@@ -46,7 +44,7 @@ public class LoginCommand implements Command {
             return "redirect:/exhibition/user";
         } else {
             CommandUtility.setUserRole(request, Role.GUEST, username);
-            return "redirect:/welcome.jsp";
+            return "redirect:/index.jsp"; //change welcome.jsp на index.jsp
         }
 
     }
