@@ -10,7 +10,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<%@ include file="parts/navbar.jsp" %>
+<%@ include file="WEB-INF/parts/navbar.jsp" %>
 <div class="container mt-2 pl-0">
 
     <c:if test="${requestScope.error eq true}">
