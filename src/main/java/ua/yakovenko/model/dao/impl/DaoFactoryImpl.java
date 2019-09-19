@@ -1,6 +1,7 @@
 package ua.yakovenko.model.dao.impl;
 
 import ua.yakovenko.model.dao.DaoFactory;
+import ua.yakovenko.model.dao.ExhibitionDao;
 import ua.yakovenko.model.dao.UserDao;
 
 import javax.sql.DataSource;
@@ -13,6 +14,11 @@ public class DaoFactoryImpl extends DaoFactory {
     @Override
     public UserDao createUserDao() {
         return new UserDaoImpl(getConnection());
+    }
+
+    @Override
+    public ExhibitionDao createExhibitionDao() {
+        return new ExhibitionDaoImpl(getConnection());
     }
 
     private Connection getConnection(){

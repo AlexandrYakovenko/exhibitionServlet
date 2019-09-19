@@ -6,6 +6,7 @@ import ua.yakovenko.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.Collections;
 
 public class RegistrationCommand implements Command {
     private UserService userService;
@@ -24,7 +25,7 @@ public class RegistrationCommand implements Command {
         User newUser = User.builder()
                 .username(username)
                 .password(password)
-                .role(Role.USER)
+                .roles(Collections.singleton(Role.USER))
                 .build();
 
         try {

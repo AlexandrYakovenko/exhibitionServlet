@@ -7,6 +7,8 @@ public abstract class DaoFactory  {
 
     public abstract UserDao createUserDao();
 
+    public abstract ExhibitionDao createExhibitionDao();
+
     public static DaoFactory getInstance(){
         if( daoFactory == null ){
             synchronized (DaoFactory.class){

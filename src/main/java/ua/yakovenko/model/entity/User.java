@@ -1,42 +1,17 @@
 package ua.yakovenko.model.entity;
 
+import java.util.List;
+import java.util.Set;
+
 public class User {
     private Long id;
     private String username;
     private String password;
-    private Role role;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    private Long accountMoney;
+    private boolean active;
+    private Set<Exhibition> exhibitions;
+    private List<Exhibition> boughtTickets;
+    private Set<Role> roles;
 
     //Builder
     public static Builder builder() {
@@ -62,8 +37,28 @@ public class User {
             return this;
         }
 
-        public Builder role(Role role) {
-            User.this.role = role;
+        public Builder accountMoney(Long accountMoney) {
+            User.this.accountMoney = accountMoney;
+            return this;
+        }
+
+        public Builder active(Boolean active) {
+            User.this.active = active;
+            return this;
+        }
+
+        public Builder exhibitions(Set<Exhibition> exhibitions) {
+            User.this.exhibitions = exhibitions;
+            return this;
+        }
+
+        public Builder boughtTickets(List<Exhibition> boughtTickets) {
+            User.this.boughtTickets = boughtTickets;
+            return this;
+        }
+
+        public Builder roles(Set<Role> roles) {
+            User.this.roles = roles;
             return this;
         }
 
@@ -72,13 +67,67 @@ public class User {
         }
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Long getAccountMoney() {
+        return accountMoney;
+    }
+
+    public void setAccountMoney(Long accountMoney) {
+        this.accountMoney = accountMoney;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Set<Exhibition> getExhibitions() {
+        return exhibitions;
+    }
+
+    public void setExhibitions(Set<Exhibition> exhibitions) {
+        this.exhibitions = exhibitions;
+    }
+
+    public List<Exhibition> getBoughtTickets() {
+        return boughtTickets;
+    }
+
+    public void setBoughtTickets(List<Exhibition> boughtTickets) {
+        this.boughtTickets = boughtTickets;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

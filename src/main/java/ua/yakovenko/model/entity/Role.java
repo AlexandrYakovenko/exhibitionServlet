@@ -1,5 +1,5 @@
 package ua.yakovenko.model.entity;
 
 public enum Role {
-    GUEST, USER, ADMIN
+    USER, ADMIN, SUPER_ADMIN
 }

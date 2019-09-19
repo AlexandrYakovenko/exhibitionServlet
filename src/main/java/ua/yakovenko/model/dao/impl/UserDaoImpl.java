@@ -7,6 +7,7 @@ import ua.yakovenko.model.entity.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static ua.yakovenko.model.dao.impl.Query.*;
@@ -22,11 +23,11 @@ public class UserDaoImpl implements UserDao {
     public void add(User entity) throws SQLException {
         try (PreparedStatement ps =
                      connection.prepareStatement(
-                                    QUERY_ADD)
+                                    QUERY_USER_ADD)
         ) {
             ps.setString(1, entity.getUsername());
             ps.setString(2, entity.getPassword());
-            ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
+            ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRoles()));
 
             ps.executeUpdate();
         }
@@ -39,7 +40,7 @@ public class UserDaoImpl implements UserDao {
     public User findByUsername(String username) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
-                             QUERY_FIND_BY_USERNAME)
+                             QUERY_USER_FIND_BY_USERNAME)
         ) {
             ps.setString(1, username);
 
@@ -61,7 +62,7 @@ public class UserDaoImpl implements UserDao {
         try (Statement statement =
                      connection.createStatement()
         ) {
-            ResultSet rs = statement.executeQuery(QUERY_FIND_ALL);
+            ResultSet rs = statement.executeQuery(QUERY_USER_FIND_ALL);
 
             while (rs.next()) {
                 User result = extractFromResultSet(rs);
@@ -77,11 +78,11 @@ public class UserDaoImpl implements UserDao {
     public void update(User user) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
-                             QUERY_UPDATE_USER)
+                             QUERY_USER_UPDATE_USER)
         ) {
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
-            ps.setObject(3, user.getRole());
+            ps.setObject(3, user.getRoles());
             ps.setLong(4, user.getId());
 
             ps.executeUpdate();
@@ -94,7 +95,7 @@ public class UserDaoImpl implements UserDao {
     public void delete(int id) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
-                            QUERY_DELETE_USER_BY_ID)
+                            QUERY_USER_DELETE_USER_BY_ID)
         ) {
             ps.setInt(1, id);
 
@@ -118,7 +119,7 @@ public class UserDaoImpl implements UserDao {
                 .id(rs.getLong("id"))
                 .username(rs.getString("username"))
                 .password(rs.getString("password"))
-                .role(Role.values()[rs.getInt("role")])
+                .roles(Collections.singleton(Role.values()[rs.getInt("role")]))
                 .build();
     }
 }
