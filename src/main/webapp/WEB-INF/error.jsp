@@ -10,18 +10,20 @@
           crossorigin="anonymous">
 </head>
 <body>
-<%@ include file="parts/navbar.jsp" %>
-<div class="container mt-2 pl-0">
+    <div class="container mt-2">
+        <%@ include file="parts/navbar.jsp" %>
+    </div>
+    <div class="container mt-2">
 
-    <h2>
-        Error Page<br/>
-        <i>Error <%= exception %></i>
-    </h2>
-    <br>
-    <a href="${pageContext.request.contextPath}/index.jsp">Main Page</a>
+        <h2>
+            Error Page<br/>
+            <i>Error <%= exception %></i>
+        </h2>
+        <br>
+        <a href="${pageContext.request.contextPath}/index.jsp">Main Page</a>
 
 
-</div>
+    </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

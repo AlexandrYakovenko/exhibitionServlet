@@ -10,14 +10,16 @@
           crossorigin="anonymous">
 </head>
 <body>
-<%@ include file="../parts/navbar.jsp" %>
-<div class="container mt-2 pl-0">
-
-    <div style="text-align: center">
-        Hello, admin
+    <div class="container mt-2">
+        <%@ include file="../admin/parts/navbarAdmin.jsp" %>
     </div>
+    <div class="container mt-2">
 
-</div>
+        <div style="text-align: center">
+            Hello, admin
+        </div>
+
+    </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

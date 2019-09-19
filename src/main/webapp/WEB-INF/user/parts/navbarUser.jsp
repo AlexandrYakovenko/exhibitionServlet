@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,20 +14,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/">
-                    My exhibitions
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/">
                     Profile
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/">
-                    User list
-                </a>
-            </li>
-
         </ul>
 
         <div class="navbar-text mr-2"> ${sessionScope.username}</div>
@@ -42,13 +31,13 @@
             </div>
         </c:if>
         <c:if test="${sessionScope.username ne null}">
-        <div class="mr-3">
-            <form action="${pageContext.request.contextPath}/exhibition/logout" method="post">
-                <button type="submit" class="btn btn-primary">
-                    Log Out
-                </button>
-            </form>
-        </div>
+            <div class="mr-3">
+                <form action="${pageContext.request.contextPath}/exhibition/logout" method="post">
+                    <button type="submit" class="btn btn-primary">
+                        Log Out
+                    </button>
+                </form>
+            </div>
         </c:if>
 
     </div>

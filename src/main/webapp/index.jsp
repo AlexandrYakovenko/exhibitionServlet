@@ -10,22 +10,24 @@
           crossorigin="anonymous">
 </head>
 <body>
-<%@ include file="WEB-INF/parts/navbar.jsp" %>
-<div class="container mt-2 pl-0">
-
-    <c:if test="${requestScope.error eq true}">
-    <div class="alert alert-danger" align="center">
-        <strong>${requestScope.message}</strong>
+    <div class="container mt-2">
+        <%@ include file="/WEB-INF/parts/navbarGuest.jsp" %>
     </div>
-</c:if>
+    <div class="container mt-2">
 
-    <h5>
-        Welcome
-        <c:if test="${sessionScope.username ne null}">${sessionScope.username}</c:if>
-        <c:if test="${sessionScope.username eq null}">Guest</c:if>
-    </h5>
+        <c:if test="${requestScope.error eq true}">
+        <div class="alert alert-danger" align="center">
+            <strong>${requestScope.message}</strong>
+        </div>
+        </c:if>
 
-</div>
+        <h5>
+            Welcome
+            <c:if test="${sessionScope.username ne null}">${sessionScope.username}</c:if>
+            <c:if test="${sessionScope.username eq null}">Guest</c:if>
+        </h5>
+
+    </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
