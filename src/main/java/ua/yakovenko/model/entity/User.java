@@ -11,7 +11,7 @@ public class User {
     private boolean active;
     private Set<Exhibition> exhibitions;
     private List<Exhibition> boughtTickets;
-    private Set<Role> roles;
+    private Role role;
 
     //Builder
     public static Builder builder() {
@@ -57,8 +57,8 @@ public class User {
             return this;
         }
 
-        public Builder roles(Set<Role> roles) {
-            User.this.roles = roles;
+        public Builder role(Role role) {
+            User.this.role = role;
             return this;
         }
 
@@ -123,11 +123,11 @@ public class User {
         this.boughtTickets = boughtTickets;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

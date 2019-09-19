@@ -2,6 +2,7 @@ package ua.yakovenko.model.service;
 
 import ua.yakovenko.model.dao.DaoFactory;
 import ua.yakovenko.model.dao.UserDao;
+import ua.yakovenko.model.entity.Role;
 import ua.yakovenko.model.entity.User;
 
 import java.sql.SQLException;
@@ -16,8 +17,18 @@ public class UserService {
         return userDao.findAll();
     }
 
-    public void addUser(User user) throws SQLException {
-        userDao.add(user);
+    public void addUser(String username, String password) throws SQLException {
+        User newUser = User.builder()
+                .username(username)
+                .password(password)
+                .accountMoney(0L)
+                .active(true)
+                .role(Role.USER)
+                .build();
+
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            userDao.add(newUser);
+        }
     }
 
     public Optional<User> findUser(String username, String password){

@@ -1,12 +1,9 @@
 package ua.yakovenko.controller.command;
 
-import ua.yakovenko.model.entity.Role;
-import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
-import java.util.Collections;
 
 public class RegistrationCommand implements Command {
     private UserService userService;
@@ -20,16 +17,11 @@ public class RegistrationCommand implements Command {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (username == null) return "/registration.jsp";
-
-        User newUser = User.builder()
-                .username(username)
-                .password(password)
-                .roles(Collections.singleton(Role.USER))
-                .build();
+        if (username == null || password == null)
+            return "/registration.jsp";
 
         try {
-            userService.addUser(newUser);
+            userService.addUser(username, password);
         } catch (SQLException e) {
             request.setAttribute("error", true);
         }
