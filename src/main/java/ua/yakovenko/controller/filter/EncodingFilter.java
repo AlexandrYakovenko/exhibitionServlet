@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class EncodingFilter extends BaseFilter {
+public class EncodingFilter extends AbstractFilter {
     @Override
     public void doFilter(HttpServletRequest request,
                          HttpServletResponse response,

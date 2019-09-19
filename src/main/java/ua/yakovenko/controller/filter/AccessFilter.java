@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AccessFilter extends BaseFilter {
+public class AccessFilter extends AbstractFilter {
     @Override
     public void doFilter(HttpServletRequest request,
                          HttpServletResponse response,
