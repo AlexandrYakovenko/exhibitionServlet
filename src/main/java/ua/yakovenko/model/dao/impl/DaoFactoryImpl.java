@@ -13,12 +13,12 @@ public class DaoFactoryImpl extends DaoFactory {
 
     @Override
     public UserDao createUserDao() {
-        return new UserDaoImpl(getConnection());
+        return new UserJdbcDao(getConnection());
     }
 
     @Override
     public ExhibitionDao createExhibitionDao() {
-        return new ExhibitionDaoImpl(getConnection());
+        return new ExhibitionJdbcDao(getConnection());
     }
 
     private Connection getConnection(){

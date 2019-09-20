@@ -1,20 +1,20 @@
 package ua.yakovenko.model.dao.impl;
 
 import ua.yakovenko.model.dao.UserDao;
-import ua.yakovenko.model.entity.Role;
+import ua.yakovenko.model.dao.mapper.UserMapper;
 import ua.yakovenko.model.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ua.yakovenko.model.dao.impl.Query.*;
-
-public class UserDaoImpl implements UserDao {
+public class UserJdbcDao implements UserDao {
     private Connection connection;
+    private UserMapper mapper;
 
-    public UserDaoImpl(Connection connection) {
+    public UserJdbcDao(Connection connection) {
         this.connection = connection;
+        mapper = new UserMapper();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return extractFromResultSet(rs);
+                return mapper.extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = statement.executeQuery(QUERY_USER_FIND_ALL);
 
             while (rs.next()) {
-                User result = extractFromResultSet(rs);
+                User result = mapper.extractFromResultSet(rs);
                 resultList.add(result);
             }
         } catch (SQLException e) {
@@ -75,15 +75,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User user) {
+    public void update(User entity) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
-                             QUERY_USER_UPDATE_USER)
+                             QUERY_USER_UPDATE)
         ) {
-            ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
-            ps.setObject(3, user.getRole());
-            ps.setLong(4, user.getId());
+            ps.setString(1, entity.getUsername());
+            ps.setString(2, entity.getPassword());
+            ps.setString(3, entity.getRole().name());
+            ps.setBoolean(4, entity.isActive());
+            ps.setLong(5, entity.getAccountMoney());
+            ps.setLong(6, entity.getId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -95,7 +97,7 @@ public class UserDaoImpl implements UserDao {
     public void delete(int id) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
-                            QUERY_USER_DELETE_USER_BY_ID)
+                            QUERY_USER_DELETE_BY_ID)
         ) {
             ps.setInt(1, id);
 
@@ -114,14 +116,14 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    private User extractFromResultSet(ResultSet rs) throws SQLException {
-        return User.builder()
-                .id(rs.getLong("id"))
-                .username(rs.getString("username"))
-                .password(rs.getString("password"))
-                .role(Role.valueOf(rs.getString("role")))
-                .active(rs.getBoolean("active"))
-                .accountMoney(rs.getLong("account_money"))
-                .build();
-    }
+    private static final String QUERY_USER_ADD =
+            "INSERT INTO user (username , password , role, active, account_money) VALUES (? ,? ,?, ?, ?)";
+    private static final String QUERY_USER_FIND_BY_USERNAME =
+            "SELECT * FROM user WHERE username = ?";
+    private static final String QUERY_USER_FIND_ALL =
+            "SELECT * FROM user";
+    private static final String QUERY_USER_UPDATE =
+            "UPDATE user SET username = ? , password = ?, role = ?, active = ?, account_money = ? WHERE id = ?";
+    private static final String QUERY_USER_DELETE_BY_ID =
+            "DELETE FROM user  WHERE id = ?";
 }
