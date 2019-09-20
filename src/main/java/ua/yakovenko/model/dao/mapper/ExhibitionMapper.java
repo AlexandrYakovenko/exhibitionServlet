@@ -22,7 +22,8 @@ public class ExhibitionMapper implements GenericMapper<Exhibition> {
     }
 
     @Override
-    public Exhibition makeUnique(Map<Long, Exhibition> cache, Exhibition teacher) {
-        return null;
+    public Exhibition makeUnique(Map<Long, Exhibition> cache, Exhibition exhibition) {
+        cache.putIfAbsent(exhibition.getId(), exhibition);
+        return cache.get(exhibition.getId());
     }
 }

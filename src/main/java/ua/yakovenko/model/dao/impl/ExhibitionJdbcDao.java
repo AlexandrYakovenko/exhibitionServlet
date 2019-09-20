@@ -98,7 +98,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     public void delete(int id) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
-                             QUERY_EXHIBITION_DELETE_BY_ID) 
+                             QUERY_EXHIBITION_DELETE_BY_ID)
         ) {
             ps.setInt(1, id);
 
