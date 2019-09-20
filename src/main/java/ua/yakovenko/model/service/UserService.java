@@ -21,9 +21,9 @@ public class UserService {
         User newUser = User.builder()
                 .username(username)
                 .password(password)
-                .accountMoney(0L)
-                .active(true)
                 .role(Role.USER)
+                .active(true)
+                .accountMoney(0L)
                 .build();
 
         try (UserDao userDao = daoFactory.createUserDao()) {

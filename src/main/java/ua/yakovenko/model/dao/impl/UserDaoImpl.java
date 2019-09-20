@@ -25,8 +25,9 @@ public class UserDaoImpl implements UserDao {
         ) {
             ps.setString(1, entity.getUsername());
             ps.setString(2, entity.getPassword());
-            ps.setInt(3, entity.getRole().ordinal());
+            ps.setString(3, entity.getRole().name());
             ps.setBoolean(4, entity.isActive());
+            ps.setLong(5, entity.getAccountMoney());
 
             ps.executeUpdate();
         }
@@ -118,7 +119,9 @@ public class UserDaoImpl implements UserDao {
                 .id(rs.getLong("id"))
                 .username(rs.getString("username"))
                 .password(rs.getString("password"))
-                .role(Role.values()[rs.getInt("role")])
+                .role(Role.valueOf(rs.getString("role")))
+                .active(rs.getBoolean("active"))
+                .accountMoney(rs.getLong("account_money"))
                 .build();
     }
 }
