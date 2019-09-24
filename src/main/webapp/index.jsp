@@ -11,7 +11,18 @@
 </head>
 <body>
     <div class="container mt-2">
+       <%-- <c:if test="${sessionScope.role eq \"SUPER_ADMIN\"}">
+            <%@ include file="/WEB-INF/super_admin/parts/navbarSuperAdmin.jsp" %>
+        </c:if>
+        <c:if test="${sessionScope.role eq \"ADMIN\"}">
+            <%@ include file="/WEB-INF/admin/parts/navbarAdmin.jsp" %>
+        </c:if>
+        <c:if test="${sessionScope.role eq \"USER\"}">
+            <%@ include file="/WEB-INF/user/parts/navbarUser.jsp" %>
+        </c:if>--%>
+       <%-- <c:if test="${sessionScope.role ne \"USER\" && ne \"ADMIN\" and ne \"SUPER_ADMIN\"}">--%>
         <%@ include file="/WEB-INF/parts/navbarGuest.jsp" %>
+        <%--</c:if>--%>
     </div>
     <div class="container mt-2">
 
@@ -20,12 +31,23 @@
             <strong>${requestScope.message}</strong>
         </div>
         </c:if>
-
-        <h5>
-            Welcome
-            <c:if test="${sessionScope.username ne null}">${sessionScope.username}</c:if>
-            <c:if test="${sessionScope.username eq null}">Guest</c:if>
-        </h5>
+        <div align="center">
+            <h5>
+                Welcome
+                <c:if test="${sessionScope.username ne null}">${sessionScope.username}</c:if>
+                <c:if test="${sessionScope.username eq null}">Guest</c:if>
+            </br>
+                <c:if test="${sessionScope.access eq \"SUPER_ADMIN\"}">
+                    <a href="${pageContext.request.contextPath}/exhibition/superAdmin">Your Page</a>
+                </c:if>
+                <c:if test="${sessionScope.access eq \"ADMIN\"}">
+                    <a href="${pageContext.request.contextPath}/exhibition/admin">Your Page</a>
+                </c:if>
+                <c:if test="${sessionScope.access eq \"USER\"}">
+                    <a href="${pageContext.request.contextPath}/exhibition/user">Your Page</a>
+                </c:if>
+            </h5>
+        </div>
 
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

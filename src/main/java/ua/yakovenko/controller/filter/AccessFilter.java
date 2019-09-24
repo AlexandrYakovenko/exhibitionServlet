@@ -17,7 +17,8 @@ public class AccessFilter extends AbstractFilter {
         String path = request.getRequestURI();
 
         if (path.contains("admin")) {
-            if (request.getSession().getAttribute("role") == Role.ADMIN) {
+            if (request.getSession().getAttribute("role") == Role.ADMIN ||
+                    request.getSession().getAttribute("role") == Role.SUPER_ADMIN) {
                 chain.doFilter(request, response);
             } else {
                 request.setAttribute("error", true);

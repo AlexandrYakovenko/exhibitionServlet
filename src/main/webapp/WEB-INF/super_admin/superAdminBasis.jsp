@@ -1,4 +1,4 @@
-<%@ page language="java" isErrorPage="true"  contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><html>
 
 <head>
@@ -10,20 +10,16 @@
           crossorigin="anonymous">
 </head>
 <body>
-    <div class="container mt-2">
-        <%@ include file="parts/navbar.jsp" %>
+<div class="container mt-2">
+    <%@ include file="../super_admin/parts/navbarSuperAdmin.jsp" %>
+</div>
+<div class="container mt-2">
+
+    <div style="text-align: center">
+        Hello, super_admin
     </div>
-    <div class="container mt-2">
 
-        <h2>
-            Error Page<br/>
-            <i>Error <%= exception %></i>
-        </h2>
-        <br>
-        <a href="${pageContext.request.contextPath}/index.jsp">Main Page</a>
-
-
-    </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

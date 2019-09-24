@@ -14,6 +14,7 @@ class CommandUtility {
         HttpSession session = request.getSession();
         session.setAttribute("username", username);
         session.setAttribute("role", role);
+        session.setAttribute("access", role.name());
     }
 
     static boolean checkUserIsLogged(HttpServletRequest request,

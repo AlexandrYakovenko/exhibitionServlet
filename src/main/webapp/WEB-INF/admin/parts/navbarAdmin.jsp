@@ -23,12 +23,6 @@
                             Profile
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/">
-                            User list
-                        </a>
-                    </li>
-
                 </ul>
 
                 <div class="navbar-text mr-2"> ${sessionScope.username}</div>

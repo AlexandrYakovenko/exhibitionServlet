@@ -39,12 +39,12 @@ public class LoginCommand implements Command {
         if (user.get().getRole().equals(Role.ADMIN)) {
             CommandUtility.setUserRole(request, Role.ADMIN, username);
             return "redirect:/exhibition/admin";
-        } else if (user.get().getRole().equals(Role.USER)) {
-            CommandUtility.setUserRole(request, Role.USER, username);
-            return "redirect:/exhibition/user";
-        } else {
+        } else if (user.get().getRole().equals(Role.SUPER_ADMIN)) {
             CommandUtility.setUserRole(request, Role.SUPER_ADMIN, username);
-            return "redirect:/index.jsp"; //change welcome.jsp на index.jsp
+            return "redirect:/exhibition/superAdmin";
+        } else {
+            CommandUtility.setUserRole(request, Role.USER, username);
+            return "redirect:/exhibition/user"; //change welcome.jsp на index.jsp
         }
 
     }

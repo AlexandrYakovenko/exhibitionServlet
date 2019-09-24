@@ -29,6 +29,8 @@ public class Servlet extends HttpServlet {
         commands.put("exception", new ExceptionCommand());
         commands.put("admin", new AdminCommand());
         commands.put("user", new UserCommand());
+        commands.put("superAdmin", new SuperAdminCommand());
+        commands.put("super_admin/userList", new UserListCommand(userService));
 
     }
 
@@ -36,13 +38,15 @@ public class Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp
     ) throws ServletException, IOException {
+
         processRequest(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req
-            , HttpServletResponse resp
+    protected void doPost(HttpServletRequest req,
+                          HttpServletResponse resp
     ) throws ServletException, IOException {
+
         processRequest(req, resp);
     }
 
@@ -52,11 +56,14 @@ public class Servlet extends HttpServlet {
         String path = request.getRequestURI();
         path = path.replaceAll(".*/exhibition/", "");
 
-        Command command = commands.getOrDefault(path, (r) -> "/index.jsp");
+        Command command = commands.getOrDefault(path, (r) -> "/WEB-INF/error404.jsp");
 
         String page = command.execute(request);
         if (page.contains("redirect")) {
             response.sendRedirect(page.replace("redirect:", ""));
+        } else if (page.contains("error404")){
+            request.setAttribute("error", "404 Not Found");
+            request.getRequestDispatcher(page).forward(request, response);
         } else {
             request.getRequestDispatcher(page).forward(request, response);
         }
