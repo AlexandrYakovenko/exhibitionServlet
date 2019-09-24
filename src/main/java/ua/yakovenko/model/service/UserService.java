@@ -32,12 +32,22 @@ public class UserService {
     }
 
     public Optional<User> findUser(String username, String password){
-        Optional<User> user = Optional.ofNullable((userDao.findByUsername(username)));
+        Optional<User> user = Optional.ofNullable(userDao.findByUsername(username));
 
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             return user;
         }
 
         return Optional.empty();
+    }
+
+    public Optional<User> findById(Long editId) {
+        Optional<User> user = Optional.ofNullable(userDao.findById(editId));
+
+        if (!user.isPresent()) {
+            return Optional.empty();
+        }
+
+        return user;
     }
 }

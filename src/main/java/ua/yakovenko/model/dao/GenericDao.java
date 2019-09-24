@@ -9,6 +9,8 @@ public interface GenericDao<T> extends AutoCloseable {
 
     T findByUsername(String username);
 
+    T findById(Long id);
+
     List<T> findAll();
 
     void update(T entity);

@@ -56,6 +56,25 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
+    public User findById(Long id) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_USER_FIND_BY_ID)
+        ) {
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapper.extractFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    @Override
     public List<User> findAll() {
         List<User> resultList = new ArrayList<>();
 
@@ -120,6 +139,8 @@ public class UserJdbcDao implements UserDao {
             "INSERT INTO user (username , password , role, active, account_money) VALUES (? ,? ,?, ?, ?)";
     private static final String QUERY_USER_FIND_BY_USERNAME =
             "SELECT * FROM user WHERE username = ?";
+    private static final String QUERY_USER_FIND_BY_ID =
+            "SELECT * FROM user WHERE id = ?";
     private static final String QUERY_USER_FIND_ALL =
             "SELECT * FROM user";
     private static final String QUERY_USER_UPDATE =

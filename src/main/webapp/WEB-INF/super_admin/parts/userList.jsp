@@ -29,7 +29,8 @@
                         <tr>
                             <td><c:out value="${user.username}"/></td>
                             <td><c:out value="${user.role}"/></td>
-                            <td><a href="/exhibition/super_admin/edit/${user.id}">edit</a></td>
+                            <c:set scope="session" var="editId" value="${user.id}"/>
+                            <td><a href="${pageContext.request.contextPath}/exhibition/super_admin/edit">edit</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

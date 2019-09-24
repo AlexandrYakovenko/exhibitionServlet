@@ -56,6 +56,25 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
+    public Exhibition findById(Long id) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_EXHIBITION_FIND_BY_ID)
+        ) {
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapper.extractFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("No exhibition by this Id");
+        }
+        return null;
+    }
+
+    @Override
     public List<Exhibition> findAll() {
         List<Exhibition> resultList = new ArrayList<>();
 
@@ -121,6 +140,8 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             "INSERT INTO exhibition (name , showroom , description, author, price, date) VALUES (? ,? ,?, ?, ?, ?)";
     private static final String QUERY_EXHIBITION_FIND_BY_NAME =
             "SELECT * FROM exhibition WHERE name = ?";
+    private static final String QUERY_EXHIBITION_FIND_BY_ID =
+            "SELECT * FROM exhibition WHERE id = ?";
     private static final String QUERY_EXHIBITION_FIND_ALL =
             "SELECT * FROM exhibition";
     private static final String QUERY_EXHIBITION_UPDATE =
