@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
+<fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages"/>
+<html lang="${param.lang}">
 <head>
     <meta charset="UTF-8">
     <title>Exhibition</title>
@@ -13,18 +15,7 @@
 </head>
 <body>
     <div class="container mt-2">
-       <%-- <c:if test="${sessionScope.role eq \"SUPER_ADMIN\"}">
-            <%@ include file="/WEB-INF/super_admin/parts/navbarSuperAdmin.jsp" %>
-        </c:if>
-        <c:if test="${sessionScope.role eq \"ADMIN\"}">
-            <%@ include file="/WEB-INF/admin/parts/navbarAdmin.jsp" %>
-        </c:if>
-        <c:if test="${sessionScope.role eq \"USER\"}">
-            <%@ include file="/WEB-INF/user/parts/navbarUser.jsp" %>
-        </c:if>--%>
-       <%-- <c:if test="${sessionScope.role ne \"USER\" && ne \"ADMIN\" and ne \"SUPER_ADMIN\"}">--%>
         <%@ include file="/WEB-INF/parts/navbarGuest.jsp" %>
-        <%--</c:if>--%>
     </div>
     <div class="container mt-2">
 
