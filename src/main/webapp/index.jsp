@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><html>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+<fmt:setBundle basename="messages"/>
 <head>
     <meta charset="UTF-8">
     <title>Exhibition</title>
@@ -33,7 +35,7 @@
         </c:if>
         <div align="center">
             <h5>
-                Welcome
+                <fmt:message key="label.welcome" />
                 <c:if test="${sessionScope.username ne null}">${sessionScope.username}</c:if>
                 <c:if test="${sessionScope.username eq null}">Guest</c:if>
             </br>
