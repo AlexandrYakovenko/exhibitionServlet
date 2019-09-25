@@ -31,7 +31,7 @@
                 <label class="col-sm-1 col-form-label" for="usernameInput">Username</label>
                 <div class="col-sm-4">
                     <input type="text" name="newUsername" class="form-control" placeholder="username"
-                            id="usernameInput"/>
+                            required id="usernameInput"/>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                 <label class="col-sm-1 col-form-label" for="roleInput">Role</label>
                 <div class="col-sm-4 ">
                     <input type="text" name="newRole" class="form-control" placeholder="role"
-                           pattern=".*" id="roleInput"/>
+                           required pattern="^USER|ADMIN$" id="roleInput"/>
                 </div>
             </div>
 

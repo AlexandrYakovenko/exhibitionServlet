@@ -27,12 +27,6 @@ public class UserEditCommand implements Command {
                 editUser.setUsername(newUsername);
                 editUser.setRole(Role.valueOf(newRole));
                 userService.update(editUser);
-            } else if (newUsername != null) {
-                editUser.setUsername(newUsername);
-                userService.update(editUser);
-            } else if (newRole != null) {
-                editUser.setRole(Role.valueOf(newRole));
-                userService.update(editUser);
             }
         } catch (Exception e) {
             request.setAttribute("error", e);
