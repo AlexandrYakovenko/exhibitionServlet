@@ -29,8 +29,14 @@
                         <tr>
                             <td><c:out value="${user.username}"/></td>
                             <td><c:out value="${user.role}"/></td>
-                            <c:set scope="session" var="editId" value="${user.id}"/>
-                            <td><a href="${pageContext.request.contextPath}/exhibition/super_admin/edit">edit</a></td>
+                            <td>
+                                <form action="${pageContext.request.contextPath}/exhibition/super_admin/edit" method="post">
+                                    <input type="hidden" name="userId" value="${user.id}" />
+                                    <button type="" class="btn btn-light">
+                                        Edit
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

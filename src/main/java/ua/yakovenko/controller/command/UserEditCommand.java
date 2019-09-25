@@ -1,5 +1,6 @@
 package ua.yakovenko.controller.command;
 
+import ua.yakovenko.model.entity.Role;
 import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.UserService;
 
@@ -14,12 +15,28 @@ public class UserEditCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Long editId = (Long) request.getSession().getAttribute("editId");
+        Long editId = Long.valueOf(request.getParameter("userId"));
         User editUser = userService.findById(editId).get();
+        request.setAttribute("editUser", editUser);
 
-        request.setAttribute("editUsername", editUser.getUsername());
-        request.setAttribute("editRole", editUser.getRole());
+        String newUsername = request.getParameter("newUsername");
+        String newRole = request.getParameter("newRole");
 
+        try {
+            if (newUsername != null && newRole != null) {
+                editUser.setUsername(newUsername);
+                editUser.setRole(Role.valueOf(newRole));
+                userService.update(editUser);
+            } else if (newUsername != null) {
+                editUser.setUsername(newUsername);
+                userService.update(editUser);
+            } else if (newRole != null) {
+                editUser.setRole(Role.valueOf(newRole));
+                userService.update(editUser);
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", e);
+        }
         return "/WEB-INF/super_admin/parts/userEdit.jsp";
     }
 }

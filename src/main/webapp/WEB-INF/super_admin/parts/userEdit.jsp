@@ -14,11 +14,16 @@
         <%@ include file="navbarSuperAdmin.jsp" %>
     </div>
     <div class="container mt-2">
-        <div class="row">
-                <h4>Username : <c:out value="${editUsername}"/></h4>
+        <c:if test="${requestScope.error eq true}">
+            <div class="alert alert-danger" align="center">
+                <strong>Cannot update user.</strong>
+            </div>
+        </c:if>
+        <div class="row ml-2">
+           <h4>Username : <c:out value="${editUser.username}"/></h4>
         </div>
-        <div class="row">
-            <h4>Role : <c:out value="${editRole}"/></h4>
+        <div class="row ml-2">
+            <h4>Role : <c:out value="${editUser.role}"/></h4>
         </div>
 
         <form action="${pageContext.request.contextPath}/exhibition/super_admin/edit" method="post">
@@ -26,17 +31,19 @@
                 <label class="col-sm-1 col-form-label" for="usernameInput">Username</label>
                 <div class="col-sm-4">
                     <input type="text" name="newUsername" class="form-control" placeholder="username"
-                           autofocus id="usernameInput"/>
+                            id="usernameInput"/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-1 col-form-label" for="roleInput">Role</label>
                 <div class="col-sm-4 ">
-                    <input type="password" name="newRole" class="form-control" placeholder="role"
-                           pattern="USER | ADMIN" id="roleInput"/>
+                    <input type="text" name="newRole" class="form-control" placeholder="role"
+                           pattern=".*" id="roleInput"/>
                 </div>
             </div>
+
+            <input type="hidden" name="userId" value="${editUser.id}">
             <button type="submit" class="btn btn-primary">
                 Save
             </button>
