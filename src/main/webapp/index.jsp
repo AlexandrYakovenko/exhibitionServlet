@@ -1,10 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page isELIgnored="false" %>
-<fmt:setLocale value="${param.lang}" />
+
+
+<fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
-<html lang="${param.lang}">
+
+<html lang="${sessionScope.lang}">
 <head>
     <meta charset="UTF-8">
     <title>Exhibition</title>
@@ -28,7 +30,7 @@
             <h5>
                 <fmt:message key="label.welcome" />
                 <c:if test="${sessionScope.username ne null}">${sessionScope.username}</c:if>
-                <c:if test="${sessionScope.username eq null}">Guest</c:if>
+                <c:if test="${sessionScope.username eq null}"><fmt:message key="label.guest" /></c:if>
             </br>
                 <c:if test="${sessionScope.access eq \"SUPER_ADMIN\"}">
                     <a href="${pageContext.request.contextPath}/exhibition/superAdmin">Your Page</a>
