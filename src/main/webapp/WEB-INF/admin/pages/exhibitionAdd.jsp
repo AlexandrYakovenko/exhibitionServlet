@@ -20,6 +20,11 @@
 </div>
 
 <div class="container mt-2">
+    <c:if test="${requestScope.error eq true}">
+        <div class="alert alert-danger" align="center">
+            <strong>${requestScope.error}</strong>
+        </div>
+    </c:if>
     <div align="center">
         <h5>Add new exhibition</h5>
     </div>
@@ -27,7 +32,7 @@
     <div align="center">
         <div class="form-group mt-3">
             <div class="col-sm-6">
-                <form action="${pageContext.request.contextPath}/exhibition/exhibitions" method="post">
+                <form action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/add" method="post">
 
                     <!-- Name -->
                     <div class="form-group">
@@ -68,9 +73,6 @@
                                id="date" placeholder="Date of event" required
                                value="<c:if test="${requestScope.exhibition ne null}">${exhibition.date}</c:if>"/>
                     </div>
-
-                    <!-- security_token only to post-methods -->
-                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
                     <input type="hidden" name="id"
                            value="<c:if test="${requestScope.exhibition ne null}">${exhibition.id}</c:if>" />

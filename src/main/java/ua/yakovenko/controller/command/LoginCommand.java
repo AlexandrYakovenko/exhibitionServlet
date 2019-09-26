@@ -22,9 +22,6 @@ public class LoginCommand implements Command {
         if (username == null)
             return "/login.jsp";
 
-        /*if (nonNull(request.getSession().getAttribute("username")))
-            return "/welcome.jsp";*/
-
         Optional<User> user = userService.findUser(username, password);
 
         if (!user.isPresent()) {
@@ -37,14 +34,14 @@ public class LoginCommand implements Command {
         }
 
         if (user.get().getRole().equals(Role.ADMIN)) {
-            CommandUtility.setUserRole(request, Role.ADMIN, username);
+            CommandUtility.setUserRole(request, user.get());
             return "redirect:/exhibition/admin";
         } else if (user.get().getRole().equals(Role.SUPER_ADMIN)) {
-            CommandUtility.setUserRole(request, Role.SUPER_ADMIN, username);
+            CommandUtility.setUserRole(request, user.get());
             return "redirect:/exhibition/superAdmin";
         } else {
-            CommandUtility.setUserRole(request, Role.USER, username);
-            return "redirect:/exhibition/user"; //change welcome.jsp на index.jsp
+            CommandUtility.setUserRole(request, user.get());
+            return "redirect:/exhibition/user";
         }
 
     }

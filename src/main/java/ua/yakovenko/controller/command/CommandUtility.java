@@ -1,6 +1,6 @@
 package ua.yakovenko.controller.command;
 
-import ua.yakovenko.model.entity.Role;
+import ua.yakovenko.model.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,13 +8,13 @@ import java.util.HashSet;
 
 class CommandUtility {
     static void setUserRole(HttpServletRequest request,
-                            Role role,
-                            String username
+                            User currentUser
     ) {
         HttpSession session = request.getSession();
-        session.setAttribute("username", username);
-        session.setAttribute("role", role);
-        session.setAttribute("access", role.name());
+        session.setAttribute("user", currentUser);
+        session.setAttribute("username", currentUser.getUsername());
+        session.setAttribute("role", currentUser.getRole());
+        session.setAttribute("access", currentUser.getRole().name());
     }
 
     static boolean checkUserIsLogged(HttpServletRequest request,
