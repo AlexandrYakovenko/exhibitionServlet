@@ -21,6 +21,6 @@ public class UserListCommand implements Command {
         userList = userService.findAllUsers();
         request.setAttribute("userList", userList);
 
-        return "/WEB-INF/super_admin/parts/userList.jsp";
+        return "/WEB-INF/super_admin/pages/userList.jsp";
     }
 }

@@ -1,7 +1,7 @@
 package ua.yakovenko.controller;
 
 import ua.yakovenko.controller.command.*;
-
+import ua.yakovenko.model.service.ExhibitionService;
 import ua.yakovenko.model.service.UserService;
 
 import javax.servlet.ServletConfig;
@@ -19,6 +19,7 @@ public class Servlet extends HttpServlet {
 
     public void init(ServletConfig servletConfig) {
         UserService userService = new UserService();
+        ExhibitionService exhibitionService = new ExhibitionService();
 
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
@@ -32,6 +33,7 @@ public class Servlet extends HttpServlet {
         commands.put("superAdmin", new SuperAdminCommand());
         commands.put("super_admin/userList", new UserListCommand(userService));
         commands.put("super_admin/edit", new UserEditCommand(userService));
+        commands.put("exhibitions", new ExhibitionPageController(exhibitionService));
     }
 
     @Override

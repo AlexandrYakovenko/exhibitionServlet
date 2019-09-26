@@ -31,6 +31,6 @@ public class UserEditCommand implements Command {
         } catch (Exception e) {
             request.setAttribute("error", e);
         }
-        return "/WEB-INF/super_admin/parts/userEdit.jsp";
+        return "/WEB-INF/super_admin/pages/userEdit.jsp";
     }
 }

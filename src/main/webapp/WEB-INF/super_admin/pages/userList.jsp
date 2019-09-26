@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container mt-2">
-        <%@ include file="navbarSuperAdmin.jsp" %>
+        <%@ include file="../parts/navbarSuperAdmin.jsp" %>
     </div>
     <div class="container mt-2">
             List of users
