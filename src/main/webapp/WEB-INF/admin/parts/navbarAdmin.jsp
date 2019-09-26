@@ -27,6 +27,11 @@
 
                 <div class="navbar-text mr-2"> ${sessionScope.username}</div>
 
+                <div class="mr-2">
+                    <a href="?sessionLocale=en" class="btn btn-info"><fmt:message key="language.en"/></a>
+                    <a href="?sessionLocale=ua" class="btn btn-info"><fmt:message key="language.ua"/></a>
+                </div>
+
                 <c:if test="${sessionScope.username eq null}">
                     <div class="mr-3">
                         <form action="${pageContext.request.contextPath}/exhibition/login" method="get">
