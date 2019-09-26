@@ -16,12 +16,26 @@
 </head>
 <body>
     <div class="container mt-2">
-        <%@ include file="../parts/navbarUser.jsp" %>
+        <c:if test="${sessionScope.access eq \"ADMIN\"}">
+            <%@ include file="/WEB-INF/admin/parts/navbarAdmin.jsp" %>
+        </c:if>
+        <c:if test="${sessionScope.access eq \"USER\"}">
+            <%@ include file="../parts/navbarUser.jsp" %>
+        </c:if>
     </div>
+
     <div class="container mt-2">
         <c:if test="${sessionScope.access eq \"ADMIN\"}">
-            <%@ include file="../../admin/parts/exhibitionEdit.jsp" %>
+            <a href="${pageContext.request.contextPath}/exhibition/admin/exhibitions/add"
+               class="btn btn-secondary">
+                Add new exhibition
+            </a>
         </c:if>
+
+
+
+
+
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
