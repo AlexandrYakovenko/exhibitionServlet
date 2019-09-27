@@ -5,6 +5,7 @@ import ua.yakovenko.model.dao.ExhibitionDao;
 import ua.yakovenko.model.entity.Exhibition;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ExhibitionService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
@@ -12,5 +13,9 @@ public class ExhibitionService {
 
     public void add(Exhibition exhibition) throws SQLException {
         exhibitionDao.add(exhibition);
+    }
+
+    public List<Exhibition> findAll() {
+       return exhibitionDao.findAll();
     }
 }

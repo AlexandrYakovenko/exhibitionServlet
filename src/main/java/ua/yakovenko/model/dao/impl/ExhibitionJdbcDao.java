@@ -5,8 +5,8 @@ import ua.yakovenko.model.dao.mapper.ExhibitionMapper;
 import ua.yakovenko.model.entity.Exhibition;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ExhibitionJdbcDao implements ExhibitionDao {
     private Connection connection;
@@ -16,7 +16,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
         this.connection = connection;
         mapper = new ExhibitionMapper();
     }
-
+//TODO сделать так чтоб в БД сохранялся Индекс автора а не его ИМЯ
     @Override
     public void add(Exhibition entity) throws SQLException {
         try(PreparedStatement ps =
@@ -76,7 +76,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
 
     @Override
     public List<Exhibition> findAll() {
-        List<Exhibition> resultList = new ArrayList<>();
+        List<Exhibition> resultList = new CopyOnWriteArrayList<>();;
 
         try(Statement statement =
                 connection.createStatement()
@@ -88,10 +88,16 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
                resultList.add(ex);
            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("");
         }
-        return resultList;
+
+        if (!resultList.isEmpty()) {
+            return resultList;
+        } else {
+            return null;
+        }
     }
+
 
     @Override
     public void update(Exhibition entity) {

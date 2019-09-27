@@ -23,7 +23,7 @@ public class ExhibitionAddController implements Command {
         String dateString = request.getParameter("date");
         Long price = null;
         Date date = null;
-        
+
         //TODO сделать проверку водимых данных
         if (priceString != null && dateString != null) {
             price = Long.valueOf(priceString);

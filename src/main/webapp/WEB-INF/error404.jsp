@@ -21,7 +21,7 @@
         <div align="center">
             <h2>
                 <b>Error Page</b><br/>
-                <i>Error : ${error}</i>
+                <i>Error : 404 Not Found</i>
             </h2>
             <br>
             <a href="${pageContext.request.contextPath}/index.jsp">Main Page</a>

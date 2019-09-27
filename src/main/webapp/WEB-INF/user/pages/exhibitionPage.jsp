@@ -32,9 +32,37 @@
             </a>
         </c:if>
 
-
-
-
+        <c:if test="${requestScope.exhibitions ne null}">
+            <div class="card-columns mt-3">
+                <c:forEach items="${exhibitions}" var="exhibition">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><c:out value="${exhibition.name}"/></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Showroom : <c:out value="${exhibition.showroom}"/></h6>
+                        <h6 class="card-subtitle mb-2 ">Price : <c:out value="${exhibition.price}"/></h6>
+                        <p class="card-text"><c:out value="${exhibition.description}"/></p><br/>
+                        <h6 class="card-subtitle mb-2 ">Date : <c:out value="${exhibition.date}"/></h6>
+                        <a href="${pageContext.request.contextPath}/exhibition/sales"
+                           class="card-link">
+                            Buy Ticket
+                        </a>
+                    </div>
+                    <div class="card-footer text-muted container">
+                        <div class="row">
+                            <p class="col align-self-center"><c:out value="${exhibition.author.username}"/></p>
+                            <p class="col align-self-center"></p>
+                            <c:if test="${exhibition.author == currentUser}">
+                                <a class="col align-self-center btn btn-secondary"
+                                   href="${pageContext.request.contextPath}/exhibition/edit">
+                                    Edit
+                                </a>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
+            </div>
+        </c:if>
 
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

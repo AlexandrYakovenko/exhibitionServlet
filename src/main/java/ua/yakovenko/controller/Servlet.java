@@ -65,10 +65,7 @@ public class Servlet extends HttpServlet {
         String page = command.execute(request);
         if (page.contains("redirect")) {
             response.sendRedirect(page.replace("redirect:", ""));
-        } else if (page.contains("error404")){
-            request.setAttribute("error", "404 Not Found");
-            request.getRequestDispatcher(page).forward(request, response);
-        } else {
+        }  else {
             request.getRequestDispatcher(page).forward(request, response);
         }
     }

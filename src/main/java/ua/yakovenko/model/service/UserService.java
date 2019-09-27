@@ -54,4 +54,8 @@ public class UserService {
     public void update(User user) {
         userDao.update(user);
     }
+
+    public User findByUsername(String author) {
+        return userDao.findByUsername(author);
+    }
 }
