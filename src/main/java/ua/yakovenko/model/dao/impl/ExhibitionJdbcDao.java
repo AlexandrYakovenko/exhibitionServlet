@@ -149,7 +149,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     private static final String QUERY_EXHIBITION_FIND_BY_ID =
             "SELECT * FROM exhibition WHERE id = ?";
     private static final String QUERY_EXHIBITION_FIND_ALL =
-            "SELECT * FROM exhibition";
+            "SELECT * FROM exhibition ORDER BY id DESC ";
     private static final String QUERY_EXHIBITION_UPDATE =
             "UPDATE exhibition SET name = ? , showroom = ?, description = ?, author = ?, price = ?, date = ? WHERE id = ?";
     private static final String QUERY_EXHIBITION_DELETE_BY_ID =

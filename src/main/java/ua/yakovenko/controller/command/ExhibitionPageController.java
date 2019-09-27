@@ -17,8 +17,9 @@ public class ExhibitionPageController implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        //TODO сюда должен передаваться параметр на удаление
         exhibitions = exhibitionService.findAll();
-        System.out.println(">>>>>" + exhibitions);
+
         if (exhibitions != null) {
             request.setAttribute("exhibitions", exhibitions);
         }

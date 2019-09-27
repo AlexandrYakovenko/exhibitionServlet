@@ -27,7 +27,7 @@
     <div class="container mt-2">
         <c:if test="${sessionScope.access eq \"ADMIN\"}">
             <a href="${pageContext.request.contextPath}/exhibition/admin/exhibitions/add"
-               class="btn btn-secondary">
+               class="btn btn-primary">
                 Add new exhibition
             </a>
         </c:if>
@@ -52,10 +52,13 @@
                             <p class="col align-self-center"><c:out value="${exhibition.author.username}"/></p>
                             <p class="col align-self-center"></p>
                             <c:if test="${exhibition.author == currentUser}">
-                                <a class="col align-self-center btn btn-secondary"
-                                   href="${pageContext.request.contextPath}/exhibition/edit">
-                                    Edit
-                                </a>
+                                <form class="col align-self-center btn btn-secondary"
+                                      action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/edit">
+                                    <input type="hidden" name="exhibitionId" value="${exhibition.id}"/>
+                                    <button class="col align-self-center btn btn-secondary" type="submit">
+                                        Edit
+                                    </button>
+                                </form>
                             </c:if>
                         </div>
                     </div>

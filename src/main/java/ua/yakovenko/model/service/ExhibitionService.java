@@ -18,4 +18,8 @@ public class ExhibitionService {
     public List<Exhibition> findAll() {
        return exhibitionDao.findAll();
     }
+
+    public Exhibition findById(Long exhibitionId) {
+        return exhibitionDao.findById(exhibitionId);
+    }
 }
