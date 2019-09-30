@@ -29,7 +29,7 @@ public class ExhibitionAddController implements Command {
             price = Long.valueOf(priceString);
             date = Date.valueOf(dateString);
         }
-
+        //TODO переписать
         if (name != null
                 && showroom != null
                 && description != null

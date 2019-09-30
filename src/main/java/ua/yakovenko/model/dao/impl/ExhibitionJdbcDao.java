@@ -37,22 +37,30 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
-    public Exhibition findByShowroom(String name) {
+    public List<Exhibition> findByShowroom(String showroom) {
+        List<Exhibition> resultList = new CopyOnWriteArrayList<>();
+
         try (PreparedStatement ps =
                     connection.prepareStatement(
-                            QUERY_EXHIBITION_FIND_BY_NAME)
+                            QUERY_EXHIBITION_FIND_BY_SHOWROOM)
         ) {
-            ps.setString(1, name);
+            ps.setString(1, showroom);
 
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                return mapper.extractFromResultSet(rs);
+            while (rs.next()) {
+                Exhibition ex = mapper.extractFromResultSet(rs);
+                resultList.add(ex);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Didn't find exhibition");
         }
-        return null;
+
+        if (!resultList.isEmpty()) {
+            return resultList;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -76,7 +84,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
 
     @Override
     public List<Exhibition> findAll() {
-        List<Exhibition> resultList = new CopyOnWriteArrayList<>();;
+        List<Exhibition> resultList = new CopyOnWriteArrayList<>();
 
         try(Statement statement =
                 connection.createStatement()
@@ -144,8 +152,8 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
 
     private static final String QUERY_EXHIBITION_ADD =
             "INSERT INTO exhibition (name , showroom , description, author, price, date) VALUES (? ,? ,?, ?, ?, ?)";
-    private static final String QUERY_EXHIBITION_FIND_BY_NAME =
-            "SELECT * FROM exhibition WHERE name = ?";
+    private static final String QUERY_EXHIBITION_FIND_BY_SHOWROOM =
+            "SELECT * FROM exhibition WHERE showroom = ?";
     private static final String QUERY_EXHIBITION_FIND_BY_ID =
             "SELECT * FROM exhibition WHERE id = ?";
     private static final String QUERY_EXHIBITION_FIND_ALL =

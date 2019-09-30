@@ -30,4 +30,8 @@ public class ExhibitionService {
     public void update(Exhibition exhibition) {
         exhibitionDao.update(exhibition);
     }
+
+    public List<Exhibition> findByShowroom(String showroom) {
+        return exhibitionDao.findByShowroom(showroom);
+    }
 }

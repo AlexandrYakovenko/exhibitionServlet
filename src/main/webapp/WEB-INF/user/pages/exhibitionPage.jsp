@@ -25,6 +25,15 @@
     </div>
 
     <div class="container mt-2">
+        <form action="${pageContext.request.contextPath}/exhibition/exhibitions">
+            <!-- Showroom -->
+            <input type="text" name="showroom" class="form-control col-sm-3"
+                   placeholder="name of showroom"/>
+            <button type="submit" class="btn btn-primary mt-1">
+                Search
+            </button>
+        </form>
+
         <c:if test="${sessionScope.access eq \"ADMIN\"}">
             <a href="${pageContext.request.contextPath}/exhibition/admin/exhibitions/add"
                class="btn btn-primary">

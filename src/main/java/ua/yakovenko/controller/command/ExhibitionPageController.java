@@ -18,13 +18,18 @@ public class ExhibitionPageController implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String exhibitionIdDelete = request.getParameter("exhibitionIdDelete");
+        String showroom = request.getParameter("showroom");
 
         if (exhibitionIdDelete != null) {
             Long idForDelete = Long.valueOf(exhibitionIdDelete);
             exhibitionService.deleteById(idForDelete);
         }
 
-        exhibitions = exhibitionService.findAll();
+        if (showroom == null || showroom.equals("")) {
+            exhibitions = exhibitionService.findAll();
+        } else {
+            exhibitions = exhibitionService.findByShowroom(showroom);
+        }
 
         if (exhibitions != null) {
             request.setAttribute("exhibitions", exhibitions);
