@@ -33,11 +33,13 @@ public class Servlet extends HttpServlet {
         commands.put("superAdmin", new SuperAdminCommand());
         commands.put("super_admin/userList", new UserListCommand(userService));
         commands.put("super_admin/edit", new UserEditCommand(userService));
-        commands.put("exhibitions", new ExhibitionPageController(exhibitionService));
-        commands.put("admin/exhibitions/add", new ExhibitionAddController(exhibitionService));
-        commands.put("admin/exhibitions/edit", new ExhibitionEditController(exhibitionService));
+        commands.put("exhibitions", new ExhibitionPageCommand(exhibitionService));
+        commands.put("admin/exhibitions/add", new ExhibitionAddCommand(exhibitionService));
+        commands.put("admin/exhibitions/edit", new ExhibitionEditCommand(exhibitionService));
         commands.put("admin/myExhibitions", new MyExhibitionsCommand(exhibitionService));
         commands.put("user/editProfile", new EditProfileCommand(userService));
+        commands.put("buy-ticket", new BuyTicketCommand(exhibitionService));
+        commands.put("add-money", new AddMoneyCommand(userService));
     }
 
     @Override

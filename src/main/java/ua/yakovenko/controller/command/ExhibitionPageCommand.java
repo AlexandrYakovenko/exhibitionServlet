@@ -7,11 +7,11 @@ import ua.yakovenko.model.service.ExhibitionService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class ExhibitionPageController implements Command {
+public class ExhibitionPageCommand implements Command {
     private ExhibitionService exhibitionService;
     private  List<Exhibition> exhibitions;
 
-    public ExhibitionPageController(ExhibitionService exhibitionService) {
+    public ExhibitionPageCommand(ExhibitionService exhibitionService) {
         this.exhibitionService = exhibitionService;
     }
 

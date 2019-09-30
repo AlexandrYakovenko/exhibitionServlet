@@ -7,10 +7,10 @@ import ua.yakovenko.model.service.ExhibitionService;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
-public class ExhibitionAddController implements Command {
+public class ExhibitionEditCommand implements Command {
     private ExhibitionService exhibitionService;
 
-    public ExhibitionAddController(ExhibitionService exhibitionService) {
+    public ExhibitionEditCommand(ExhibitionService exhibitionService) {
         this.exhibitionService = exhibitionService;
     }
 
@@ -29,16 +29,19 @@ public class ExhibitionAddController implements Command {
             price = Long.valueOf(priceString);
             date = Date.valueOf(dateString);
         }
-        //TODO переписать
+
+        Long exhibitionId = Long.valueOf(request.getParameter("exhibitionId"));
+
         if (name != null
                 && showroom != null
                 && description != null
                 && price != null
                 && date != null
-        ) {
+                ) {
             User author = (User) request.getSession().getAttribute("user");
 
             Exhibition exhibition = Exhibition.builder()
+                    .id(exhibitionId)
                     .name(name)
                     .showroom(showroom)
                     .description(description)
@@ -48,15 +51,17 @@ public class ExhibitionAddController implements Command {
                     .build();
 
             try {
-                exhibitionService.add(exhibition);
+                exhibitionService.update(exhibition);
             } catch (Exception e) {
-                request.setAttribute("error", "You cannot add this exhibition");
-                return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+                request.setAttribute("error", "You cannot edit this exhibition");
             }
-
-            return "redirect:/exhibition/exhibitions";
         }
 
-        return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+        Exhibition currentExhibition = exhibitionService.findById(exhibitionId);
+        if (currentExhibition != null) {
+            request.setAttribute("exhibition", currentExhibition);
+        }
+
+        return "/WEB-INF/admin/pages/exhibitionEdit.jsp";
     }
 }

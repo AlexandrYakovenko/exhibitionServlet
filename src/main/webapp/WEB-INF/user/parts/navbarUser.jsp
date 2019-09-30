@@ -13,7 +13,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/">
+                <a class="nav-link" href="${pageContext.request.contextPath}/exhibition/user/editProfile">
                     Profile
                 </a>
             </li>

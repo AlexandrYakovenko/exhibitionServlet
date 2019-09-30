@@ -51,10 +51,13 @@
                         <h6 class="card-subtitle mb-2 ">Price : <c:out value="${exhibition.price}"/></h6>
                         <p class="card-text"><c:out value="${exhibition.description}"/></p><br/>
                         <h6 class="card-subtitle mb-2 ">Date : <c:out value="${exhibition.date}"/></h6>
-                        <a href="${pageContext.request.contextPath}/exhibition/sales"
-                           class="card-link">
-                            Buy Ticket
-                        </a>
+                        <form action="${pageContext.request.contextPath}/exhibition/buy-ticket"
+                              method="post">
+                            <input type="hidden" name="ticketId" value="${exhibition.id}">
+                            <button type="submit" class="btn btn-link">
+                                Buy Ticket
+                            </button>
+                        </form>
                     </div>
                     <div class="card-footer text-muted container">
                         <div class="row">
