@@ -60,7 +60,7 @@
                         <div class="row">
                             <p class="col align-self-center"><c:out value="${exhibition.author.username}"/></p>
                             <p class="col align-self-center"></p>
-                            <c:if test="${exhibition.author == currentUser}">
+                            <c:if test="${exhibition.author eq currentUser}">
                                 <form class="col align-self-center" method="post"
                                       action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/edit">
                                     <input type="hidden" name="exhibitionId" value="${exhibition.id}"/>

@@ -44,15 +44,13 @@
                             <div class="row">
                                 <p class="col align-self-center"><c:out value="${exhibition.author.username}"/></p>
                                 <p class="col align-self-center"></p>
-                                <c:if test="${exhibition.author == currentUser}">
-                                    <form class="col align-self-center" method="post"
-                                          action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/edit">
-                                        <input type="hidden" name="exhibitionId" value="${exhibition.id}"/>
-                                        <button class="btn btn-secondary" type="submit">
-                                            Edit
-                                        </button>
-                                    </form>
-                                </c:if>
+                                <form class="col align-self-center" method="post"
+                                      action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/edit">
+                                    <input type="hidden" name="exhibitionId" value="${exhibition.id}"/>
+                                    <button class="btn btn-secondary" type="submit">
+                                         Edit
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
