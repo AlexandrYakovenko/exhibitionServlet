@@ -3,6 +3,7 @@ package ua.yakovenko.model.dao.mapper;
 import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.service.UserService;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class ExhibitionMapper implements GenericMapper<Exhibition> {
                 .description(rs.getString("description"))
                 .author(userService.findByUsername(rs.getString("author")))
                 .price(rs.getLong("price"))
-                .date(rs.getDate("date"))
+                .date(Date.valueOf(rs.getString("date")))
                 .build();
     }
 
