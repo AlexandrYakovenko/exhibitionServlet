@@ -3,6 +3,7 @@ package ua.yakovenko.model.service;
 import ua.yakovenko.model.dao.DaoFactory;
 import ua.yakovenko.model.dao.ExhibitionDao;
 import ua.yakovenko.model.entity.Exhibition;
+import ua.yakovenko.model.entity.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -33,5 +34,9 @@ public class ExhibitionService {
 
     public List<Exhibition> findByShowroom(String showroom) {
         return exhibitionDao.findByShowroom(showroom);
+    }
+
+    public List<Exhibition> findByAuthor(User author) {
+        return exhibitionDao.findByAuthor(author);
     }
 }

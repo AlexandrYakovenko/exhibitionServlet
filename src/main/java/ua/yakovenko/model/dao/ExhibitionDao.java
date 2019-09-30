@@ -1,9 +1,12 @@
 package ua.yakovenko.model.dao;
 
 import ua.yakovenko.model.entity.Exhibition;
+import ua.yakovenko.model.entity.User;
 
 import java.util.List;
 
 public interface ExhibitionDao extends GenericDao<Exhibition> {
     List<Exhibition> findByShowroom(String username);
+
+    List<Exhibition> findByAuthor(User user);
 }

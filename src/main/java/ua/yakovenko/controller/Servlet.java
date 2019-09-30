@@ -36,6 +36,7 @@ public class Servlet extends HttpServlet {
         commands.put("exhibitions", new ExhibitionPageController(exhibitionService));
         commands.put("admin/exhibitions/add", new ExhibitionAddController(exhibitionService));
         commands.put("admin/exhibitions/edit", new ExhibitionEditController(exhibitionService));
+        commands.put("admin/myExhibitions", new MyExhibitionsCommand(exhibitionService));
     }
 
     @Override

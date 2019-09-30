@@ -3,6 +3,7 @@ package ua.yakovenko.model.dao.impl;
 import ua.yakovenko.model.dao.ExhibitionDao;
 import ua.yakovenko.model.dao.mapper.ExhibitionMapper;
 import ua.yakovenko.model.entity.Exhibition;
+import ua.yakovenko.model.entity.User;
 
 import java.sql.*;
 import java.util.List;
@@ -45,6 +46,33 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
                             QUERY_EXHIBITION_FIND_BY_SHOWROOM)
         ) {
             ps.setString(1, showroom);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Exhibition ex = mapper.extractFromResultSet(rs);
+                resultList.add(ex);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Didn't find exhibition");
+        }
+
+        if (!resultList.isEmpty()) {
+            return resultList;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Exhibition> findByAuthor(User user) {
+        List<Exhibition> resultList = new CopyOnWriteArrayList<>();
+
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_EXHIBITION_FIND_BY_AUTHOR)
+        ) {
+            ps.setLong(1, user.getId());
 
             ResultSet rs = ps.executeQuery();
 
@@ -162,5 +190,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             "UPDATE exhibition SET name = ? , showroom = ?, description = ?, author = ?, price = ?, date = ? WHERE id = ?";
     private static final String QUERY_EXHIBITION_DELETE_BY_ID =
             "DELETE FROM exhibition  WHERE id = ?";
+    private static final String QUERY_EXHIBITION_FIND_BY_AUTHOR =
+            "SELECT * FROM exhibition WHERE author = ? ORDER BY id DESC";
 
 }
