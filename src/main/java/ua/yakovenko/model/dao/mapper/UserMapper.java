@@ -7,8 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class UserMapper implements GenericMapper<User> {
-    @Override
+public class UserMapper {
     public User extractFromResultSet(ResultSet rs) throws SQLException {
         return User.builder()
                 .id(rs.getLong("id"))
@@ -20,7 +19,6 @@ public class UserMapper implements GenericMapper<User> {
                 .build();
     }
 
-    @Override
     public User makeUnique(Map<Long, User> cache, User user) {
         cache.putIfAbsent(user.getId(), user);
         return cache.get(user.getId());

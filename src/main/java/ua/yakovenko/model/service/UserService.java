@@ -41,14 +41,8 @@ public class UserService {
         return Optional.empty();
     }
 
-    public Optional<User> findById(Long editId) {
-        Optional<User> user = Optional.ofNullable(userDao.findById(editId));
-
-        if (!user.isPresent()) {
-            return Optional.empty();
-        }
-
-        return user;
+    public User findById(Long editId) {
+       return userDao.findById(editId);
     }
 
     public void update(User user) {

@@ -16,7 +16,7 @@ public class UserEditCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         Long editId = Long.valueOf(request.getParameter("userId"));
-        User editUser = userService.findById(editId).get();
+        User editUser = userService.findById(editId);
         request.setAttribute("editUser", editUser);
 
         String newUsername = request.getParameter("newUsername");

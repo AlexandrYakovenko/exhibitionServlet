@@ -8,23 +8,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class ExhibitionMapper implements GenericMapper<Exhibition> {
+public class ExhibitionMapper {
     private UserService userService = new UserService();
 
-    @Override
     public Exhibition extractFromResultSet(ResultSet rs) throws SQLException {
         return Exhibition.builder()
                 .id(rs.getLong("id"))
                 .name(rs.getString("name"))
                 .showroom(rs.getString("showroom"))
                 .description(rs.getString("description"))
-                .author(userService.findByUsername(rs.getString("author")))
+                .author(userService.findById(rs.getLong("author")))
                 .price(rs.getLong("price"))
                 .date(Date.valueOf(rs.getString("date")))
                 .build();
     }
 
-    @Override
     public Exhibition makeUnique(Map<Long, Exhibition> cache, Exhibition exhibition) {
         cache.putIfAbsent(exhibition.getId(), exhibition);
         return cache.get(exhibition.getId());

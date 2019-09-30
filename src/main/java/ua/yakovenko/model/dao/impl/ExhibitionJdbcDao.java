@@ -16,7 +16,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
         this.connection = connection;
         mapper = new ExhibitionMapper();
     }
-//TODO сделать так чтоб в БД сохранялся Индекс автора а не его ИМЯ
+
     @Override
     public void add(Exhibition entity) throws SQLException {
         try(PreparedStatement ps =
@@ -26,7 +26,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getShowroom());
             ps.setString(3, entity.getDescription());
-            ps.setString(4, entity.getAuthor().getUsername());
+            ps.setLong(4, entity.getAuthor().getId());
             ps.setLong(5, entity.getPrice());
             ps.setString(6, entity.getDate().toString());
 
@@ -37,7 +37,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
-    public Exhibition findByUsername(String name) {
+    public Exhibition findByShowroom(String name) {
         try (PreparedStatement ps =
                     connection.prepareStatement(
                             QUERY_EXHIBITION_FIND_BY_NAME)
@@ -108,7 +108,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getShowroom());
             ps.setString(3, entity.getDescription());
-            ps.setString(4, entity.getAuthor().getUsername());
+            ps.setLong(4, entity.getAuthor().getId());
             ps.setLong(5, entity.getPrice());
             ps.setString(6, entity.getDate().toString());
             ps.setLong(7, entity.getId());
