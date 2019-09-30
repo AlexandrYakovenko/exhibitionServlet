@@ -20,13 +20,19 @@
     </div>
 
     <div class="container mt-2">
+        <c:if test="${requestScope.error eq true}">
+            <div class="alert alert-danger" align="center">
+                <strong><c:out value="${error}"/></strong>
+            </div>
+        </c:if>
+
         <div align="center">
             <h5>Edit your exhibition</h5>
         </div>
 
             <div class="form-group mt-3">
                 <div class="col-sm-6">
-                    <form action="${pageContext.request.contextPath}/exhibition/exhibitions" method="post">
+                    <form action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/edit" method="post">
 
                         <!-- Name -->
                         <div class="form-group">
@@ -71,7 +77,7 @@
                         <!-- security_token only to post-methods -->
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
-                        <input type="hidden" name="id"
+                        <input type="hidden" name="exhibitionId"
                                value="<c:if test="${requestScope.exhibition ne null}">${exhibition.id}</c:if>" />
 
                         <div class="form-group">

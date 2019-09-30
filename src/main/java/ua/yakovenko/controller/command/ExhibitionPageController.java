@@ -23,7 +23,7 @@ public class ExhibitionPageController implements Command {
             Long idForDelete = Long.valueOf(exhibitionIdDelete);
             exhibitionService.deleteById(idForDelete);
         }
-        
+
         exhibitions = exhibitionService.findAll();
 
         if (exhibitions != null) {

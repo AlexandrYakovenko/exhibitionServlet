@@ -26,4 +26,8 @@ public class ExhibitionService {
     public void deleteById(Long idForDelete) {
         exhibitionDao.delete(idForDelete);
     }
+
+    public void update(Exhibition exhibition) {
+        exhibitionDao.update(exhibition);
+    }
 }
