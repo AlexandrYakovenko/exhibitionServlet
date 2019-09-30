@@ -22,4 +22,8 @@ public class ExhibitionService {
     public Exhibition findById(Long exhibitionId) {
         return exhibitionDao.findById(exhibitionId);
     }
+
+    public void deleteById(Long idForDelete) {
+        exhibitionDao.delete(idForDelete);
+    }
 }

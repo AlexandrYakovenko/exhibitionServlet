@@ -17,7 +17,13 @@ public class ExhibitionPageController implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        //TODO сюда должен передаваться параметр на удаление
+        String exhibitionIdDelete = request.getParameter("exhibitionIdDelete");
+
+        if (exhibitionIdDelete != null) {
+            Long idForDelete = Long.valueOf(exhibitionIdDelete);
+            exhibitionService.deleteById(idForDelete);
+        }
+        
         exhibitions = exhibitionService.findAll();
 
         if (exhibitions != null) {

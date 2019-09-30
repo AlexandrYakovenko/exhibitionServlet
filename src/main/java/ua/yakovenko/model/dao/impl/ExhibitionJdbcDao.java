@@ -120,12 +120,12 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
                              QUERY_EXHIBITION_DELETE_BY_ID)
         ) {
-            ps.setInt(1, id);
+            ps.setLong(1, id);
 
             ps.executeUpdate();
         } catch (SQLException e) {
