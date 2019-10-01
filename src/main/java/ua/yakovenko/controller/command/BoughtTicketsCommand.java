@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BoughtTicketsCommand implements Command {
     private ExhibitionService exhibitionService;
     private UserService userService;
+
     public BoughtTicketsCommand(ExhibitionService exhibitionService, UserService userService) {
         this.exhibitionService = exhibitionService;
         this.userService = userService;

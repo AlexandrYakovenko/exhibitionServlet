@@ -26,8 +26,12 @@
 
     <div class="container mt-2">
         <div>
-            <h5>Username : ${user.username}</h5>
-            <h5>Balance : ${user.accountMoney}</h5>
+            <h5>Username :
+                <c:if test="${requestScope.currentUser ne null}">${currentUser.username}</c:if>
+            </h5>
+            <h5>Balance :
+                <c:if test="${requestScope.currentUser ne null}">${currentUser.accountMoney}</c:if>
+            </h5>
         </div>
 
         <div>
