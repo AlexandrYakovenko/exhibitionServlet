@@ -2,6 +2,7 @@ package ua.yakovenko.model.dao.impl;
 
 import ua.yakovenko.model.dao.UserDao;
 import ua.yakovenko.model.dao.mapper.UserMapper;
+import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.User;
 
 import java.sql.*;
@@ -53,6 +54,20 @@ public class UserJdbcDao implements UserDao {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    @Override
+    public void buyTicket(User user, Exhibition exhibition) {
+        try (PreparedStatement updateUser =
+                connection.prepareStatement(QUERY_USER_UPDATE);
+             PreparedStatement updateTicket =
+                connection.prepareStatement(QUERY_TICKET_UPDATE)
+        ) {
+            
+
+        } catch (SQLException e) {
+
+        }
     }
 
     @Override
@@ -147,4 +162,6 @@ public class UserJdbcDao implements UserDao {
             "UPDATE user SET username = ? , password = ?, role = ?, active = ?, account_money = ? WHERE id = ?";
     private static final String QUERY_USER_DELETE_BY_ID =
             "DELETE FROM user  WHERE id = ?";
+    private static final String QUERY_TICKET_UPDATE =
+            "INSERT INTO ticket (user_id, ticket_id) VALUES (?, ?)";
 }

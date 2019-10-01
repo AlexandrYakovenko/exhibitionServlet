@@ -64,7 +64,7 @@ public class UserService {
             Long ticketPrice = exhibition.getPrice();
 
             if (userMoney >= ticketPrice) {
-                /*userDao.buyTicket(user, exhibition);*/
+                userDao.buyTicket(user, exhibition);
             }
         }
     }
