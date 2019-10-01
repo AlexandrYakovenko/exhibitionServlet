@@ -63,7 +63,7 @@
                     </div>
             </div>
         <div class="mt-3">
-            <form action="${pageContext.request.contextPath}/exhibition/boughtTickets"
+            <form action="${pageContext.request.contextPath}/exhibition/bought-tickets"
                          method="post">
             <input type="hidden" name="ticketId" value="${exhibition.id}">
             <button type="submit" class="btn btn-success">
