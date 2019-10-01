@@ -57,16 +57,26 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public void buyTicket(User user, Exhibition exhibition) {
-        try (PreparedStatement updateUser =
-                connection.prepareStatement(QUERY_USER_UPDATE);
-             PreparedStatement updateTicket =
-                connection.prepareStatement(QUERY_TICKET_UPDATE)
+    public void buyTicket(User user, Exhibition exhibition) throws SQLException {
+        try (PreparedStatement updateBalance =
+                connection.prepareStatement(QUERY_USER_UPDATE_BALANCE);
+             PreparedStatement addTicket =
+                connection.prepareStatement(QUERY_TICKET_ADD)
         ) {
-            
+            connection.setAutoCommit(false);
 
+            updateBalance.setLong(1, user.getAccountMoney() - exhibition.getPrice());
+            updateBalance.setLong(2, user.getId());
+            updateBalance.execute();
+
+            addTicket.setLong(1, user.getId());
+            addTicket.setLong(2, exhibition.getId());
+            addTicket.execute();
+
+            connection.commit();
+            connection.setAutoCommit(true);
         } catch (SQLException e) {
-
+            connection.rollback();
         }
     }
 
@@ -162,6 +172,8 @@ public class UserJdbcDao implements UserDao {
             "UPDATE user SET username = ? , password = ?, role = ?, active = ?, account_money = ? WHERE id = ?";
     private static final String QUERY_USER_DELETE_BY_ID =
             "DELETE FROM user  WHERE id = ?";
-    private static final String QUERY_TICKET_UPDATE =
+    private static final String QUERY_USER_UPDATE_BALANCE =
+            "UPDATE user SET account_money = ? WHERE id = ?";
+    private static final String QUERY_TICKET_ADD =
             "INSERT INTO ticket (user_id, ticket_id) VALUES (?, ?)";
 }

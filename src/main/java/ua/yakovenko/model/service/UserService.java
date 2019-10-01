@@ -65,7 +65,11 @@ public class UserService {
 
             if (userMoney >= ticketPrice) {
                 userDao.buyTicket(user, exhibition);
+            } else {
+                throw new RuntimeException("Not enough money");
             }
+        } catch (SQLException e) {
+            throw new RuntimeException("You cannot buy this ticket");
         }
     }
 }

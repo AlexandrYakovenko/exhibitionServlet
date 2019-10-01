@@ -13,6 +13,7 @@ class CommandUtility {
         HttpSession session = request.getSession();
         session.setAttribute("user", currentUser);
         session.setAttribute("username", currentUser.getUsername());
+        session.setAttribute("userId", currentUser.getId());
         session.setAttribute("role", currentUser.getRole());
         session.setAttribute("access", currentUser.getRole().name());
     }

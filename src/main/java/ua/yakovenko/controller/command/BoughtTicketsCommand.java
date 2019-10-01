@@ -21,8 +21,11 @@ public class BoughtTicketsCommand implements Command {
 
         if (ticketIdStr != null) {
             Long ticketId = Long.valueOf(ticketIdStr);
-
-            userService.buyTicket(user, ticketId);
+            try {
+                userService.buyTicket(user, ticketId);
+            } catch (Exception e) {
+                return "redirect:/exhibition/buy-ticket";
+            }
         }
 
         return "/WEB-INF/user/pages/boughtTickets.jsp";
