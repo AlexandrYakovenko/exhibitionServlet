@@ -9,4 +9,6 @@ public interface ExhibitionDao extends GenericDao<Exhibition> {
     List<Exhibition> findByShowroom(String username);
 
     List<Exhibition> findByAuthor(User user);
+
+    List<Exhibition> findBoughtTickets(User user);
 }

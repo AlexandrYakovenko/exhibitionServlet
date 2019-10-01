@@ -18,19 +18,28 @@ public class BuyTicketCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        String ticketIdString = request.getParameter("ticketId");
+        String exhibitionIdStr = request.getParameter("exhibitionId");
+        Exhibition exhibition = null;
+        User currentUser = null;
 
-        if (ticketIdString != null) {
-            Long ticket = Long.valueOf(ticketIdString);
-            request.getSession().setAttribute("ticketId", ticket);
+        if (exhibitionIdStr != null) {
+            Long exhibitionId = Long.valueOf(exhibitionIdStr);
+            request.getSession().setAttribute("exhibitionId", exhibitionId);
         }
 
-        Long ticketId = (Long) request.getSession().getAttribute("ticketId");
-        Exhibition exhibition = exhibitionService.findById(ticketId);
+        Object ticketObj =  request.getSession().getAttribute("exhibitionId");
 
-        Long userId = (Long) request.getSession().getAttribute("userId");
-        User currentUser = userService.findById(userId);
+        if (ticketObj != null) {
+            Long ticketId = (Long) ticketObj;
+            exhibition = exhibitionService.findById(ticketId);
+        }
+
+        Object userIdObj = request.getSession().getAttribute("userId");
+
+        if (userIdObj != null) {
+            Long userId = (Long) userIdObj;
+            currentUser = userService.findById(userId);
+        }
 
         request.setAttribute("currentUser", currentUser);
         request.setAttribute("exhibition", exhibition);

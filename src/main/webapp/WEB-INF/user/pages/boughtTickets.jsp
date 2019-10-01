@@ -26,7 +26,7 @@
 
     <div class="container mt-2">
         <h5>Username : ${user.username}</h5>
-        <h5>Tickets : </h5>
+        <h5>Tickets : ${ticket.id}</h5>
 
         <c:if test="${requestScope.tickets ne null}">
             <c:forEach items="${tickets}" var="ticket">

@@ -39,4 +39,10 @@ public class ExhibitionService {
     public List<Exhibition> findByAuthor(User author) {
         return exhibitionDao.findByAuthor(author);
     }
+
+    public List<Exhibition> findBoughtTickets(User user) {
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.findBoughtTickets(user);
+        }
+    }
 }

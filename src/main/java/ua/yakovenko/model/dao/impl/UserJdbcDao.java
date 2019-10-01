@@ -6,8 +6,8 @@ import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.User;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserJdbcDao implements UserDao {
     private Connection connection;
@@ -101,7 +101,7 @@ public class UserJdbcDao implements UserDao {
 
     @Override
     public List<User> findAll() {
-        List<User> resultList = new ArrayList<>();
+        List<User> resultList = new CopyOnWriteArrayList<>();
 
         try (Statement statement =
                      connection.createStatement()

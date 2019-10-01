@@ -53,7 +53,7 @@
                         <h6 class="card-subtitle mb-2 ">Date : <c:out value="${exhibition.date}"/></h6>
                         <form action="${pageContext.request.contextPath}/exhibition/buy-ticket"
                               method="post">
-                            <input type="hidden" name="ticketId" value="${exhibition.id}">
+                            <input type="hidden" name="exhibitionId" value="${exhibition.id}">
                             <button type="submit" class="btn btn-link">
                                 Buy Ticket
                             </button>

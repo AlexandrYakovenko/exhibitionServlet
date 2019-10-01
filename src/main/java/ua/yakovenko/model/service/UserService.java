@@ -72,4 +72,5 @@ public class UserService {
             throw new RuntimeException("You cannot buy this ticket");
         }
     }
+
 }
