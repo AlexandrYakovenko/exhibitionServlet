@@ -1,5 +1,6 @@
 package ua.yakovenko.controller.command;
 
+import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.ExhibitionService;
 import ua.yakovenko.model.service.UserService;
 
@@ -15,7 +16,14 @@ public class BoughtTicketsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        String ticketIdStr = request.getParameter("ticketId");
 
+        if (ticketIdStr != null) {
+            Long ticketId = Long.valueOf(ticketIdStr);
+
+            userService.buyTicket(user, ticketId);
+        }
 
         return "/WEB-INF/user/pages/boughtTickets.jsp";
     }
