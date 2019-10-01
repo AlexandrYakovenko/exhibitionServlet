@@ -127,6 +127,29 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
+    public void buyTicket(User user, Long ticketId) throws SQLException {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(QUERY_USER_UPDATE);
+             PreparedStatement pss =
+                     connection.prepareStatement(QUERY_ADD_TICKET)
+        ) {
+            connection.setAutoCommit(false);
+
+            ps.setLong(1, user.getId());
+            ps.executeQuery();
+
+            pss.setLong(1, user.getId());
+            pss.setLong(2, ticketId);
+            pss.executeQuery();
+
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void close() {
         try {
             connection.close();
@@ -147,4 +170,6 @@ public class UserJdbcDao implements UserDao {
             "UPDATE user SET username = ? , password = ?, role = ?, active = ?, account_money = ? WHERE id = ?";
     private static final String QUERY_USER_DELETE_BY_ID =
             "DELETE FROM user  WHERE id = ?";
+    private static final String QUERY_ADD_TICKET =
+            "INSERT INTO ticket (user_id, ticket_id) VALUES (?, ?)";
 }

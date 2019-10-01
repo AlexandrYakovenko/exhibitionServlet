@@ -25,6 +25,12 @@
     </div>
 
     <div class="container mt-2">
+        <c:if test="${requestScope.error eq true}">
+            <div class="alert alert-danger" align="center">
+                <strong>${error}</strong>
+            </div>
+        </c:if>
+
         <div>
             <h5>Username : ${user.username}</h5>
             <h5>Balance : ${user.accountMoney}</h5>
@@ -63,9 +69,9 @@
                     </div>
             </div>
         <div class="mt-3">
-            <form action="${pageContext.request.contextPath}/exhibition/boughtTickets"
+            <form action="${pageContext.request.contextPath}/exhibition/boy-ticket"
                          method="post">
-            <input type="hidden" name="ticketId" value="${exhibition.id}">
+            <input type="hidden" name="boughTicketId" value="${exhibition.id}">
             <button type="submit" class="btn btn-success">
                 Buy
             </button>

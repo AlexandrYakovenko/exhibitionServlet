@@ -1,7 +1,9 @@
 package ua.yakovenko.model.service;
 
 import ua.yakovenko.model.dao.DaoFactory;
+import ua.yakovenko.model.dao.ExhibitionDao;
 import ua.yakovenko.model.dao.UserDao;
+import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.Role;
 import ua.yakovenko.model.entity.User;
 
@@ -12,6 +14,7 @@ import java.util.Optional;
 public class UserService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private UserDao userDao = daoFactory.createUserDao();
+    private ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao();
 
     public List<User> findAllUsers(){
         return userDao.findAll();
@@ -51,5 +54,19 @@ public class UserService {
 
     public User findByUsername(String author) {
         return userDao.findByUsername(author);
+    }
+
+    public void buyTicket(User user, Long boughtTicket) throws SQLException {
+        Exhibition exhibition = exhibitionDao.findById(boughtTicket);
+        Long userMoney = user.getAccountMoney();
+        Long ticketPrice = exhibition.getPrice();
+
+        if (userMoney >= ticketPrice) {
+            user.setAccountMoney(userMoney - ticketPrice);
+        } else {
+            throw new RuntimeException();
+        }
+
+        userDao.buyTicket(user, boughtTicket);
     }
 }
