@@ -14,8 +14,11 @@ public class AddMoneyCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
+        Long userId = (Long) request.getSession().getAttribute("userId");
+        User user = userService.findById(userId);
         Long accountMoney = user.getAccountMoney();
+        request.setAttribute("currentUser", user);
+
         String moneyString = request.getParameter("money");
 
         if (moneyString != null) {

@@ -13,10 +13,11 @@ import java.util.Optional;
 
 public class UserService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private UserDao userDao = daoFactory.createUserDao();
 
     public List<User> findAllUsers(){
-        return userDao.findAll();
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findAll();
+        }
     }
 
     public void addUser(String username, String password) throws SQLException {
@@ -34,30 +35,38 @@ public class UserService {
     }
 
     public Optional<User> findUser(String username, String password){
-        Optional<User> user = Optional.ofNullable(userDao.findByUsername(username));
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            Optional<User> user = Optional.ofNullable(userDao.findByUsername(username));
 
-        if (user.isPresent() && user.get().getPassword().equals(password)) {
-            return user;
+            if (user.isPresent() && user.get().getPassword().equals(password)) {
+                return user;
+            }
+
+            return Optional.empty();
         }
-
-        return Optional.empty();
     }
 
     public User findById(Long editId) {
-       return userDao.findById(editId);
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findById(editId);
+        }
     }
 
     public void update(User user) {
-        userDao.update(user);
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            userDao.update(user);
+        }
     }
 
     public User findByUsername(String author) {
-        return userDao.findByUsername(author);
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findByUsername(author);
+        }
     }
 
     public void buyTicket(User user, Long ticketId) {
-        try (ExhibitionDao exhibitionDao =
-                     daoFactory.createExhibitionDao()
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao();
+             UserDao userDao = daoFactory.createUserDao()
         ) {
             Exhibition exhibition = exhibitionDao.findById(ticketId);
             Long userMoney = user.getAccountMoney();
