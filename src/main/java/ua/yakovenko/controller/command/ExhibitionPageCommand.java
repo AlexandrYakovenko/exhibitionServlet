@@ -18,7 +18,7 @@ public class ExhibitionPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         request.setAttribute("currentPage", 1);
-        
+
         String exhibitionIdDelete = request.getParameter("exhibitionIdDelete");
         if (exhibitionIdDelete != null) {
             Long idForDelete = Long.valueOf(exhibitionIdDelete);
