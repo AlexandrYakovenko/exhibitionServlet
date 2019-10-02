@@ -92,6 +92,28 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
+    public List<Exhibition> findBoughtTickets(User user) {
+        List<Exhibition> resultList = new CopyOnWriteArrayList<>();
+
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_FIND_BOUGHT_TICKETS)
+        ) {
+            ps.setLong(1, user.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Exhibition result = mapper.extractFromResultSet(rs);
+                resultList.add(result);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultList;
+    }
+
+    @Override
     public Exhibition findById(Long id) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
@@ -192,5 +214,10 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             "DELETE FROM exhibition  WHERE id = ?";
     private static final String QUERY_EXHIBITION_FIND_BY_AUTHOR =
             "SELECT * FROM exhibition WHERE author = ? ORDER BY id DESC";
+    private static final String QUERY_FIND_BOUGHT_TICKETS =
+            "SELECT (id, name, showroom, description, author, price, date) " +
+                    "FROM exhibition " +
+                    "INNER JOIN ticket " +
+                    "ON id = ticket_id AND user_id = ? ORDER BY id DESC ";
 
 }

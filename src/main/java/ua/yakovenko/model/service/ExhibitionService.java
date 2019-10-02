@@ -10,33 +10,52 @@ import java.util.List;
 
 public class ExhibitionService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao();
 
     public void add(Exhibition exhibition) throws SQLException {
-        exhibitionDao.add(exhibition);
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            exhibitionDao.add(exhibition);
+        }
     }
 
     public List<Exhibition> findAll() {
-       return exhibitionDao.findAll();
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.findAll();
+        }
     }
 
     public Exhibition findById(Long exhibitionId) {
-        return exhibitionDao.findById(exhibitionId);
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.findById(exhibitionId);
+        }
     }
 
     public void deleteById(Long idForDelete) {
-        exhibitionDao.delete(idForDelete);
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            exhibitionDao.delete(idForDelete);
+        }
     }
 
     public void update(Exhibition exhibition) {
-        exhibitionDao.update(exhibition);
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            exhibitionDao.update(exhibition);
+        }
     }
 
     public List<Exhibition> findByShowroom(String showroom) {
-        return exhibitionDao.findByShowroom(showroom);
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.findByShowroom(showroom);
+        }
     }
 
     public List<Exhibition> findByAuthor(User author) {
-        return exhibitionDao.findByAuthor(author);
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.findByAuthor(author);
+        }
+    }
+
+    public List<Exhibition> findBoughtTickets(User user) {
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.findBoughtTickets(user);
+        }
     }
 }

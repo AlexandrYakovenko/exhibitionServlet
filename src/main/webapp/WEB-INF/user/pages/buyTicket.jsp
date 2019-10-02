@@ -26,8 +26,12 @@
 
     <div class="container mt-2">
         <div>
-            <h5>Username : ${user.username}</h5>
-            <h5>Balance : ${user.accountMoney}</h5>
+            <h5>Username :
+                <c:if test="${requestScope.currentUser ne null}">${currentUser.username}</c:if>
+            </h5>
+            <h5>Balance :
+                <c:if test="${requestScope.currentUser ne null}">${currentUser.accountMoney}</c:if>
+            </h5>
         </div>
 
         <div>
@@ -35,7 +39,7 @@
                 Add Money
             </a>
         </div>
-
+        <c:if test="${requestScope.exhibition ne null}">
             <div class="card-columns mt-3">
                     <div class="card">
                         <div class="card-body">
@@ -62,10 +66,11 @@
                         </div>
                     </div>
             </div>
+        </c:if>
         <div class="mt-3">
             <form action="${pageContext.request.contextPath}/exhibition/bought-tickets"
                          method="post">
-            <input type="hidden" name="ticketId" value="${exhibition.id}">
+            <input type="hidden" name="boughtTicketId" value="${exhibition.id}">
             <button type="submit" class="btn btn-success">
                 Buy
             </button>
