@@ -44,7 +44,7 @@ class CommandUtility {
                                ExhibitionService eService
     ) {
         int page = 1;
-        int recordsPerPage = 10;
+        int recordsPerPage = 5;
         int numberOfRecords = eService.countOfRecords();
         int numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / recordsPerPage);
 
@@ -52,12 +52,11 @@ class CommandUtility {
             page = Integer.parseInt(request.getParameter("page"));
         }
 
-        List<Exhibition> list =
+        List<Exhibition> exhibitions =
                 eService.findDiapason((page - 1) * recordsPerPage,
                         recordsPerPage);
 
-
-        request.setAttribute("exhibitionList", list);
+        request.setAttribute("exhibitionList", exhibitions);
         request.setAttribute("numberOfPages", numberOfPages);
         request.setAttribute("currentPage", page);
     }

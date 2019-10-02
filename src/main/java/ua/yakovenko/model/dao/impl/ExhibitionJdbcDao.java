@@ -262,5 +262,5 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     private static final String  QUERY_COUNT_OF_RECORDS =
             "SELECT COUNT(*) FROM exhibition";
     private static final String QUERY_FIND_DIAPASON =
-            "SELECT * FROM exhibition LIMIT ?, ?";
+            "SELECT * FROM exhibition ORDER BY id DESC LIMIT ?, ?";
 }

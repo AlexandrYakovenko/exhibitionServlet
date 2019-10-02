@@ -79,21 +79,8 @@
             </div>
         </c:if>
 
-        <!-- Previous -->
-        <c:if test="${currentPage != 1}">
-            <a href="${pageContext.request.contextPath}/exhibition/user/exhibitions?page=${currentPage - 1}"
-               class="btn btn-link">
-                Previous
-            </a>
-        </c:if>
-
-        <!-- Next -->
-        <c:if test="${currentPage lt numberOfPages}">
-            <a href="${pageContext.request.contextPath}/exhibition/user/exhibitions?page=${currentPage + 1}"
-               class="btn btn-link">
-                Next
-            </a>
-        </c:if>
+        <!-- Pager -->
+        <%@ include file="../parts/pager.jsp"%>
 
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

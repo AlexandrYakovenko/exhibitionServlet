@@ -28,14 +28,10 @@ public class ExhibitionPageCommand implements Command {
             CommandUtility.showPagination(request, exhibitionService);
         } else {
             exhibitions = exhibitionService.findByShowroom(showroom);
-        }
-
-        if (exhibitions != null) {
             request.setAttribute("exhibitionList", exhibitions);
         }
 
         User currentUser = (User) request.getSession().getAttribute("user");
-
         request.setAttribute("currentUser", currentUser);
 
         return "/WEB-INF/user/pages/exhibitionPage.jsp";
