@@ -19,6 +19,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/exhibition/user/bought-tickets">
+                            Tickets
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/exhibition/user/edit-profile">
                             Profile
                         </a>
