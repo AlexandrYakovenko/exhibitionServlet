@@ -28,19 +28,22 @@ public class Servlet extends HttpServlet {
         commands.put("registration", new RegistrationCommand(userService));
         commands.put("logout", new LogOutCommand());
         commands.put("exception", new ExceptionCommand());
-        commands.put("admin", new AdminCommand());
-        commands.put("user", new UserCommand());
-        commands.put("superAdmin", new SuperAdminCommand());
-        commands.put("super_admin/userList", new UserListCommand(userService));
+
+        commands.put("super_admin", new SuperAdminCommand());
+        commands.put("super_admin/user-list", new UserListCommand(userService));
         commands.put("super_admin/edit", new UserEditCommand(userService));
-        commands.put("exhibitions", new ExhibitionPageCommand(exhibitionService));
+
+        commands.put("admin", new AdminCommand());
         commands.put("admin/exhibitions/add", new ExhibitionAddCommand(exhibitionService));
         commands.put("admin/exhibitions/edit", new ExhibitionEditCommand(exhibitionService));
-        commands.put("admin/myExhibitions", new MyExhibitionsCommand(exhibitionService));
-        commands.put("user/editProfile", new EditProfileCommand(userService));
-        commands.put("buy-ticket", new BuyTicketCommand(exhibitionService, userService));
-        commands.put("bought-tickets", new BoughtTicketsCommand(exhibitionService, userService));
-        commands.put("add-money", new AddMoneyCommand(userService));
+        commands.put("admin/my_exhibitions", new MyExhibitionsCommand(exhibitionService));
+
+        commands.put("user", new UserCommand());
+        commands.put("user/exhibitions", new ExhibitionPageCommand(exhibitionService));
+        commands.put("user/edit-profile", new EditProfileCommand(userService));
+        commands.put("user/buy-ticket", new BuyTicketCommand(exhibitionService, userService));
+        commands.put("user/bought-tickets", new BoughtTicketsCommand(exhibitionService, userService));
+        commands.put("user/add-money", new AddMoneyCommand(userService));
 
     }
 

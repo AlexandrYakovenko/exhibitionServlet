@@ -32,7 +32,7 @@
                 <c:if test="${sessionScope.username eq null}"><fmt:message key="label.guest" /></c:if>
             </br>
                 <c:if test="${sessionScope.access eq \"SUPER_ADMIN\"}">
-                    <a href="${pageContext.request.contextPath}/exhibition/superAdmin">Your Page</a>
+                    <a href="${pageContext.request.contextPath}/exhibition/super_admin">Your Page</a>
                 </c:if>
                 <c:if test="${sessionScope.access eq \"ADMIN\"}">
                     <a href="${pageContext.request.contextPath}/exhibition/admin">Your Page</a>

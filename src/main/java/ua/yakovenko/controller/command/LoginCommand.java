@@ -38,7 +38,7 @@ public class LoginCommand implements Command {
             return "redirect:/exhibition/admin";
         } else if (user.get().getRole().equals(Role.SUPER_ADMIN)) {
             CommandUtility.setUserRole(request, user.get());
-            return "redirect:/exhibition/superAdmin";
+            return "redirect:/exhibition/super_admin";
         } else {
             CommandUtility.setUserRole(request, user.get());
             return "redirect:/exhibition/user";

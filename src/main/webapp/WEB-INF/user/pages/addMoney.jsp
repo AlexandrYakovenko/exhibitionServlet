@@ -37,7 +37,7 @@
                 </c:if>
             </h5>
         </div>
-        <form action="${pageContext.request.contextPath}/exhibition/add-money"
+        <form action="${pageContext.request.contextPath}/exhibition/user/add-money"
               method="post" class="form-group mt-4">
             <label for="money"><b>Replenish balance</b></label>
             <input type="text" name="money" placeholder="0" autofocus

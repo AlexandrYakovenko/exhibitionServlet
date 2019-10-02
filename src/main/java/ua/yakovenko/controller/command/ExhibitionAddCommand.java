@@ -54,7 +54,7 @@ public class ExhibitionAddCommand implements Command {
                 return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
             }
 
-            return "redirect:/exhibition/exhibitions";
+            return "redirect:/exhibition/user/exhibitions";
         }
 
         return "/WEB-INF/admin/pages/exhibitionAdd.jsp";

@@ -25,7 +25,7 @@
     </div>
 
     <div class="container mt-2">
-        <form action="${pageContext.request.contextPath}/exhibition/exhibitions">
+        <form action="${pageContext.request.contextPath}/exhibition/user/exhibitions">
             <!-- Showroom -->
             <input type="text" name="showroom" class="form-control col-sm-3"
                    placeholder="name of showroom"/>
@@ -51,7 +51,7 @@
                         <h6 class="card-subtitle mb-2 ">Price : <c:out value="${exhibition.price}"/></h6>
                         <p class="card-text"><c:out value="${exhibition.description}"/></p><br/>
                         <h6 class="card-subtitle mb-2 ">Date : <c:out value="${exhibition.date}"/></h6>
-                        <form action="${pageContext.request.contextPath}/exhibition/buy-ticket"
+                        <form action="${pageContext.request.contextPath}/exhibition/user/buy-ticket"
                               method="post">
                             <input type="hidden" name="exhibitionId" value="${exhibition.id}">
                             <button type="submit" class="btn btn-link">

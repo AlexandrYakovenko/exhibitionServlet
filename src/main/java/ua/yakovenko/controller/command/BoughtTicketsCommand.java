@@ -34,7 +34,7 @@ public class BoughtTicketsCommand implements Command {
             try {
                 userService.buyTicket(user, ticketId);
             } catch (Exception e) {
-                return "redirect:/exhibition/buy-ticket";
+                return "redirect:/exhibition/user/buy-ticket";
             }
         }
 

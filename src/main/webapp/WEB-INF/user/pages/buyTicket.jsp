@@ -35,7 +35,7 @@
         </div>
 
         <div>
-            <a class="btn btn-primary" href="/exhibition/add-money">
+            <a class="btn btn-primary" href="/exhibition/user/add-money">
                 Add Money
             </a>
         </div>
@@ -68,7 +68,7 @@
             </div>
         </c:if>
         <div class="mt-3">
-            <form action="${pageContext.request.contextPath}/exhibition/bought-tickets"
+            <form action="${pageContext.request.contextPath}/exhibition/user/bought-tickets"
                          method="post">
             <input type="hidden" name="boughtTicketId" value="${exhibition.id}">
             <button type="submit" class="btn btn-success">

@@ -36,7 +36,7 @@
         </div>
 
         <form method="post" class="col-sm-4"
-              action="${pageContext.request.contextPath}/exhibition/user/editProfile">
+              action="${pageContext.request.contextPath}/exhibition/user/edit-profile">
             <!-- Username -->
             <b>Edit Username.</b><br/>
             <label for="username">Username :</label>
@@ -48,7 +48,7 @@
             </button>
         </form>
         <form method="post" class="col-sm-4"
-              action="${pageContext.request.contextPath}/exhibition/user/editProfile">
+              action="${pageContext.request.contextPath}/exhibition/user/edit-profile">
             <!-- Password -->
             <b>Edit Password.</b><br/>
             <label for="password">Password :</label>

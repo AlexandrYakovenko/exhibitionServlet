@@ -25,7 +25,7 @@ public class AddMoneyCommand implements Command {
             Long money = Long.valueOf(moneyString);
             user.setAccountMoney(accountMoney + money);
             userService.update(user);
-            return "redirect:/exhibition/buy-ticket";
+            return "redirect:/exhibition/user/buy-ticket";
         }
 
         return "/WEB-INF/user/pages/addMoney.jsp";

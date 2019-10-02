@@ -8,12 +8,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/exhibition/exhibitions">
+                <a class="nav-link" href="${pageContext.request.contextPath}/exhibition/user/exhibitions">
                     Exhibitions
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/exhibition/user/editProfile">
+                <a class="nav-link" href="${pageContext.request.contextPath}/exhibition/user/edit-profile">
                     Profile
                 </a>
             </li>
