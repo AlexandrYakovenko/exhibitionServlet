@@ -1,6 +1,7 @@
 package ua.yakovenko.model.entity;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Exhibition {
     private Long id;
@@ -119,5 +120,19 @@ public class Exhibition {
 
     public String getAuthorName() {
         return author != null ? author.getUsername() : "admin";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Exhibition)) return false;
+        Exhibition that = (Exhibition) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
     }
 }

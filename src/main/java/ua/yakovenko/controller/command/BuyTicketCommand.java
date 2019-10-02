@@ -6,6 +6,7 @@ import ua.yakovenko.model.service.ExhibitionService;
 import ua.yakovenko.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class BuyTicketCommand implements Command {
     private ExhibitionService exhibitionService;
@@ -19,26 +20,28 @@ public class BuyTicketCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String exhibitionIdStr = request.getParameter("exhibitionId");
-
         if (exhibitionIdStr != null) {
             Long exhibitionId = Long.valueOf(exhibitionIdStr);
             request.getSession().setAttribute("exhibitionId", exhibitionId);
         }
 
-        Object userIdObj = request.getSession().getAttribute("userId");
-
-        if (userIdObj != null) {
-            Long userId = (Long) userIdObj;
-            User currentUser = userService.findById(userId);
-            request.setAttribute("currentUser", currentUser);
-        }
-
+        Exhibition exhibition = null;
         Object exhibitionIdObj = request.getSession().getAttribute("exhibitionId");
-
         if (exhibitionIdObj != null) {
             Long exhibitionId = (Long) exhibitionIdObj;
-            Exhibition exhibition = exhibitionService.findById(exhibitionId);
+            exhibition = exhibitionService.findById(exhibitionId);
             request.setAttribute("exhibition", exhibition);
+        }
+
+        Long userId = (Long) request.getSession().getAttribute("userId");
+        User user = userService.findById(userId);
+        request.setAttribute("currentUser", user);
+
+        List<Exhibition> exhibitions = exhibitionService.findBoughtTickets(user);
+        if (exhibitions != null) {
+            if (exhibitions.contains(exhibition)) {
+                request.setAttribute("haveTicket", "You have already bought this ticket.");
+            }
         }
 
         return "/WEB-INF/user/pages/buyTicket.jsp";

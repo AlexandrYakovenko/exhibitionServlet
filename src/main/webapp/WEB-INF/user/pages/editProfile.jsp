@@ -39,7 +39,6 @@
 
         <div>
             <h5>Username : ${user.username}</h5>
-            <h5>Old : ${requestScope.oldUsername}</h5>
         </div>
 
         <form method="post" class="col-sm-4"
@@ -54,10 +53,11 @@
                 Save
             </button>
         </form>
+
         <form method="post" class="col-sm-4"
               action="${pageContext.request.contextPath}/exhibition/user/edit-profile">
             <!-- Password -->
-            <b>Edit Password.</b><br/>
+            <b>Edit Password :</b><br/>
             <label for="password">Password :</label>
             <input type="password" name="password" id="password" class="form-control"
                     pattern="^[\w-]{1,20}$"/>

@@ -25,6 +25,12 @@
     </div>
 
     <div class="container mt-2">
+        <c:if test="${requestScope.haveTicket ne null}">
+            <div class="alert alert-info" align="center">
+                <strong>${requestScope.haveTicket}</strong>
+            </div>
+        </c:if>
+
         <div>
             <h5>Username :
                 <c:if test="${requestScope.currentUser ne null}">${currentUser.username}</c:if>
@@ -67,16 +73,17 @@
                     </div>
             </div>
         </c:if>
-        <div class="mt-3">
-            <form action="${pageContext.request.contextPath}/exhibition/user/bought-tickets"
-                         method="post">
-            <input type="hidden" name="boughtTicketId" value="${exhibition.id}">
-            <button type="submit" class="btn btn-success">
-                Buy
-            </button>
-        </form>
-        </div>
-
+        <c:if test="${requestScope.haveTicket eq null}">
+            <div class="mt-3">
+                <form action="${pageContext.request.contextPath}/exhibition/user/bought-tickets"
+                             method="post">
+                    <input type="hidden" name="boughtTicketId" value="${exhibition.id}">
+                    <button type="submit" class="btn btn-success">
+                        Buy
+                    </button>
+                </form>
+            </div>
+        </c:if>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

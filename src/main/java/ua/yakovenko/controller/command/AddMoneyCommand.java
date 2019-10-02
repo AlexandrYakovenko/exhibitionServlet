@@ -25,6 +25,8 @@ public class AddMoneyCommand implements Command {
             Long money = Long.valueOf(moneyString);
             user.setAccountMoney(accountMoney + money);
             userService.update(user);
+
+            CommandUtility.setUser(request, user);
             return "redirect:/exhibition/user/buy-ticket";
         }
 

@@ -4,7 +4,6 @@ import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class EditProfileCommand implements Command {
     private static final String USERNAME_SAVED = "Username successfully saved";
@@ -20,10 +19,9 @@ public class EditProfileCommand implements Command {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("passwordConfirm");
-        HttpSession session = request.getSession();
 
-        User currentUser = (User) request.getSession().getAttribute("user");
-
+        Long userId = (Long) request.getSession().getAttribute("userId");
+        User currentUser = userService.findById(userId);
         if (username != null) {
             currentUser.setUsername(username);
 
@@ -31,9 +29,7 @@ public class EditProfileCommand implements Command {
 
             CommandUtility.setUser(request, currentUser);
             request.setAttribute("message", USERNAME_SAVED);
-        }
-
-        if (password != null && passwordConfirm != null) {
+        }else if (password != null && passwordConfirm != null) {
             if (password.equals(passwordConfirm) ) {
                 currentUser.setPassword(password);
 
@@ -45,8 +41,6 @@ public class EditProfileCommand implements Command {
                 request.setAttribute("error", "Invalid confirm password.");
             }
         }
-
-        request.setAttribute("oldUsername",  session.getAttribute("username"));
 
         return "/WEB-INF/user/pages/editProfile.jsp";
     }
