@@ -1,10 +1,13 @@
 package ua.yakovenko.controller.command;
 
+import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.User;
+import ua.yakovenko.model.service.ExhibitionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
+import java.util.List;
 
 class CommandUtility {
     static void setUser(HttpServletRequest request,
@@ -35,5 +38,27 @@ class CommandUtility {
         request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
 
         return false;
+    }
+
+    static void showPagination(HttpServletRequest request,
+                               ExhibitionService eService
+    ) {
+        int page = 1;
+        int recordsPerPage = 10;
+        int numberOfRecords = eService.countOfRecords();
+        int numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / recordsPerPage);
+
+        if (request.getParameter("page") != null) {
+            page = Integer.valueOf(request.getParameter("page"));
+        }
+
+        List<Exhibition> list =
+                eService.findDiapason((page - 1) * recordsPerPage,
+                        recordsPerPage);
+
+
+        request.setAttribute("exhibitionList", list);
+        request.setAttribute("numberOfPages", numberOfPages);
+        request.setAttribute("currentPage", page);
     }
 }

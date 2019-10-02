@@ -58,4 +58,16 @@ public class ExhibitionService {
             return exhibitionDao.findBoughtTickets(user);
         }
     }
+
+    public int countOfRecords() {
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.countOfRecords();
+        }
+    }
+
+    public List<Exhibition> findDiapason(int from, int count) {
+        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
+            return exhibitionDao.findDiapason(from, count);
+        }
+    }
 }

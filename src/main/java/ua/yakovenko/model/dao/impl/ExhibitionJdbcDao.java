@@ -114,6 +114,47 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
+    public int countOfRecords()  {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_COUNT_OF_RECORDS)
+        ) {
+            ResultSet rs = ps.executeQuery();
+            return  rs.getInt("COUNT(*)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Exhibition> findDiapason(int from, int count) {
+        List<Exhibition> resultList = new CopyOnWriteArrayList<>();
+
+        try(PreparedStatement ps =
+                    connection.prepareStatement(
+                            QUERY_FIND_DIAPASON)
+        ){
+            ps.setInt(1, from);
+            ps.setInt(2, count);
+            ResultSet rs = ps.executeQuery(QUERY_FIND_DIAPASON);
+
+            while (rs.next()) {
+                Exhibition ex = mapper.extractFromResultSet(rs);
+                resultList.add(ex);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("");
+        }
+
+        if (!resultList.isEmpty()) {
+            return resultList;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public Exhibition findById(Long id) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
@@ -216,5 +257,8 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             "SELECT * FROM exhibition WHERE author = ? ORDER BY id DESC";
     private static final String QUERY_FIND_BOUGHT_TICKETS =
             "SELECT id, name, showroom, description, author, price, date FROM exhibition INNER JOIN ticket ON id = ticket_id AND user_id = ? ORDER BY id DESC";
-
+    private static final String  QUERY_COUNT_OF_RECORDS =
+            "SELECT COUNT(*) FROM exhibition";
+    private static final String QUERY_FIND_DIAPASON =
+            "SELECT * FROM exhibition ORDER BY id DESC LIMIT ?, ?";
 }
