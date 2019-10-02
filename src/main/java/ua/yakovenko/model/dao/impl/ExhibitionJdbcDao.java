@@ -215,9 +215,6 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     private static final String QUERY_EXHIBITION_FIND_BY_AUTHOR =
             "SELECT * FROM exhibition WHERE author = ? ORDER BY id DESC";
     private static final String QUERY_FIND_BOUGHT_TICKETS =
-            "SELECT (id, name, showroom, description, author, price, date) " +
-                    "FROM exhibition " +
-                    "INNER JOIN ticket " +
-                    "ON id = ticket_id AND user_id = ? ORDER BY id DESC ";
+            "SELECT id, name, showroom, description, author, price, date FROM exhibition INNER JOIN ticket ON id = ticket_id AND user_id = ? ORDER BY id DESC";
 
 }
