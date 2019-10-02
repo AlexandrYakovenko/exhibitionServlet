@@ -106,7 +106,7 @@
                             <p class="col align-self-center"><c:out value="${exhibition.author.username}"/></p>
                             <p class="col align-self-center"></p>
                             <form class="col align-self-center" method="post"
-                                  action="${pageContext.request.contextPath}/exhibition/exhibitions">
+                                  action="${pageContext.request.contextPath}/exhibition/user/exhibitions">
                                   <input type="hidden" name="exhibitionIdDelete" value="${exhibition.id}"/>
                                   <button class="btn btn-secondary" type="submit">
                                       Delete

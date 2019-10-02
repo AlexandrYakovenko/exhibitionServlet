@@ -7,15 +7,16 @@ import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 
 class CommandUtility {
-    static void setUserRole(HttpServletRequest request,
-                            User currentUser
+    static void setUser(HttpServletRequest request,
+                            User user
     ) {
         HttpSession session = request.getSession();
-        session.setAttribute("user", currentUser);
-        session.setAttribute("username", currentUser.getUsername());
-        session.setAttribute("userId", currentUser.getId());
-        session.setAttribute("role", currentUser.getRole());
-        session.setAttribute("access", currentUser.getRole().name());
+
+        session.setAttribute("user", user);
+        session.setAttribute("username", user.getUsername());
+        session.setAttribute("userId", user.getId());
+        session.setAttribute("role",user.getRole());
+        session.setAttribute("access", user.getRole().name());
     }
 
     static boolean checkUserIsLogged(HttpServletRequest request,

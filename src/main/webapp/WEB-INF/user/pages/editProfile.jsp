@@ -31,8 +31,15 @@
             </div>
         </c:if>
 
+        <c:if test="${requestScope.error ne null}">
+            <div class="alert alert-danger" align="center">
+                <strong>${error}</strong>
+            </div>
+        </c:if>
+
         <div>
             <h5>Username : ${user.username}</h5>
+            <h5>Old : ${requestScope.oldUsername}</h5>
         </div>
 
         <form method="post" class="col-sm-4"

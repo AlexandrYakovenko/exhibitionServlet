@@ -22,9 +22,7 @@ public class BuyTicketCommand implements Command {
 
         if (exhibitionIdStr != null) {
             Long exhibitionId = Long.valueOf(exhibitionIdStr);
-            request.setAttribute("exhibitionId", exhibitionId);
-            Exhibition exhibition = exhibitionService.findById(exhibitionId);
-            request.setAttribute("exhibition", exhibition);
+            request.getSession().setAttribute("exhibitionId", exhibitionId);
         }
 
         Object userIdObj = request.getSession().getAttribute("userId");
@@ -34,7 +32,15 @@ public class BuyTicketCommand implements Command {
             User currentUser = userService.findById(userId);
             request.setAttribute("currentUser", currentUser);
         }
-        
+
+        Object exhibitionIdObj = request.getSession().getAttribute("exhibitionId");
+
+        if (exhibitionIdObj != null) {
+            Long exhibitionId = (Long) exhibitionIdObj;
+            Exhibition exhibition = exhibitionService.findById(exhibitionId);
+            request.setAttribute("exhibition", exhibition);
+        }
+
         return "/WEB-INF/user/pages/buyTicket.jsp";
     }
 }

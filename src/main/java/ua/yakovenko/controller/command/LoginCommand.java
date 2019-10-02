@@ -34,13 +34,13 @@ public class LoginCommand implements Command {
         }
 
         if (user.get().getRole().equals(Role.ADMIN)) {
-            CommandUtility.setUserRole(request, user.get());
+            CommandUtility.setUser(request, user.get());
             return "redirect:/exhibition/admin";
         } else if (user.get().getRole().equals(Role.SUPER_ADMIN)) {
-            CommandUtility.setUserRole(request, user.get());
+            CommandUtility.setUser(request, user.get());
             return "redirect:/exhibition/super_admin";
         } else {
-            CommandUtility.setUserRole(request, user.get());
+            CommandUtility.setUser(request, user.get());
             return "redirect:/exhibition/user";
         }
 
