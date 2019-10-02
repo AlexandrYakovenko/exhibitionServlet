@@ -41,11 +41,11 @@
                         </tr>
                         <hr/>
                         <tr>
-                            <td>${ticket.id}</td>
-                            <td>${ticket.showroom}</td>
-                            <td style="max-width: 200px">${ticket.description}</td>
-                            <td>${ticket.price}</td>
-                            <td>${ticket.date}</td>
+                            <td style="max-width: 20px; min-width: 20px">${ticket.name}</td>
+                            <td style="max-width: 20px; min-width: 20px">${ticket.showroom}</td>
+                            <td style="max-width: 75px; min-width: 75px">${ticket.description}</td>
+                            <td style="max-width: 20px; min-width: 20px">${ticket.price}</td>
+                            <td style="max-width: 20px; min-width: 20px">${ticket.date}</td>
                         </tr>
                     </table>
                 </div>
