@@ -49,7 +49,7 @@ class CommandUtility {
         int numberOfPages = (int) Math.ceil(numberOfRecords * 1.0 / recordsPerPage);
 
         if (request.getParameter("page") != null) {
-            page = Integer.valueOf(request.getParameter("page"));
+            page = Integer.parseInt(request.getParameter("page"));
         }
 
         List<Exhibition> list =

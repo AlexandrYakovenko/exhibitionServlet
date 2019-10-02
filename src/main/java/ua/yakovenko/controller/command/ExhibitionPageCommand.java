@@ -18,13 +18,12 @@ public class ExhibitionPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String exhibitionIdDelete = request.getParameter("exhibitionIdDelete");
-        String showroom = request.getParameter("showroom");
-
         if (exhibitionIdDelete != null) {
             Long idForDelete = Long.valueOf(exhibitionIdDelete);
             exhibitionService.deleteById(idForDelete);
         }
 
+        String showroom = request.getParameter("showroom");
         if (showroom == null || showroom.equals("")) {
             CommandUtility.showPagination(request, exhibitionService);
         } else {

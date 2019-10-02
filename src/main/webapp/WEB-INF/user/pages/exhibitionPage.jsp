@@ -41,7 +41,7 @@
             </a>
         </c:if>
 
-        <c:if test="${requestScope.exhibitions ne null}">
+        <c:if test="${requestScope.exhibitionList ne null}">
             <div class="card-columns mt-3">
                 <c:forEach items="${exhibitionList}" var="exhibition">
                 <div class="card">

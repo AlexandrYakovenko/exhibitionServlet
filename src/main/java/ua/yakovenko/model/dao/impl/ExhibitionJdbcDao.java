@@ -120,7 +120,9 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
                              QUERY_COUNT_OF_RECORDS)
         ) {
             ResultSet rs = ps.executeQuery();
-            return  rs.getInt("COUNT(*)");
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,14 +139,14 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
         ){
             ps.setInt(1, from);
             ps.setInt(2, count);
-            ResultSet rs = ps.executeQuery(QUERY_FIND_DIAPASON);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Exhibition ex = mapper.extractFromResultSet(rs);
                 resultList.add(ex);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("");
+            throw new RuntimeException("QUERY_FIND_DIAPASON");
         }
 
         if (!resultList.isEmpty()) {
@@ -260,5 +262,5 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     private static final String  QUERY_COUNT_OF_RECORDS =
             "SELECT COUNT(*) FROM exhibition";
     private static final String QUERY_FIND_DIAPASON =
-            "SELECT * FROM exhibition ORDER BY id DESC LIMIT ?, ?";
+            "SELECT * FROM exhibition LIMIT ?, ?";
 }
