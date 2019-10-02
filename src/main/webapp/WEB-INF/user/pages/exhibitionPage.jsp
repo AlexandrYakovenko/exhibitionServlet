@@ -43,7 +43,7 @@
 
         <c:if test="${requestScope.exhibitions ne null}">
             <div class="card-columns mt-3">
-                <c:forEach items="${exhibitions}" var="exhibition">
+                <c:forEach items="${exhibitionList}" var="exhibition">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><c:out value="${exhibition.name}"/></h5>
@@ -77,6 +77,22 @@
                 </div>
                 </c:forEach>
             </div>
+        </c:if>
+
+        <!-- Previous -->
+        <c:if test="${currentPage != 1}">
+            <a href="${pageContext.request.contextPath}/exhibition/user/exhibitions?page=${currentPage - 1}"
+               class="btn btn-link">
+                Previous
+            </a>
+        </c:if>
+
+        <!-- Next -->
+        <c:if test="${currentPage lt numberOfPages}">
+            <a href="${pageContext.request.contextPath}/exhibition/user/exhibitions?page=${currentPage + 1}"
+               class="btn btn-link">
+                Next
+            </a>
         </c:if>
 
     </div>

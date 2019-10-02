@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ExhibitionPageCommand implements Command {
     private ExhibitionService exhibitionService;
-    private  List<Exhibition> exhibitions;
+    private  List<Exhibition> exhibitions = null;
 
     public ExhibitionPageCommand(ExhibitionService exhibitionService) {
         this.exhibitionService = exhibitionService;
@@ -26,13 +26,13 @@ public class ExhibitionPageCommand implements Command {
         }
 
         if (showroom == null || showroom.equals("")) {
-            exhibitions = exhibitionService.findAll();
+            CommandUtility.showPagination(request, exhibitionService);
         } else {
             exhibitions = exhibitionService.findByShowroom(showroom);
         }
 
         if (exhibitions != null) {
-            request.setAttribute("exhibitions", exhibitions);
+            request.setAttribute("exhibitionList", exhibitions);
         }
 
         User currentUser = (User) request.getSession().getAttribute("user");
