@@ -20,7 +20,7 @@
         </div>
         <div class="container mt-2">
 
-        <c:if test="${requestScope.error eq true}">
+        <c:if test="${requestScope.message ne null}">
         <div class="alert alert-danger" align="center">
             <strong>${requestScope.message}</strong>
         </div>

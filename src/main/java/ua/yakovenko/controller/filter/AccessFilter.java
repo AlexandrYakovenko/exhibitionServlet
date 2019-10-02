@@ -17,12 +17,25 @@ public class AccessFilter extends AbstractFilter {
         String path = request.getRequestURI();
 
         if (path.contains("admin")) {
-            if (request.getSession().getAttribute("role") == Role.ADMIN ||
-                    request.getSession().getAttribute("role") == Role.SUPER_ADMIN) {
+            if (request.getSession().getAttribute("role") == Role.ADMIN ) {
                 chain.doFilter(request, response);
             } else {
-                request.setAttribute("error", true);
                 request.setAttribute("message", "AccessDenied");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }
+        } else if (path.contains("user")) {
+            if (request.getSession().getAttribute("role") == Role.ADMIN ||
+                    request.getSession().getAttribute("role") == Role.USER) {
+                chain.doFilter(request, response);
+            } else {
+                request.setAttribute("message", "Login, Please.");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }
+        } else if (path.contains("super_admin")) {
+            if (request.getSession().getAttribute("role") == Role.SUPER_ADMIN) {
+                chain.doFilter(request, response);
+            } else {
+                request.setAttribute("message", "Login, Please.");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         } else {
