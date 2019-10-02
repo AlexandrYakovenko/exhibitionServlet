@@ -47,7 +47,7 @@
             <b>Edit Username.</b><br/>
             <label for="username">Username :</label>
             <input type="text" name="username" value="${user.username}" autofocus
-                    id="username" class="form-control"/>
+                    id="username" class="form-control" required/>
 
             <button type="submit" class="btn btn-primary mt-2">
                 Save
@@ -60,14 +60,14 @@
             <b>Edit Password :</b><br/>
             <label for="password">Password :</label>
             <input type="password" name="password" id="password" class="form-control"
-                    pattern="^[\w-]{1,20}$"/>
+                    required pattern="^[\w]{1,20}$"/>
 
             <!-- Password Confirm -->
             <label for="passwordConfirm">
                 Confirm password, if you want to change it :
             </label>
             <input type="password" name="passwordConfirm" id="passwordConfirm"
-                   class="form-control"  pattern="^[\w-]{1,20}$"/>
+                   class="form-control" required pattern="^[\w-]{1,20}$"/>
 
             <button type="submit" class="btn btn-primary mt-2">
                 Save
