@@ -19,7 +19,7 @@ public class LoginCommand implements Command {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (username == null)
+        if (username == null || password == null)
             return "/login.jsp";
 
         Optional<User> user = userService.findUser(username, password);

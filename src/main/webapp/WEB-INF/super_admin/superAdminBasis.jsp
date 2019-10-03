@@ -20,7 +20,7 @@
 <div class="container mt-2">
 
     <div style="text-align: center">
-        Hello, super_admin
+        Hello, super admin
     </div>
 
 </div>

@@ -17,11 +17,6 @@
 
         <div class="navbar-text mr-2"> ${sessionScope.username}</div>
 
-        <div class="mr-2">
-            <a href="?sessionLocale=en" class="btn btn-info"><fmt:message key="language.en"/></a>
-            <a href="?sessionLocale=ua" class="btn btn-info"><fmt:message key="language.ua"/></a>
-        </div>
-
         <div class="mr-3">
             <c:if test="${sessionScope.username eq null}">
                 <a href="${pageContext.request.contextPath}/exhibition/login"
