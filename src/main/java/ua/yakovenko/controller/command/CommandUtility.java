@@ -10,9 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 
 class CommandUtility {
-    static void setUser(HttpServletRequest request,
-                            User user
-    ) {
+    static void setUser(HttpServletRequest request, User user) {
         HttpSession session = request.getSession();
 
         session.setAttribute("user", user);
@@ -59,5 +57,14 @@ class CommandUtility {
         request.setAttribute("exhibitionList", exhibitions);
         request.setAttribute("numberOfPages", numberOfPages);
         request.setAttribute("currentPage", page);
+    }
+
+    static boolean correctInput(String... params) {
+        for (String param : params) {
+            if (param == null || param.equals("")) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -20,9 +20,9 @@
 
     <div class="container mt-2">
 
-        <c:if test="${requestScope.error eq true}">
+        <c:if test="${requestScope.error ne null}">
             <div class="alert alert-danger" align="center">
-                <strong><fmt:message key="label.login.error"/></strong>
+                <strong><c:out value="${error}"/></strong>
             </div>
         </c:if>
 

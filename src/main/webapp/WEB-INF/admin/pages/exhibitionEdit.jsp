@@ -88,18 +88,30 @@
                     </form>
                 </div>
             </div>
-        <div class="card-columns mt-3">
+        <c:if test="${requestScope.exhibition ne null}">
+            <div class="card-columns mt-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><c:out value="${exhibition.name}"/></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Showroom : <c:out value="${exhibition.showroom}"/></h6>
-                        <h6 class="card-subtitle mb-2 ">Price : <c:out value="${exhibition.price}"/></h6>
+                        <h5 class="card-title">
+                            <c:out value="${exhibition.name}"/>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <fmt:message key="label.showroom"/><c:out value="${exhibition.showroom}"/>
+                        </h6>
+                        <h6 class="card-subtitle mb-2 ">
+                            <fmt:message key="label.price"/><c:out value="${exhibition.price}"/>
+                        </h6>
                         <p class="card-text"><c:out value="${exhibition.description}"/></p><br/>
-                        <h6 class="card-subtitle mb-2 ">Date : <c:out value="${exhibition.date}"/></h6>
-                        <a href="${pageContext.request.contextPath}/exhibition/sales"
-                           class="card-link">
-                            Buy Ticket
-                        </a>
+                        <h6 class="card-subtitle mb-2 ">
+                            <fmt:message key="label.date"/><c:out value="${exhibition.date}"/>
+                        </h6>
+                        <form action="${pageContext.request.contextPath}/exhibition/user/buy-ticket"
+                              method="post">
+                            <input type="hidden" name="exhibitionId" value="${exhibition.id}">
+                            <button type="submit" class="btn btn-link">
+                                <fmt:message key="button.buy_ticket"/>
+                            </button>
+                        </form>
                     </div>
                     <div class="card-footer text-muted container">
                         <div class="row">
@@ -109,13 +121,14 @@
                                   action="${pageContext.request.contextPath}/exhibition/user/exhibitions">
                                   <input type="hidden" name="exhibitionIdDelete" value="${exhibition.id}"/>
                                   <button class="btn btn-secondary" type="submit">
-                                      Delete
+                                      <fmt:message key="button.delete"/>
                                   </button>
                             </form>
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
+        </c:if>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

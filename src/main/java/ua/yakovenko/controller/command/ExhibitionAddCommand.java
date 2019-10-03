@@ -16,47 +16,36 @@ public class ExhibitionAddCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String showroom = request.getParameter("showroom");
-        String description = request.getParameter("description");
-        String priceString = request.getParameter("price");
-        String dateString = request.getParameter("date");
-        Long price = null;
-        Date date = null;
+        try {
+            String name = request.getParameter("name");
+            String showroom = request.getParameter("showroom");
+            String description = request.getParameter("description");
+            String priceStr = request.getParameter("price");
+            String dateStr = request.getParameter("date");
 
-        //TODO сделать проверку водимых данных
-        if (priceString != null && dateString != null) {
-            price = Long.valueOf(priceString);
-            date = Date.valueOf(dateString);
-        }
-        //TODO переписать
-        if (name != null
-                && showroom != null
-                && description != null
-                && price != null
-                && date != null
-        ) {
-            User author = (User) request.getSession().getAttribute("user");
+            if (CommandUtility.correctInput(name, showroom, description, priceStr, dateStr)) {
+                Long price = Long.valueOf(priceStr);
+                Date date = Date.valueOf(dateStr);
 
-            Exhibition exhibition = Exhibition.builder()
-                    .name(name)
-                    .showroom(showroom)
-                    .description(description)
-                    .author(author)
-                    .price(price)
-                    .date(date)
-                    .build();
+                User author = (User) request.getSession().getAttribute("user");
+                Exhibition exhibition = Exhibition.builder()
+                        .name(name)
+                        .showroom(showroom)
+                        .description(description)
+                        .author(author)
+                        .price(price)
+                        .date(date)
+                        .build();
 
-            try {
                 exhibitionService.add(exhibition);
-            } catch (Exception e) {
-                request.setAttribute("error", "You cannot add this exhibition");
-                return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+
+                return "redirect:/exhibition/user/exhibitions";
             }
 
-            return "redirect:/exhibition/user/exhibitions";
+            return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+        } catch (Exception e) {
+            request.setAttribute("error", "You cannot add this exhibition");
+            return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
         }
-
-        return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
     }
 }

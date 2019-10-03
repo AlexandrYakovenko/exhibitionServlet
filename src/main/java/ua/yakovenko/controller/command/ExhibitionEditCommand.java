@@ -16,50 +16,39 @@ public class ExhibitionEditCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String showroom = request.getParameter("showroom");
-        String description = request.getParameter("description");
-        String priceString = request.getParameter("price");
-        String dateString = request.getParameter("date");
-        Long price = null;
-        Date date = null;
+        try {
+            String name = request.getParameter("name");
+            String showroom = request.getParameter("showroom");
+            String description = request.getParameter("description");
+            String priceStr = request.getParameter("price");
+            String dateStr = request.getParameter("date");
 
-        //TODO сделать проверку водимых данных
-        if (priceString != null && dateString != null) {
-            price = Long.valueOf(priceString);
-            date = Date.valueOf(dateString);
-        }
+            Long exhibitionId = Long.valueOf(request.getParameter("exhibitionId"));
 
-        Long exhibitionId = Long.valueOf(request.getParameter("exhibitionId"));
+            if (CommandUtility.correctInput(name, showroom, description, priceStr, dateStr)) {
+                Long price = Long.valueOf(priceStr);
+                Date date = Date.valueOf(dateStr);
 
-        if (name != null
-                && showroom != null
-                && description != null
-                && price != null
-                && date != null
-                ) {
-            User author = (User) request.getSession().getAttribute("user");
+                User author = (User) request.getSession().getAttribute("user");
+                Exhibition exhibition = Exhibition.builder()
+                        .id(exhibitionId)
+                        .name(name)
+                        .showroom(showroom)
+                        .description(description)
+                        .author(author)
+                        .price(price)
+                        .date(date)
+                        .build();
 
-            Exhibition exhibition = Exhibition.builder()
-                    .id(exhibitionId)
-                    .name(name)
-                    .showroom(showroom)
-                    .description(description)
-                    .author(author)
-                    .price(price)
-                    .date(date)
-                    .build();
-
-            try {
                 exhibitionService.update(exhibition);
-            } catch (Exception e) {
-                request.setAttribute("error", "You cannot edit this exhibition");
             }
-        }
 
-        Exhibition currentExhibition = exhibitionService.findById(exhibitionId);
-        if (currentExhibition != null) {
-            request.setAttribute("exhibition", currentExhibition);
+            Exhibition currentExhibition = exhibitionService.findById(exhibitionId);
+            if (currentExhibition != null) {
+                request.setAttribute("exhibition", currentExhibition);
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", "You cannot edit this exhibition");
         }
 
         return "/WEB-INF/admin/pages/exhibitionEdit.jsp";

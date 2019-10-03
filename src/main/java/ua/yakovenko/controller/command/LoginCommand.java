@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 public class LoginCommand implements Command {
+    private static final String DATA_ERROR = "Invalid username or password.";
+    private static final String LOGGED_ERROR = "You has already logged.";
+
     private UserService userService;
 
     public LoginCommand(UserService userService) {
@@ -25,12 +28,13 @@ public class LoginCommand implements Command {
         Optional<User> user = userService.findUser(username, password);
 
         if (!user.isPresent()) {
-            request.setAttribute("error", true);
+            request.setAttribute("error", DATA_ERROR);
             return "/login.jsp";
         }
 
         if (CommandUtility.checkUserIsLogged(request, username)) {
-            throw new RuntimeException("You already logged");
+            request.setAttribute("error", LOGGED_ERROR);
+            return "/login.jsp";
         }
 
         if (user.get().getRole().equals(Role.ADMIN)) {
