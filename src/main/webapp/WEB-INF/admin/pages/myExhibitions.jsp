@@ -21,8 +21,8 @@
 
     <div class="container mt-2">
         <div>
-            <h5>Username : ${user.username}</h5>
-            <h5>Balance : ${user.accountMoney}</h5>
+            <h5><fmt:message key="label.username"/>${user.username}</h5>
+            <h5><fmt:message key="label.balance"/>${user.accountMoney}</h5>
         </div>
 
         <c:if test="${requestScope.exhibitions ne null}">
@@ -30,16 +30,24 @@
                 <c:forEach items="${exhibitions}" var="exhibition">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><c:out value="${exhibition.name}"/></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Showroom : <c:out value="${exhibition.showroom}"/></h6>
-                            <h6 class="card-subtitle mb-2 ">Price : <c:out value="${exhibition.price}"/></h6>
+                            <h5 class="card-title">
+                                <c:out value="${exhibition.name}"/>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <fmt:message key="label.showroom"/><c:out value="${exhibition.showroom}"/>
+                            </h6>
+                            <h6 class="card-subtitle mb-2 ">
+                                <fmt:message key="label.price"/><c:out value="${exhibition.price}"/>
+                            </h6>
                             <p class="card-text"><c:out value="${exhibition.description}"/></p><br/>
-                            <h6 class="card-subtitle mb-2 ">Date : <c:out value="${exhibition.date}"/></h6>
+                            <h6 class="card-subtitle mb-2 ">
+                                <fmt:message key="label.date"/><c:out value="${exhibition.date}"/>
+                            </h6>
                             <form action="${pageContext.request.contextPath}/exhibition/user/buy-ticket"
                                   method="post">
                                 <input type="hidden" name="exhibitionId" value="${exhibition.id}">
                                 <button type="submit" class="btn btn-link">
-                                    Buy Ticket
+                                    <fmt:message key="button.buy_ticket"/>
                                 </button>
                             </form>
                         </div>
@@ -51,7 +59,7 @@
                                       action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/edit">
                                     <input type="hidden" name="exhibitionId" value="${exhibition.id}"/>
                                     <button class="btn btn-secondary" type="submit">
-                                         Edit
+                                        <fmt:message key="button.edit"/>
                                     </button>
                                 </form>
                             </div>

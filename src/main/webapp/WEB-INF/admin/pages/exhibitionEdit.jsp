@@ -27,7 +27,7 @@
         </c:if>
 
         <div align="center">
-            <h5>Edit your exhibition</h5>
+            <h5><fmt:message key="label.exhibition_edit"/></h5>
         </div>
 
             <div class="form-group mt-3">
@@ -36,41 +36,41 @@
 
                         <!-- Name -->
                         <div class="form-group">
-                            <label for="exhibition">Exhibition</label>
+                            <label for="exhibition"><fmt:message key="label.exhibition_name"/></label>
                             <input type="text" name="name" class="form-control"
-                                   id="exhibition" placeholder="name of exhibition" required
+                                   id="exhibition"  required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.name}</c:if>"/>
                         </div>
 
                         <!-- Showroom -->
                         <div class="form-group">
-                            <label for="showroom">Showroom</label>
+                            <label for="showroom"><fmt:message key="label.exhibition_showroom"/></label>
                             <input type="text" name="showroom" class="form-control"
-                                   id="showroom" placeholder="name of showroom" required
+                                   id="showroom"  required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.showroom}</c:if>"/>
                         </div>
 
                         <!-- Description -->
                         <div class="form-group">
-                            <label for="description">Description</label>
+                            <label for="description"><fmt:message key="label.exhibition_description"/></label>
                             <input type="text" name="description" class="form-control"
-                                   id="description" placeholder="description of event" required
+                                   id="description"  required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.description}</c:if>"/>
                         </div>
 
                         <!-- Price -->
                         <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="text" name="price" class="form-control"
-                                   id="price" placeholder="0" required
+                            <label for="price"><fmt:message key="label.exhibition_price"/></label>
+                            <input type="text" name="price" class="form-control" id="price" placeholder="0"
+                                   pattern="[1-9]{1}|^[1-9]{1}[0-9]{1}|^[1-9]{1}[0-9]{1}[0-9]{1}|^1000" required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.price}</c:if>"/>
                         </div>
 
                         <!-- Date -->
                         <div class="form-group">
-                            <label for="date">Date</label>
+                            <label for="date"><fmt:message key="label.exhibition_date"/></label>
                             <input type="date" name="date" class="form-control"
-                                   id="date" placeholder="Date of event" required
+                                   id="date" placeholder="0000-00-00" required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.date}</c:if>"/>
                         </div>
 
@@ -82,7 +82,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
-                                Save
+                                <fmt:message key="button.save"/>
                             </button>
                         </div>
                     </form>
