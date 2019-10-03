@@ -28,31 +28,35 @@
         <form action="${pageContext.request.contextPath}/exhibition/registration" method="post">
             <!-- Username -->
             <div class="form-group row">
-                <label class="col-sm-1 col-form-label">Username</label>
+                <label class="col-sm-2 col-form-label">
+                    <fmt:message key="label.username"/>
+                </label>
                 <div class="col-sm-4">
-                    <input type="text" name="username" class="form-control" placeholder="username" required
-                           autofocus/>
+                    <input type="text" name="username" class="form-control" required autofocus
+                           placeholder="<fmt:message key="placeholder.username"/>"/>
                 </div>
             </div>
 
             <!-- Password -->
             <div class="form-group row">
-                <label class="col-sm-1 col-form-label"> Password </label>
+                <label class="col-sm-2 col-form-label">
+                    <fmt:message key="label.password"/>
+                </label>
                 <div class="col-sm-4 ">
-                    <input type="password" name="password" class="form-control" placeholder="password"
-                           required/>
+                    <input type="password" name="password" class="form-control" required
+                           placeholder="<fmt:message key="placeholder.password"/>"/>
                 </div>
             </div>
 
             <button type="submit" class="btn btn-primary">
-                Registration
+                <fmt:message key="label.registration"/>
             </button>
         </form>
 
         <div class="mt-2">
             <a href="${pageContext.request.contextPath}/exhibition/login"
                class="btn btn-light">
-                Login
+                <fmt:message key="label.login"/>
             </a>
         </div>
 

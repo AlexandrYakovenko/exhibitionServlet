@@ -24,10 +24,10 @@ public class Servlet extends HttpServlet {
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
 
+        commands.put("index", new IndexCommand());
         commands.put("login", new LoginCommand(userService));
         commands.put("registration", new RegistrationCommand(userService));
         commands.put("logout", new LogOutCommand());
-        commands.put("exception", new ExceptionCommand());
 
         commands.put("super_admin", new SuperAdminCommand());
         commands.put("super_admin/user-list", new UserListCommand(userService));

@@ -16,24 +16,21 @@
             <a href="?sessionLocale=ua" class="btn btn-info"><fmt:message key="language.ua"/></a>
         </div>
 
-        <c:if test="${sessionScope.username eq null}">
-            <div class="mr-3">
-                <form action="${pageContext.request.contextPath}/exhibition/login" method="get">
-                    <button type="submit" class="btn btn-primary">
-                        <fmt:message key="button.login"/>
-                    </button>
-                </form>
-            </div>
-        </c:if>
-        <c:if test="${sessionScope.username ne null}">
+
         <div class="mr-3">
-            <form action="${pageContext.request.contextPath}/exhibition/logout" method="post">
-                <button type="submit" class="btn btn-primary">
+            <c:if test="${sessionScope.username eq null}">
+                <a href="${pageContext.request.contextPath}/exhibition/login"
+                   class="btn btn-primary">
+                    <fmt:message key="label.login"/>
+                </a>
+            </c:if>
+            <c:if test="${sessionScope.username ne null}">
+                <a href="${pageContext.request.contextPath}/exhibition/logout"
+                   class="btn btn-primary">
                     <fmt:message key="button.logout"/>
-                </button>
-            </form>
+                </a>
+            </c:if>
         </div>
-        </c:if>
 
     </div>
 </nav>

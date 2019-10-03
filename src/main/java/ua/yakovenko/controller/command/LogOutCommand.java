@@ -5,10 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 public class LogOutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-      /*метод .invalidate() заменяет метод коммандУтилити:
-      CommandUtility.deleteUserFromContextAndSession(request);*/
         request.getSession().invalidate();
 
-        return "redirect:/index.jsp";
+        return "redirect:/exhibition/index";
     }
 }

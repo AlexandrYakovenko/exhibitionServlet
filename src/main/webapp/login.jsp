@@ -17,39 +17,44 @@
     <div class="container mt-2">
         <%@ include file="/WEB-INF/parts/navbarGuest.jsp" %>
     </div>
+
     <div class="container mt-2">
 
         <c:if test="${requestScope.error eq true}">
             <div class="alert alert-danger" align="center">
-                <strong>Invalid username or password</strong>
+                <strong><fmt:message key="label.login.error"/></strong>
             </div>
         </c:if>
 
         <form action="${pageContext.request.contextPath}/exhibition/login" method="post">
             <div class="form-group row">
-                <label class="col-sm-1 col-form-label" for="usernameInput">Username</label>
+                <label class="col-sm-2 col-form-label" for="usernameInput">
+                    <fmt:message key="label.username"/>
+                </label>
                 <div class="col-sm-4">
-                    <input type="text" name="username" class="form-control" placeholder="username" required
-                           autofocus id="usernameInput"/>
+                    <input type="text" name="username" class="form-control" id="usernameInput"
+                           placeholder="<fmt:message key="placeholder.username"/>" required autofocus/>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-1 col-form-label" for="passwordInput">Password</label>
+                <label class="col-sm-2 col-form-label" for="passwordInput">
+                    <fmt:message key="label.password"/>
+                </label>
                 <div class="col-sm-4 ">
-                    <input type="password" name="password" class="form-control" placeholder="password" required
-                           id="passwordInput"/>
+                    <input type="password" name="password" class="form-control" id="passwordInput"
+                           placeholder="<fmt:message key="placeholder.password"/>" required/>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">
-                Login
+                <fmt:message key="label.login"/>
             </button>
         </form>
 
         <div class="mt-2">
             <a href="${pageContext.request.contextPath}/exhibition/registration"
                class="btn btn-light">
-                Registration
+                <fmt:message key="label.registration"/>
             </a>
         </div>
 

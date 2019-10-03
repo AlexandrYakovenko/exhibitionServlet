@@ -2,9 +2,9 @@ package ua.yakovenko.controller.command;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ExceptionCommand implements Command {
+public class IndexCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        return null;
+        return "/index.jsp";
     }
 }

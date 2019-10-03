@@ -26,7 +26,7 @@ public class RegistrationCommand implements Command {
             request.setAttribute("error", true);
         }
 
-        return "/registration.jsp";
+        return "redirect:/exhibition/login";
     }
 }
 

@@ -28,9 +28,14 @@
         <div align="center">
             <h5>
                 <fmt:message key="label.welcome" />
-                <c:if test="${sessionScope.username ne null}">${sessionScope.username}</c:if>
-                <c:if test="${sessionScope.username eq null}"><fmt:message key="label.guest" /></c:if>
-            </br>
+                <c:if test="${sessionScope.username ne null}">
+                    ${sessionScope.username}
+                </c:if>
+                <c:if test="${sessionScope.username eq null}">
+                    <fmt:message key="label.guest" />
+                </c:if>
+            </h5>
+            <h5>
                 <c:if test="${sessionScope.access eq \"SUPER_ADMIN\"}">
                     <a href="${pageContext.request.contextPath}/exhibition/super_admin">Your Page</a>
                 </c:if>
