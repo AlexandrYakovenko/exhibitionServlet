@@ -16,7 +16,7 @@ public class BuyTicketCommand implements Command {
         this.exhibitionService = exhibitionService;
         this.userService = userService;
     }
-
+    //TODO пофиксить баг с покупкой билетов
     @Override
     public String execute(HttpServletRequest request) {
         String exhibitionIdStr = request.getParameter("exhibitionId");

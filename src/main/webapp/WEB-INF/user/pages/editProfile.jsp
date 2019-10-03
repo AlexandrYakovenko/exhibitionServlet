@@ -38,39 +38,39 @@
         </c:if>
 
         <div>
-            <h5>Username : ${user.username}</h5>
+            <h5><fmt:message key="label.username"/>${user.username}</h5>
         </div>
 
         <form method="post" class="col-sm-4"
               action="${pageContext.request.contextPath}/exhibition/user/edit-profile">
             <!-- Username -->
-            <b>Edit Username.</b><br/>
-            <label for="username">Username :</label>
+            <b><fmt:message key="label.edit_username"/></b><br/>
+            <label for="username"><fmt:message key="label.username"/></label>
             <input type="text" name="username" value="${user.username}" autofocus
                     id="username" class="form-control" required/>
 
             <button type="submit" class="btn btn-primary mt-2">
-                Save
+                <fmt:message key="button.save"/>
             </button>
         </form>
 
         <form method="post" class="col-sm-4"
               action="${pageContext.request.contextPath}/exhibition/user/edit-profile">
             <!-- Password -->
-            <b>Edit Password :</b><br/>
-            <label for="password">Password :</label>
+            <b><fmt:message key="label.edit_password"/></b><br/>
+            <label for="password"><fmt:message key="label.password"/></label>
             <input type="password" name="password" id="password" class="form-control"
                     required pattern="^[\w]{1,20}$"/>
 
             <!-- Password Confirm -->
             <label for="passwordConfirm">
-                Confirm password, if you want to change it :
+                <fmt:message key="label.confirm_password"/>
             </label>
             <input type="password" name="passwordConfirm" id="passwordConfirm"
                    class="form-control" required pattern="^[\w-]{1,20}$"/>
 
             <button type="submit" class="btn btn-primary mt-2">
-                Save
+                <fmt:message key="button.save"/>
             </button>
         </form>
     </div>

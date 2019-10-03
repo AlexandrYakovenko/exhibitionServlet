@@ -5,7 +5,7 @@
             <li class="page-item">
                 <a href="${pageContext.request.contextPath}/exhibition/user/exhibitions?page=${currentPage - 1}"
                    class="page-link">
-                    Previous
+                    <fmt:message key="pager.link.previous"/>
                 </a>
             </li>
         </c:if>
@@ -30,7 +30,7 @@
         <li class="page-item">
             <a href="${pageContext.request.contextPath}/exhibition/user/exhibitions?page=${currentPage + 1}"
                class="page-link">
-                Next
+                <fmt:message key="pager.link.next"/>
             </a>
         <li class="page-item">
             </c:if>

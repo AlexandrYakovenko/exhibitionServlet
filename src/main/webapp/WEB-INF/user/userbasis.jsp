@@ -21,7 +21,7 @@
     <div class="container mt-2">
 
         <div style="text-align: center">
-            <fmt:message key="label.hello.user"/>
+            <fmt:message key="label.hello.user"/>${username}
         </div>
 
     </div>

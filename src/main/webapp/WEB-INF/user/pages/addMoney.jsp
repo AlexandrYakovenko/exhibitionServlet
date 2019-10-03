@@ -26,12 +26,12 @@
 
     <div class="container mt-2">
         <div>
-            <h5>Username :
+            <h5><fmt:message key="label.username"/>
                 <c:if test="${requestScope.currentUser ne null}">
                     ${currentUser.username}
                 </c:if>
             </h5>
-            <h5>Balance :
+            <h5><fmt:message key="label.balance"/>
                 <c:if test="${requestScope.currentUser ne null}">
                     ${currentUser.accountMoney}
                 </c:if>
@@ -44,7 +44,7 @@
                    required id="money" class="form-control col-sm-3 mt-1"
                    pattern="[1-9]{1}|^[1-9]{1}[0-9]{1}|^[1-9]{1}[0-9]{1}[0-9]{1}|^1000">
             <button class="btn btn-primary mt-2" type="submit">
-                Add
+                <fmt:message key="button.add"/>
             </button>
         </form>
     </div>

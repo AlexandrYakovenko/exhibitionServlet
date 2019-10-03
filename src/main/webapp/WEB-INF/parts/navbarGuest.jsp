@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/"><fmt:message key="link.home"/></a>
+    <a class="navbar-brand" href="/"><fmt:message key="nav.link.home"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,13 +21,13 @@
             <c:if test="${sessionScope.username eq null}">
                 <a href="${pageContext.request.contextPath}/exhibition/login"
                    class="btn btn-primary">
-                    <fmt:message key="label.login"/>
+                    <fmt:message key="nav.link.login"/>
                 </a>
             </c:if>
             <c:if test="${sessionScope.username ne null}">
                 <a href="${pageContext.request.contextPath}/exhibition/logout"
                    class="btn btn-primary">
-                    <fmt:message key="button.logout"/>
+                    <fmt:message key="nav.link.logout"/>
                 </a>
             </c:if>
         </div>

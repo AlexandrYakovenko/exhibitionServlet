@@ -23,7 +23,7 @@
                 <i>Error : 404 Not Found</i>
             </h2>
             <br>
-            <a href="${pageContext.request.contextPath}/index.jsp">Main Page</a>
+            <a href="${pageContext.request.contextPath}/index.jsp"><fmt:message key="link.main.page"/></a>
         </div>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

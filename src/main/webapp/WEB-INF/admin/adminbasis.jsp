@@ -20,7 +20,7 @@
     <div class="container mt-2">
 
         <div style="text-align: center">
-            Hello, admin
+            <fmt:message key="label.hello.user"/>${username}
         </div>
 
     </div>

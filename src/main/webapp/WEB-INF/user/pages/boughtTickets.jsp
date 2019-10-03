@@ -25,19 +25,19 @@
     </div>
 
     <div class="container mt-2">
-        <h5>Username : ${user.username}</h5>
-        <h5>Tickets : ${ticket.id}</h5>
+        <h5><fmt:message key="label.username"/>${user.username}</h5>
+        <h5><fmt:message key="label.tickets"/>${ticket.id}</h5>
 
         <c:if test="${requestScope.tickets ne null}">
             <c:forEach items="${tickets}" var="ticket">
                 <div class="container">
                     <table style="width:100%">
                         <tr>
-                            <th>Name</th>
-                            <th>Showroom</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Date</th>
+                            <th><fmt:message key="table.th.name"/></th>
+                            <th><fmt:message key="table.th.showroom"/></th>
+                            <th><fmt:message key="table.th.description"/></th>
+                            <th><fmt:message key="table.th.price"/></th>
+                            <th><fmt:message key="table.th.date"/></th>
                         </tr>
                         <hr/>
                         <tr>

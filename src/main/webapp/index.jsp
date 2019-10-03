@@ -20,11 +20,11 @@
         </div>
         <div class="container mt-2">
 
-        <c:if test="${requestScope.message ne null}">
+        <%--<c:if test="${requestScope.message ne null}">
         <div class="alert alert-danger" align="center">
             <strong>${requestScope.message}</strong>
         </div>
-        </c:if>
+        </c:if>--%>
         <div align="center">
             <h5>
                 <fmt:message key="label.welcome" />

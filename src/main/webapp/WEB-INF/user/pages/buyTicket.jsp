@@ -32,28 +32,36 @@
         </c:if>
 
         <div>
-            <h5>Username :
+            <h5><fmt:message key="label.username"/>
                 <c:if test="${requestScope.currentUser ne null}">${currentUser.username}</c:if>
             </h5>
-            <h5>Balance :
+            <h5><fmt:message key="label.balance"/>
                 <c:if test="${requestScope.currentUser ne null}">${currentUser.accountMoney}</c:if>
             </h5>
         </div>
 
         <div>
             <a class="btn btn-primary" href="/exhibition/user/add-money">
-                Add Money
+                <fmt:message key="link.add_money"/>
             </a>
         </div>
         <c:if test="${requestScope.exhibition ne null}">
             <div class="card-columns mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><c:out value="${exhibition.name}"/></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Showroom : <c:out value="${exhibition.showroom}"/></h6>
-                            <h6 class="card-subtitle mb-2 ">Price : <c:out value="${exhibition.price}"/></h6>
+                            <h5 class="card-title">
+                                <c:out value="${exhibition.name}"/>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <fmt:message key="label.showroom"/><c:out value="${exhibition.showroom}"/>
+                            </h6>
+                            <h6 class="card-subtitle mb-2 ">
+                                <fmt:message key="label.price"/><c:out value="${exhibition.price}"/>
+                            </h6>
                             <p class="card-text"><c:out value="${exhibition.description}"/></p><br/>
-                            <h6 class="card-subtitle mb-2 ">Date : <c:out value="${exhibition.date}"/></h6>
+                            <h6 class="card-subtitle mb-2 ">
+                                <fmt:message key="label.date"/><c:out value="${exhibition.date}"/>
+                            </h6>
                         </div>
                         <div class="card-footer text-muted container">
                             <div class="row">
@@ -64,7 +72,7 @@
                                           action="${pageContext.request.contextPath}/exhibition/admin/exhibitions/edit">
                                         <input type="hidden" name="exhibitionId" value="${exhibition.id}"/>
                                         <button class="btn btn-secondary" type="submit">
-                                            Edit
+                                            <fmt:message key="button.edit"/>
                                         </button>
                                     </form>
                                 </c:if>
@@ -79,7 +87,7 @@
                              method="post">
                     <input type="hidden" name="boughtTicketId" value="${exhibition.id}">
                     <button type="submit" class="btn btn-success">
-                        Buy
+                        <fmt:message key="button.buy"/>
                     </button>
                 </form>
             </div>
