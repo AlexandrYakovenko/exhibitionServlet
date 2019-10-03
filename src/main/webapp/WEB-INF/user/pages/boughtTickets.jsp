@@ -26,7 +26,7 @@
 
     <div class="container mt-2">
         <h5><fmt:message key="label.username"/>${user.username}</h5>
-        <h5><fmt:message key="label.tickets"/>${ticket.id}</h5>
+        <h5><fmt:message key="label.tickets"/></h5>
 
         <c:if test="${requestScope.tickets ne null}">
             <c:forEach items="${tickets}" var="ticket">

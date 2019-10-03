@@ -16,15 +16,14 @@ public class AddMoneyCommand implements Command {
     public String execute(HttpServletRequest request) {
         Long userId = (Long) request.getSession().getAttribute("userId");
         User user = userService.findById(userId);
-        Long accountMoney = user.getAccountMoney();
         request.setAttribute("currentUser", user);
 
         String moneyString = request.getParameter("money");
-
+        Long accountMoney = user.getAccountMoney();
         if (moneyString != null) {
             Long money = Long.valueOf(moneyString);
-            user.setAccountMoney(accountMoney + money);
-            userService.update(user);
+            Long value = accountMoney + money;
+            userService.updateBalance(user, value);
 
             CommandUtility.setUser(request, user);
             return "redirect:/exhibition/user/buy-ticket";

@@ -81,6 +81,21 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
+    public void updateBalance(User user, Long value) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_USER_UPDATE_BALANCE)
+        ) {
+            ps.setLong(1, value);
+            ps.setLong(2, user.getId());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot update balance");
+        }
+    }
+
+    @Override
     public User findById(Long id) {
         try (PreparedStatement ps =
                      connection.prepareStatement(

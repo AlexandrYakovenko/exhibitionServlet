@@ -16,12 +16,10 @@ public class EditProfileCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String passwordConfirm = request.getParameter("passwordConfirm");
-
         Long userId = (Long) request.getSession().getAttribute("userId");
         User currentUser = userService.findById(userId);
+
+        String username = request.getParameter("username");
         if (username != null) {
             currentUser.setUsername(username);
 
@@ -29,7 +27,11 @@ public class EditProfileCommand implements Command {
 
             CommandUtility.setUser(request, currentUser);
             request.setAttribute("message", USERNAME_SAVED);
-        }else if (password != null && passwordConfirm != null) {
+        }
+
+        String password = request.getParameter("password");
+        String passwordConfirm = request.getParameter("passwordConfirm");
+        if (password != null && passwordConfirm != null) {
             if (password.equals(passwordConfirm) ) {
                 currentUser.setPassword(password);
 

@@ -9,4 +9,6 @@ public interface UserDao extends GenericDao<User> {
     User findByUsername(String username);
 
     void buyTicket(User user, Exhibition exhibition) throws SQLException;
+
+    void updateBalance(User user, Long value);
 }

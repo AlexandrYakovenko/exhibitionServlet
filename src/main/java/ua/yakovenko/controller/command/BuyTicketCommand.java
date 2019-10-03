@@ -16,9 +16,13 @@ public class BuyTicketCommand implements Command {
         this.exhibitionService = exhibitionService;
         this.userService = userService;
     }
-    //TODO пофиксить баг с покупкой билетов
+
     @Override
     public String execute(HttpServletRequest request) {
+        Long userId = (Long) request.getSession().getAttribute("userId");
+        User user = userService.findById(userId);
+        request.setAttribute("currentUser", user);
+
         String exhibitionIdStr = request.getParameter("exhibitionId");
         if (exhibitionIdStr != null) {
             Long exhibitionId = Long.valueOf(exhibitionIdStr);
@@ -32,10 +36,6 @@ public class BuyTicketCommand implements Command {
             exhibition = exhibitionService.findById(exhibitionId);
             request.setAttribute("exhibition", exhibition);
         }
-
-        Long userId = (Long) request.getSession().getAttribute("userId");
-        User user = userService.findById(userId);
-        request.setAttribute("currentUser", user);
 
         List<Exhibition> exhibitions = exhibitionService.findBoughtTickets(user);
         if (exhibitions != null) {

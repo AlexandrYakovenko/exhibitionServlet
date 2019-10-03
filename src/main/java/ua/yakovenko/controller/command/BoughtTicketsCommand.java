@@ -19,7 +19,8 @@ public class BoughtTicketsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
+        Long userId = (Long) request.getSession().getAttribute("userId");
+        User user = userService.findById(userId);
 
         String boughtTicketIdStr = request.getParameter("boughtTicketId");
         if (boughtTicketIdStr != null) {

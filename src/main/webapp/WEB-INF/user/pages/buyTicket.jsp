@@ -32,11 +32,17 @@
         </c:if>
 
         <div>
-            <h5><fmt:message key="label.username"/>
-                <c:if test="${requestScope.currentUser ne null}">${currentUser.username}</c:if>
+            <h5>
+                <fmt:message key="label.username"/>
+                <c:if test="${requestScope.currentUser ne null}">
+                    ${currentUser.username}
+                </c:if>
             </h5>
-            <h5><fmt:message key="label.balance"/>
-                <c:if test="${requestScope.currentUser ne null}">${currentUser.accountMoney}</c:if>
+            <h5>
+                <fmt:message key="label.balance"/>
+                <c:if test="${requestScope.currentUser ne null}">
+                    ${currentUser.accountMoney}
+                </c:if>
             </h5>
         </div>
 

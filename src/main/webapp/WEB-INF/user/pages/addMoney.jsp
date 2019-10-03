@@ -26,12 +26,14 @@
 
     <div class="container mt-2">
         <div>
-            <h5><fmt:message key="label.username"/>
+            <h5>
+                <fmt:message key="label.username"/>
                 <c:if test="${requestScope.currentUser ne null}">
                     ${currentUser.username}
                 </c:if>
             </h5>
-            <h5><fmt:message key="label.balance"/>
+            <h5>
+                <fmt:message key="label.balance"/>
                 <c:if test="${requestScope.currentUser ne null}">
                     ${currentUser.accountMoney}
                 </c:if>

@@ -58,6 +58,12 @@ public class UserService {
         }
     }
 
+    public void updateBalance(User user, Long value) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            userDao.updateBalance(user, value);
+        }
+    }
+
     public User findByUsername(String author) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return userDao.findByUsername(author);
