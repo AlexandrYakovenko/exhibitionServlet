@@ -20,7 +20,7 @@
     </div>
 
     <div class="container mt-2">
-        <c:if test="${requestScope.error eq true}">
+        <c:if test="${requestScope.error ne null}">
             <div class="alert alert-danger" align="center">
                 <strong><c:out value="${error}"/></strong>
             </div>
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="exhibition"><fmt:message key="label.exhibition_name"/></label>
                             <input type="text" name="name" class="form-control"
-                                   id="exhibition"  required
+                                   id="exhibition"  pattern="^[\w-]{3,20}$" required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.name}</c:if>"/>
                         </div>
 
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="showroom"><fmt:message key="label.exhibition_showroom"/></label>
                             <input type="text" name="showroom" class="form-control"
-                                   id="showroom"  required
+                                   id="showroom" pattern="^[\w-]{3,20}$" required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.showroom}</c:if>"/>
                         </div>
 

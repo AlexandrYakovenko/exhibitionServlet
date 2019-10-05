@@ -9,6 +9,10 @@ import java.sql.Date;
 
 public class ExhibitionEditCommand implements Command {
 
+    private static final String DATE_ERROR = "You choose date before today.";
+
+    private static final String EXHIBITION_EDIT_ERROR = "You cannot edit this exhibition now.";
+
     private ExhibitionService exhibitionService;
 
     public ExhibitionEditCommand(ExhibitionService exhibitionService) {
@@ -30,18 +34,22 @@ public class ExhibitionEditCommand implements Command {
                 Long price = Long.valueOf(priceStr);
                 Date date = Date.valueOf(dateStr);
 
-                User author = (User) request.getSession().getAttribute("user");
-                Exhibition exhibition = Exhibition.builder()
-                        .id(exhibitionId)
-                        .name(name)
-                        .showroom(showroom)
-                        .description(description)
-                        .author(author)
-                        .price(price)
-                        .date(date)
-                        .build();
+                if (!CommandUtility.dataBeforeToday(date)) {
+                    User author = (User) request.getSession().getAttribute("user");
+                    Exhibition exhibition = Exhibition.builder()
+                            .id(exhibitionId)
+                            .name(name)
+                            .showroom(showroom)
+                            .description(description)
+                            .author(author)
+                            .price(price)
+                            .date(date)
+                            .build();
 
-                exhibitionService.update(exhibition);
+                    exhibitionService.update(exhibition);
+                } else {
+                    request.setAttribute("error", DATE_ERROR);
+                }
             }
 
             Exhibition currentExhibition = exhibitionService.findById(exhibitionId);
@@ -49,7 +57,7 @@ public class ExhibitionEditCommand implements Command {
                 request.setAttribute("exhibition", currentExhibition);
             }
         } catch (Exception e) {
-            request.setAttribute("error", "You cannot edit this exhibition");
+            request.setAttribute("error", EXHIBITION_EDIT_ERROR);
         }
 
         return "/WEB-INF/admin/pages/exhibitionEdit.jsp";

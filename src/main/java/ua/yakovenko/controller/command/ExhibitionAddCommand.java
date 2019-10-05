@@ -9,6 +9,10 @@ import java.sql.Date;
 
 public class ExhibitionAddCommand implements Command {
 
+    private static final String DATE_ERROR = "You choose date before today.";
+
+    private static final String EXHIBITION_ADD_ERROR = "You cannot add this exhibition now.";
+
     private ExhibitionService exhibitionService;
 
     public ExhibitionAddCommand(ExhibitionService exhibitionService) {
@@ -28,6 +32,15 @@ public class ExhibitionAddCommand implements Command {
                 Long price = Long.valueOf(priceStr);
                 Date date = Date.valueOf(dateStr);
 
+                if (CommandUtility.dataBeforeToday(date)) {
+                    request.setAttribute("name", name);
+                    request.setAttribute("showroom", showroom);
+                    request.setAttribute("description", description);
+                    request.setAttribute("price", price);
+                    request.setAttribute("error", DATE_ERROR);
+                    return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+                }
+
                 User author = (User) request.getSession().getAttribute("user");
                 Exhibition exhibition = Exhibition.builder()
                         .name(name)
@@ -42,10 +55,9 @@ public class ExhibitionAddCommand implements Command {
 
                 return "redirect:/exhibition/user/exhibitions";
             }
-
             return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
         } catch (Exception e) {
-            request.setAttribute("error", "You cannot add this exhibition");
+            request.setAttribute("error", EXHIBITION_ADD_ERROR);
             return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
         }
     }

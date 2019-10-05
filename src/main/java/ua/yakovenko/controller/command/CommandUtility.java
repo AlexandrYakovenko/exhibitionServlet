@@ -6,6 +6,7 @@ import ua.yakovenko.model.service.ExhibitionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -67,5 +68,13 @@ class CommandUtility {
             }
         }
         return true;
+    }
+
+    static boolean dataBeforeToday(Date data) {
+        long now = System.currentTimeMillis();
+
+        Date today = new Date(now);
+
+        return data.before(today);
     }
 }

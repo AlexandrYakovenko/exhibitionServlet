@@ -20,9 +20,9 @@
 </div>
 
 <div class="container mt-2">
-    <c:if test="${requestScope.error eq true}">
+    <c:if test="${requestScope.error ne null}">
         <div class="alert alert-danger" align="center">
-            <strong>${requestScope.error}</strong>
+            <strong><c:out value="${error}"/></strong>
         </div>
     </c:if>
     <div align="center">
@@ -37,17 +37,17 @@
                     <!-- Name -->
                     <div class="form-group">
                         <label for="exhibition"><fmt:message key="label.exhibition_name"/></label>
-                        <input type="text" name="name" class="form-control" id="exhibition"
+                        <input type="text" name="name" class="form-control" id="exhibition" pattern="^[\w-]{3,20}$"
                                placeholder="<fmt:message key="placeholder.exhibition_name"/>" required
-                               value="<c:if test="${requestScope.exhibition ne null}">${exhibition.name}</c:if>"/>
+                               value="<c:if test="${requestScope.name ne null}">${name}</c:if>"/>
                     </div>
 
                     <!-- Showroom -->
                     <div class="form-group">
                         <label for="showroom"><fmt:message key="label.exhibition_showroom"/></label>
-                        <input type="text" name="showroom" class="form-control"
+                        <input type="text" name="showroom" class="form-control" pattern="^[\w-]{3,20}$"
                                id="showroom" placeholder="<fmt:message key="placeholder.exhibition_showroom"/>" required
-                               value="<c:if test="${requestScope.exhibition ne null}">${exhibition.showroom}</c:if>"/>
+                               value="<c:if test="${requestScope.showroom ne null}">${showroom}</c:if>"/>
                     </div>
 
                     <!-- Description -->
@@ -55,7 +55,7 @@
                         <label for="description"><fmt:message key="label.exhibition_description"/></label>
                         <input type="text" name="description" class="form-control" id="description"
                                placeholder="<fmt:message key="placeholder.exhibition_description"/>" required
-                               value="<c:if test="${requestScope.exhibition ne null}">${exhibition.description}</c:if>"/>
+                               value="<c:if test="${requestScope.description ne null}">${description}</c:if>"/>
                     </div>
 
                     <!-- Price -->
@@ -63,7 +63,7 @@
                         <label for="price"><fmt:message key="label.exhibition_price"/></label>
                         <input type="text" name="price" class="form-control" id="price" placeholder="0"
                                pattern="[1-9]{1}|^[1-9]{1}[0-9]{1}|^[1-9]{1}[0-9]{1}[0-9]{1}|^1000" required
-                               value="<c:if test="${requestScope.exhibition ne null}">${exhibition.price}</c:if>"/>
+                               value="<c:if test="${requestScope.price ne null}">${price}</c:if>"/>
                     </div>
 
                     <!-- Date -->
@@ -71,11 +71,11 @@
                         <label for="date"><fmt:message key="label.exhibition_date"/></label>
                         <input type="date" name="date" class="form-control"
                                id="date"  required
-                               value="<c:if test="${requestScope.exhibition ne null}">${exhibition.date}</c:if>"/>
+                               value="<c:if test="${requestScope.date ne null}">${date}</c:if>"/>
                     </div>
 
-                    <input type="hidden" name="id"
-                           value="<c:if test="${requestScope.exhibition ne null}">${exhibition.id}</c:if>" />
+                    <%--<input type="hidden" name="id"
+                           value="<c:if test="${requestScope.exhibition ne null}">${exhibition.id}</c:if>" />--%>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">
