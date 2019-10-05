@@ -25,32 +25,36 @@
     </div>
 
     <div class="container mt-2">
+
         <h5><fmt:message key="label.username"/>${user.username}</h5>
+
         <h5><fmt:message key="label.tickets"/></h5>
 
-        <c:if test="${requestScope.tickets ne null}">
-            <c:forEach items="${tickets}" var="ticket">
-                <div class="container">
-                    <table style="width:100%">
-                        <tr>
-                            <th><fmt:message key="table.th.name"/></th>
-                            <th><fmt:message key="table.th.showroom"/></th>
-                            <th><fmt:message key="table.th.description"/></th>
-                            <th><fmt:message key="table.th.price"/></th>
-                            <th><fmt:message key="table.th.date"/></th>
-                        </tr>
-                        <hr/>
-                        <tr>
-                            <td style="max-width: 20px; min-width: 20px">${ticket.name}</td>
-                            <td style="max-width: 20px; min-width: 20px">${ticket.showroom}</td>
-                            <td style="max-width: 75px; min-width: 75px">${ticket.description}</td>
-                            <td style="max-width: 20px; min-width: 20px">${ticket.price}</td>
-                            <td style="max-width: 20px; min-width: 20px">${ticket.date}</td>
-                        </tr>
+                <c:if test="${requestScope.tickets ne null}">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col"><fmt:message key="table.th.name"/></th>
+                                <th scope="col"><fmt:message key="table.th.showroom"/></th>
+                                <th scope="col"><fmt:message key="table.th.description"/></th>
+                                <th scope="col"><fmt:message key="table.th.price"/></th>
+                                <th scope="col"><fmt:message key="table.th.date"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${tickets}" var="ticket">
+                                <tr>
+                                    <td style="max-width: 25px" scope="row">${ticket.name}</td>
+                                    <td style="max-width: 25px">${ticket.showroom}</td>
+                                    <td style="max-width: 150px">${ticket.description}</td>
+                                    <td style="max-width: 25px">${ticket.price}</td>
+                                    <td style="max-width: 25px">${ticket.date}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
                     </table>
-                </div>
-            </c:forEach>
-        </c:if>
+
+                </c:if>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
