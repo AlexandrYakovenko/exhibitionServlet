@@ -2,6 +2,7 @@ package ua.yakovenko.controller.command;
 
 import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.UserService;
+import ua.yakovenko.model.util.CommandUtility;
 
 import javax.servlet.http.HttpServletRequest;
 

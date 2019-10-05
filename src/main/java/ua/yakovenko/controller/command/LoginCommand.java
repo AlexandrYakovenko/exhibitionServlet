@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ua.yakovenko.model.entity.Role;
 import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.UserService;
+import ua.yakovenko.model.util.CommandUtility;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;

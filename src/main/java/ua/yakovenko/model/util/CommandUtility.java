@@ -1,4 +1,4 @@
-package ua.yakovenko.controller.command;
+package ua.yakovenko.model.util;
 
 import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.User;
@@ -10,9 +10,9 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 
-class CommandUtility {
+public class CommandUtility {
 
-    static void setUser(HttpServletRequest request, User user) {
+    public static void setUser(HttpServletRequest request, User user) {
         HttpSession session = request.getSession();
 
         session.setAttribute("user", user);
@@ -22,7 +22,7 @@ class CommandUtility {
         session.setAttribute("access", user.getRole().name());
     }
 
-    static boolean checkUserIsLogged(HttpServletRequest request,
+    public static boolean checkUserIsLogged(HttpServletRequest request,
                                      String username
     ) {
         @SuppressWarnings("unchecked")
@@ -40,7 +40,7 @@ class CommandUtility {
         return false;
     }
 
-    static void showPagination(HttpServletRequest request,
+    public static void showPagination(HttpServletRequest request,
                                ExhibitionService eService
     ) {
         int page = 1;
@@ -61,7 +61,7 @@ class CommandUtility {
         request.setAttribute("currentPage", page);
     }
 
-    static boolean correctInput(String... params) {
+    public static boolean correctInput(String... params) {
         for (String param : params) {
             if (param == null || param.equals("")) {
                 return false;
@@ -70,7 +70,7 @@ class CommandUtility {
         return true;
     }
 
-    static boolean dataBeforeToday(Date data) {
+    public static boolean dataBeforeToday(Date data) {
         long now = System.currentTimeMillis();
 
         Date today = new Date(now);
