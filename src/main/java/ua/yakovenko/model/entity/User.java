@@ -1,20 +1,21 @@
 package ua.yakovenko.model.entity;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class User {
+
     private Long id;
+
     private String username;
+
     private String password;
+
     private Long accountMoney;
+
     private boolean active;
-    private Set<Exhibition> exhibitions;
-    private List<Exhibition> boughtTickets;
+
     private Role role;
 
-    //Builder
     public static Builder builder() {
         return new User().new Builder();
     }
@@ -45,16 +46,6 @@ public class User {
 
         public Builder active(Boolean active) {
             User.this.active = active;
-            return this;
-        }
-
-        public Builder exhibitions(Set<Exhibition> exhibitions) {
-            User.this.exhibitions = exhibitions;
-            return this;
-        }
-
-        public Builder boughtTickets(List<Exhibition> boughtTickets) {
-            User.this.boughtTickets = boughtTickets;
             return this;
         }
 
@@ -108,22 +99,6 @@ public class User {
         this.active = active;
     }
 
-    public Set<Exhibition> getExhibitions() {
-        return exhibitions;
-    }
-
-    public void setExhibitions(Set<Exhibition> exhibitions) {
-        this.exhibitions = exhibitions;
-    }
-
-    public List<Exhibition> getBoughtTickets() {
-        return boughtTickets;
-    }
-
-    public void setBoughtTickets(List<Exhibition> boughtTickets) {
-        this.boughtTickets = boughtTickets;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -154,8 +129,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", accountMoney=" + accountMoney +
                 ", active=" + active +
-                ", exhibitions=" + exhibitions +
-                ", boughtTickets=" + boughtTickets +
                 ", role=" + role +
                 '}';
     }

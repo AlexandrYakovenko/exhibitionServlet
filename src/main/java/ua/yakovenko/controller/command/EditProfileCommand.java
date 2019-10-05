@@ -6,8 +6,11 @@ import ua.yakovenko.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 
 public class EditProfileCommand implements Command {
+
     private static final String USERNAME_SAVED = "Username successfully saved";
+
     private static final String PASSWORD_SAVED = "Password successfully saved";
+
     private UserService userService;
 
     public EditProfileCommand(UserService userService) {

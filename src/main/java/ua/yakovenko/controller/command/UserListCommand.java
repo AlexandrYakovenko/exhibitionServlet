@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class UserListCommand implements Command {
+
     private UserService userService;
 
     public UserListCommand(UserService userService) {

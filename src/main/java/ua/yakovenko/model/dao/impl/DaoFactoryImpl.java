@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DaoFactoryImpl extends DaoFactory {
+
     private DataSource dataSource = ConnectionPoolHolder.getDataSource();
 
     @Override
@@ -21,7 +22,7 @@ public class DaoFactoryImpl extends DaoFactory {
         return new ExhibitionJdbcDao(getConnection());
     }
 
-    private Connection getConnection(){
+    private Connection getConnection() {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {

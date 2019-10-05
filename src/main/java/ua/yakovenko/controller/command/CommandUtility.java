@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 
 class CommandUtility {
+
     static void setUser(HttpServletRequest request, User user) {
         HttpSession session = request.getSession();
 

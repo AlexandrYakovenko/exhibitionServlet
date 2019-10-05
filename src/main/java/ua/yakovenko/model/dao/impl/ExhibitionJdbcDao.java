@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ExhibitionJdbcDao implements ExhibitionDao {
+
     private Connection connection;
+
     private ExhibitionMapper mapper;
 
     public ExhibitionJdbcDao(Connection connection) {

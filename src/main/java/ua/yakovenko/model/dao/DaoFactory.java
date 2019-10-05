@@ -3,6 +3,7 @@ package ua.yakovenko.model.dao;
 import ua.yakovenko.model.dao.impl.DaoFactoryImpl;
 
 public abstract class DaoFactory  {
+
     private static DaoFactory daoFactory;
 
     public abstract UserDao createUserDao();

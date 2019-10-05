@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSessionListener;
 import java.util.HashSet;
 
 public class SessionListener implements HttpSessionListener {
+
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent){}
 
@@ -12,11 +13,13 @@ public class SessionListener implements HttpSessionListener {
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
         @SuppressWarnings("unchecked")
         HashSet<String> loggedUsers = (HashSet<String>) httpSessionEvent
-                .getSession().getServletContext()
-                .getAttribute("loggedUsers");
+                .getSession()
+                    .getServletContext()
+                        .getAttribute("loggedUsers");
 
-        String username = (String) httpSessionEvent.getSession()
-                .getAttribute("username");
+        String username = (String) httpSessionEvent
+                .getSession()
+                    .getAttribute("username");
 
         loggedUsers.remove(username);
 

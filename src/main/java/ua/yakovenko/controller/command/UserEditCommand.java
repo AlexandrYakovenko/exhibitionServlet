@@ -7,6 +7,7 @@ import ua.yakovenko.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 
 public class UserEditCommand implements Command {
+
     private UserService userService;
 
     public UserEditCommand(UserService userService) {

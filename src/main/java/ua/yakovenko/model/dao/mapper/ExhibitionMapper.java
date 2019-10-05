@@ -6,9 +6,9 @@ import ua.yakovenko.model.service.UserService;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class ExhibitionMapper {
+
     private UserService userService = new UserService();
 
     public Exhibition extractFromResultSet(ResultSet rs) throws SQLException {
@@ -21,10 +21,5 @@ public class ExhibitionMapper {
                 .price(rs.getLong("price"))
                 .date(Date.valueOf(rs.getString("date")))
                 .build();
-    }
-
-    public Exhibition makeUnique(Map<Long, Exhibition> cache, Exhibition exhibition) {
-        cache.putIfAbsent(exhibition.getId(), exhibition);
-        return cache.get(exhibition.getId());
     }
 }

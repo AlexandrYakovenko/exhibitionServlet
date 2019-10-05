@@ -1,5 +1,7 @@
 package ua.yakovenko.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.yakovenko.controller.command.*;
 import ua.yakovenko.model.service.ExhibitionService;
 import ua.yakovenko.model.service.UserService;
@@ -15,6 +17,9 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class Servlet extends HttpServlet {
+
+    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
+
     private Map<String, Command> commands = new HashMap<>();
 
     public void init(ServletConfig servletConfig) {
@@ -28,6 +33,7 @@ public class Servlet extends HttpServlet {
         commands.put("login", new LoginCommand(userService));
         commands.put("registration", new RegistrationCommand(userService));
         commands.put("logout", new LogOutCommand());
+        commands.put("server-error", new ServerErrorCommand());
 
         commands.put("super_admin", new SuperAdminCommand());
         commands.put("super_admin/user-list", new UserListCommand(userService));
@@ -65,17 +71,22 @@ public class Servlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response
-    ) throws ServletException, IOException {
-        String path = request.getRequestURI();
-        path = path.replaceAll(".*/exhibition/", "");
+    ) throws IOException {
+        try {
+            String path = request.getRequestURI();
+            path = path.replaceAll(".*/exhibition/", "");
 
-        Command command = commands.getOrDefault(path, (r) -> "/WEB-INF/error404.jsp");
+            Command command = commands.getOrDefault(path, (r) -> "/WEB-INF/error404.jsp");
 
-        String page = command.execute(request);
-        if (page.contains("redirect")) {
-            response.sendRedirect(page.replace("redirect:", ""));
-        }  else {
-            request.getRequestDispatcher(page).forward(request, response);
+            String page = command.execute(request);
+            if (page.contains("redirect")) {
+                response.sendRedirect(page.replace("redirect:", ""));
+            } else {
+                request.getRequestDispatcher(page).forward(request, response);
+            }
+        } catch (Exception e) {
+
+            response.sendRedirect("/exhibition/server-error");
         }
     }
 }

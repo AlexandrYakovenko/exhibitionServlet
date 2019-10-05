@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SessionLocaleFilter extends AbstractFilter {
+
     @Override
     public void doFilter(HttpServletRequest request,
                          HttpServletResponse response,
                          FilterChain chain
     ) throws IOException, ServletException {
+
         if (request.getParameter("sessionLocale") != null) {
             request.getSession()
                     .setAttribute("lang",

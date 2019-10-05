@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
 public class ExhibitionEditCommand implements Command {
+
     private ExhibitionService exhibitionService;
 
     public ExhibitionEditCommand(ExhibitionService exhibitionService) {

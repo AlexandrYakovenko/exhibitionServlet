@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ExhibitionPageCommand implements Command {
+
     private ExhibitionService exhibitionService;
-    private  List<Exhibition> exhibitions = null;
 
     public ExhibitionPageCommand(ExhibitionService exhibitionService) {
         this.exhibitionService = exhibitionService;
@@ -29,7 +29,7 @@ public class ExhibitionPageCommand implements Command {
         if (showroom == null || showroom.equals("")) {
             CommandUtility.showPagination(request, exhibitionService);
         } else {
-            exhibitions = exhibitionService.findByShowroom(showroom);
+            List<Exhibition> exhibitions = exhibitionService.findByShowroom(showroom);
             request.setAttribute("exhibitionList", exhibitions);
         }
 

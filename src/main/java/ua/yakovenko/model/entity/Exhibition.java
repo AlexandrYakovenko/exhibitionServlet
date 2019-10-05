@@ -4,15 +4,21 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Exhibition {
+
     private Long id;
+
     private String name;
+
     private String showroom;
+
     private String description;
+
     private User author;
+
     private Long price;
+
     private Date date;
 
-    //Builder
     public static Exhibition.Builder builder() {
         return new Exhibition().new Builder();
     }
@@ -115,11 +121,6 @@ public class Exhibition {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-
-    public String getAuthorName() {
-        return author != null ? author.getUsername() : "admin";
     }
 
     @Override

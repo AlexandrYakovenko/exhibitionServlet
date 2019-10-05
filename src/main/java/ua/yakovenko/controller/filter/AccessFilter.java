@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AccessFilter extends AbstractFilter {
+
     @Override
     public void doFilter(HttpServletRequest request,
                          HttpServletResponse response,
                          FilterChain chain
     ) throws IOException, ServletException {
-        String path = request.getRequestURI();
 
+        String path = request.getRequestURI();
 
         if (path.contains("super_admin")) {
             if (request.getSession().getAttribute("role") == Role.SUPER_ADMIN) {

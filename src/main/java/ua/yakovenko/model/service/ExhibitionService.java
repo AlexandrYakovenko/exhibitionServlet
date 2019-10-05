@@ -8,6 +8,7 @@ import ua.yakovenko.model.entity.User;
 import java.util.List;
 
 public class ExhibitionService {
+
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
     public void add(Exhibition exhibition) {

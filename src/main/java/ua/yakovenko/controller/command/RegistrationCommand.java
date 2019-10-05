@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
 public class RegistrationCommand implements Command {
+
     private UserService userService;
 
     public RegistrationCommand(UserService userService) {

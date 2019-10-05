@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class MyExhibitionsCommand implements Command {
+
     private ExhibitionService exhibitionService;
-    private List<Exhibition> exhibitions;
 
     public MyExhibitionsCommand(ExhibitionService exhibitionService) {
         this.exhibitionService = exhibitionService;
@@ -19,7 +19,7 @@ public class MyExhibitionsCommand implements Command {
     public String execute(HttpServletRequest request) {
         User author = (User) request.getSession().getAttribute("user");
 
-        exhibitions = exhibitionService.findByAuthor(author);
+        List<Exhibition> exhibitions = exhibitionService.findByAuthor(author);
 
         request.setAttribute("exhibitions", exhibitions);
         request.setAttribute("user", author);

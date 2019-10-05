@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserJdbcDao implements UserDao {
+
     private Connection connection;
+
     private UserMapper mapper;
 
     public UserJdbcDao(Connection connection) {

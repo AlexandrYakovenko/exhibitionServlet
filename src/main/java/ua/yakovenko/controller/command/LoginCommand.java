@@ -10,9 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 public class LoginCommand implements Command {
+
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
+
     private static final String DATA_ERROR = "Invalid username or password.";
+
     private static final String LOGGED_ERROR = "You has already logged.";
+
+    private static final String LOGGED_SUCCESS = " logged successfully.";
 
     private UserService userService;
 
@@ -43,19 +48,19 @@ public class LoginCommand implements Command {
         if (user.get().getRole().equals(Role.ADMIN)) {
             CommandUtility.setUser(request, user.get());
 
-            LOGGER.info(user.get() + " logged successfully.");
+            LOGGER.info(user.get() + LOGGED_SUCCESS);
 
             return "redirect:/exhibition/admin";
         } else if (user.get().getRole().equals(Role.SUPER_ADMIN)) {
             CommandUtility.setUser(request, user.get());
 
-            LOGGER.info(user.get() + " logged successfully.");
+            LOGGER.info(user.get() + LOGGED_SUCCESS);
 
             return "redirect:/exhibition/super_admin";
         } else {
             CommandUtility.setUser(request, user.get());
 
-            LOGGER.info(user.get() + " logged successfully.");
+            LOGGER.info(user.get() + LOGGED_SUCCESS);
 
             return "redirect:/exhibition/user";
         }

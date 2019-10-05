@@ -6,6 +6,6 @@ public class AdminCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
 
-        return "/WEB-INF/admin/adminbasis.jsp";
+        return "/WEB-INF/admin/adminBasis.jsp";
     }
 }
