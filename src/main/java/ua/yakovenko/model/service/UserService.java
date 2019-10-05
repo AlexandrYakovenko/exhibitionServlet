@@ -36,13 +36,11 @@ public class UserService {
 
     public Optional<User> findUser(String username, String password){
         try (UserDao userDao = daoFactory.createUserDao()) {
-            Optional<User> user = Optional.ofNullable(userDao.findByUsername(username));
-
-            if (user.isPresent() && user.get().getPassword().equals(password)) {
-                return user;
-            }
-
-            return Optional.empty();
+            Optional<User> user =
+                    Optional.ofNullable(
+                            userDao.findByUsernameAndPassword(
+                                    username, password));
+            return user;
         }
     }
 
@@ -61,12 +59,6 @@ public class UserService {
     public void updateBalance(User user, Long value) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             userDao.updateBalance(user, value);
-        }
-    }
-
-    public User findByUsername(String author) {
-        try (UserDao userDao = daoFactory.createUserDao()) {
-            return userDao.findByUsername(author);
         }
     }
 

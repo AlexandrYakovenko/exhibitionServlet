@@ -1,11 +1,10 @@
 package ua.yakovenko.model.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface GenericDao<T> extends AutoCloseable {
 
-    void add(T entity) throws SQLException;
+    void add(T entity);
 
     T findById(Long id);
 
@@ -14,6 +13,8 @@ public interface GenericDao<T> extends AutoCloseable {
     void update(T entity);
 
     void delete(Long id);
+
+    void deleteEntity(T entity);
 
     void close();
 }

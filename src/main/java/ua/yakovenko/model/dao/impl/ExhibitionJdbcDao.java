@@ -19,7 +19,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
-    public void add(Exhibition entity) throws SQLException {
+    public void add(Exhibition entity) {
         try(PreparedStatement ps =
                 connection.prepareStatement(
                         QUERY_EXHIBITION_ADD)
@@ -35,6 +35,25 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Exhibition findByName(String name) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_EXHIBITION_FIND_BY_NAME)
+        ) {
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapper.extractFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Exhibition does not exist.");
+        }
+        return null;
     }
 
     @Override
@@ -235,6 +254,20 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
+    public void deleteEntity(Exhibition entity) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_EXHIBITION_DELETE_BY_ID)
+        ) {
+            ps.setLong(1, entity.getId());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void close() {
         try {
             connection.close();
@@ -263,4 +296,6 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             "SELECT COUNT(*) FROM exhibition";
     private static final String QUERY_FIND_DIAPASON =
             "SELECT * FROM exhibition ORDER BY id DESC LIMIT ?, ?";
+    private static final String QUERY_EXHIBITION_FIND_BY_NAME =
+            "SELECT * FROM exhibition WHERE name = ?";
 }

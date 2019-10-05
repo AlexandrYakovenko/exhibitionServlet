@@ -19,7 +19,7 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public void add(User entity) throws SQLException {
+    public void add(User entity) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
                                     QUERY_USER_ADD)
@@ -38,12 +38,13 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public User findByUsernameAndPassword (String username, String password) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
                              QUERY_USER_FIND_BY_USERNAME)
         ) {
             ps.setString(1, username);
+            ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
 
@@ -167,6 +168,20 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
+    public void deleteEntity(User entity) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_USER_DELETE_BY_ID)
+        ) {
+            ps.setLong(1, entity.getId());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void close() {
         try {
             connection.close();
@@ -178,7 +193,7 @@ public class UserJdbcDao implements UserDao {
     private static final String QUERY_USER_ADD =
             "INSERT INTO user (username , password , role, active, account_money) VALUES (? ,? ,?, ?, ?)";
     private static final String QUERY_USER_FIND_BY_USERNAME =
-            "SELECT * FROM user WHERE username = ?";
+            "SELECT * FROM user WHERE username = ? AND password = ?";
     private static final String QUERY_USER_FIND_BY_ID =
             "SELECT * FROM user WHERE id = ?";
     private static final String QUERY_USER_FIND_ALL =

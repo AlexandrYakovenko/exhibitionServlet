@@ -5,13 +5,12 @@ import ua.yakovenko.model.dao.ExhibitionDao;
 import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ExhibitionService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
-    public void add(Exhibition exhibition) throws SQLException {
+    public void add(Exhibition exhibition) {
         try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
             exhibitionDao.add(exhibition);
         }
@@ -29,9 +28,9 @@ public class ExhibitionService {
         }
     }
 
-    public void deleteById(Long idForDelete) {
+    public void deleteById(Long id) {
         try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
-            exhibitionDao.delete(idForDelete);
+            exhibitionDao.delete(id);
         }
     }
 

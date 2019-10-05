@@ -6,7 +6,7 @@ import ua.yakovenko.model.entity.User;
 import java.sql.SQLException;
 
 public interface UserDao extends GenericDao<User> {
-    User findByUsername(String username);
+    User findByUsernameAndPassword (String username, String password);
 
     void buyTicket(User user, Exhibition exhibition) throws SQLException;
 
