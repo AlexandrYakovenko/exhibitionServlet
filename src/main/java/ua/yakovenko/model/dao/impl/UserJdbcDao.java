@@ -77,9 +77,14 @@ public class UserJdbcDao implements UserDao {
             addTicket.execute();
 
             connection.commit();
+
             connection.setAutoCommit(true);
         } catch (SQLException e) {
             connection.rollback();
+
+            connection.setAutoCommit(true);
+
+            throw new RuntimeException("You cannot buy this ticket");
         }
     }
 

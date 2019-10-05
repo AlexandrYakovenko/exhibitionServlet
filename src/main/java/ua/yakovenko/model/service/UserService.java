@@ -63,7 +63,7 @@ public class UserService {
         }
     }
 
-    public void buyTicket(User user, Long ticketId) {
+    public void buyTicket(User user, Long ticketId) throws SQLException {
         try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao();
              UserDao userDao = daoFactory.createUserDao()
         ) {
@@ -76,8 +76,6 @@ public class UserService {
             } else {
                 throw new RuntimeException("Not enough money");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException("You cannot buy this ticket");
         }
     }
 }
