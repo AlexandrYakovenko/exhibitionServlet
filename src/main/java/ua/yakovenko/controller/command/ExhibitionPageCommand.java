@@ -3,7 +3,7 @@ package ua.yakovenko.controller.command;
 import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.ExhibitionService;
-import ua.yakovenko.model.util.CommandUtility;
+import ua.yakovenko.controller.util.CommandUtility;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

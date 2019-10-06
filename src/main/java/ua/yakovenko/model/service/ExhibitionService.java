@@ -17,12 +17,6 @@ public class ExhibitionService {
         }
     }
 
-    public List<Exhibition> findAll() {
-        try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
-            return exhibitionDao.findAll();
-        }
-    }
-
     public Exhibition findById(Long exhibitionId) {
         try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
             return exhibitionDao.findById(exhibitionId);

@@ -1,4 +1,4 @@
-package ua.yakovenko.model.util;
+package ua.yakovenko.controller.util;
 
 import ua.yakovenko.model.entity.Exhibition;
 import ua.yakovenko.model.entity.User;

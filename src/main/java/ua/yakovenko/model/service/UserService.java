@@ -21,7 +21,7 @@ public class UserService {
         }
     }
 
-    public void addUser(String username, String password) throws SQLException {
+    public void addUser(String username, String password) {
         User newUser = User.builder()
                 .username(username)
                 .password(password)

@@ -1,5 +1,6 @@
 package ua.yakovenko.model.service;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +15,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceTest {
+
     private static final String USER = "roots";
+
     private static final String PASSWORD = "roots";
+
     private static final String URL = "jdbc:mysql://localhost:3306/exhibition_servlet_db_test?useTimezone=true&serverTimezone=UTC";
 
     private UserDao userDao;
+
     private Connection connection;
 
     @Before
@@ -30,6 +35,16 @@ public class UserServiceTest {
             e.printStackTrace();
         }
     }
+
+    @After
+    public void after() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void findAllUsers() {
         final String username = "user0";

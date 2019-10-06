@@ -16,11 +16,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ExhibitionServiceTest {
+
     private static final String USER = "roots";
+
     private static final String PASSWORD = "roots";
+
     private static final String URL = "jdbc:mysql://localhost:3306/exhibition_servlet_db_test?useTimezone=true&serverTimezone=UTC";
 
     private ExhibitionDao exhibitionDao;
+
     private Connection connection;
 
     @Before
@@ -41,6 +45,7 @@ public class ExhibitionServiceTest {
             e.printStackTrace();
         }
     }
+
     @Test
     public void add() {
         final String name = "name0";
