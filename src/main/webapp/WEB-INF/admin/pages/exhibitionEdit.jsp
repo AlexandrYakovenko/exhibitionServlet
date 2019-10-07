@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="exhibition"><fmt:message key="label.exhibition_name"/></label>
                             <input type="text" name="name" class="form-control"
-                                   id="exhibition"  pattern="^[\w-]{3,20}$" required
+                                   id="exhibition"  pattern="^.{2,30}$" required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.name}</c:if>"/>
                         </div>
 
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="showroom"><fmt:message key="label.exhibition_showroom"/></label>
                             <input type="text" name="showroom" class="form-control"
-                                   id="showroom" pattern="^[\w-]{3,20}$" required
+                                   id="showroom" pattern="^.{2,30}$" required
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.showroom}</c:if>"/>
                         </div>
 

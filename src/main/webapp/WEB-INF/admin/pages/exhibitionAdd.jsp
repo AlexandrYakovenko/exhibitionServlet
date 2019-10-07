@@ -37,7 +37,7 @@
                     <!-- Name -->
                     <div class="form-group">
                         <label for="exhibition"><fmt:message key="label.exhibition_name"/></label>
-                        <input type="text" name="name" class="form-control" id="exhibition" pattern="^[\w-]{3,20}$"
+                        <input type="text" name="name" class="form-control" id="exhibition" pattern=".{2,30}$"
                                placeholder="<fmt:message key="placeholder.exhibition_name"/>" required
                                value="<c:if test="${requestScope.name ne null}">${name}</c:if>"/>
                     </div>
@@ -45,7 +45,7 @@
                     <!-- Showroom -->
                     <div class="form-group">
                         <label for="showroom"><fmt:message key="label.exhibition_showroom"/></label>
-                        <input type="text" name="showroom" class="form-control" pattern="^[\w-]{3,20}$"
+                        <input type="text" name="showroom" class="form-control" pattern="^.{2,30}$"
                                id="showroom" placeholder="<fmt:message key="placeholder.exhibition_showroom"/>" required
                                value="<c:if test="${requestScope.showroom ne null}">${showroom}</c:if>"/>
                     </div>
@@ -73,9 +73,6 @@
                                id="date"  required
                                value="<c:if test="${requestScope.date ne null}">${date}</c:if>"/>
                     </div>
-
-                    <%--<input type="hidden" name="id"
-                           value="<c:if test="${requestScope.exhibition ne null}">${exhibition.id}</c:if>" />--%>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">
