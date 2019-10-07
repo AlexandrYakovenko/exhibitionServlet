@@ -1,12 +1,15 @@
 package ua.yakovenko.controller.command;
 
+import ua.yakovenko.controller.util.CommandUtility;
 import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.UserService;
-import ua.yakovenko.controller.util.CommandUtility;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class AddMoneyCommand implements Command {
+
     private UserService userService;
 
     public AddMoneyCommand(UserService userService) {
@@ -15,11 +18,11 @@ public class AddMoneyCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Long userId = (Long) request.getSession().getAttribute("userId");
+        Long userId = (Long) request.getSession().getAttribute(USER_ID);
         User user = userService.findById(userId);
-        request.setAttribute("currentUser", user);
+        request.setAttribute(CURRENT_USER, user);
 
-        String moneyString = request.getParameter("money");
+        String moneyString = request.getParameter(MONEY);
         Long accountMoney = user.getAccountMoney();
         if (moneyString != null) {
             Long money = Long.valueOf(moneyString);
@@ -27,9 +30,9 @@ public class AddMoneyCommand implements Command {
             userService.updateBalance(user, value);
 
             CommandUtility.setUser(request, user);
-            return "redirect:/exhibition/user/buy-ticket";
+            return "redirect:/exhibition/" + URL_BUY_TICKET;
         }
 
-        return "/WEB-INF/user/pages/addMoney.jsp";
+        return PAGE_ADD_MONEY;
     }
 }
