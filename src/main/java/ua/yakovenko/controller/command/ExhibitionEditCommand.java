@@ -8,6 +8,8 @@ import ua.yakovenko.controller.util.CommandUtility;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class ExhibitionEditCommand implements Command {
 
     private static final String DATE_ERROR = "You choose date before today.";
@@ -29,7 +31,7 @@ public class ExhibitionEditCommand implements Command {
             String priceStr = request.getParameter("price");
             String dateStr = request.getParameter("date");
 
-            Long exhibitionId = Long.valueOf(request.getParameter("exhibitionId"));
+            Long exhibitionId = Long.valueOf(request.getParameter(EXHIBITION_ID));
 
             if (CommandUtility.correctInput(name, showroom, description, priceStr, dateStr)) {
                 Long price = Long.valueOf(priceStr);
@@ -61,6 +63,6 @@ public class ExhibitionEditCommand implements Command {
             request.setAttribute("error", EXHIBITION_EDIT_ERROR);
         }
 
-        return "/WEB-INF/admin/pages/exhibitionEdit.jsp";
+        return PAGE_EXHIBITION_EDIT;
     }
 }

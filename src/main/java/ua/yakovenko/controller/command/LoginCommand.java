@@ -10,6 +10,8 @@ import ua.yakovenko.controller.util.CommandUtility;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class LoginCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
@@ -32,18 +34,18 @@ public class LoginCommand implements Command {
         String password = request.getParameter("password");
 
         if (username == null || password == null)
-            return "/login.jsp";
+            return PAGE_LOGIN;
 
         Optional<User> user = userService.findUser(username, password);
 
         if (!user.isPresent()) {
             request.setAttribute("error", DATA_ERROR);
-            return "/login.jsp";
+            return PAGE_LOGIN;
         }
 
         if (CommandUtility.checkUserIsLogged(request, username)) {
             request.setAttribute("error", LOGGED_ERROR);
-            return "/login.jsp";
+            return PAGE_LOGIN;
         }
 
         if (user.get().getRole().equals(Role.ADMIN)) {
@@ -51,19 +53,19 @@ public class LoginCommand implements Command {
 
             LOGGER.info(user.get() + LOGGED_SUCCESS);
 
-            return "redirect:/exhibition/admin";
+            return "redirect:/exhibition/" + URL_ADMIN;
         } else if (user.get().getRole().equals(Role.SUPER_ADMIN)) {
             CommandUtility.setUser(request, user.get());
 
             LOGGER.info(user.get() + LOGGED_SUCCESS);
 
-            return "redirect:/exhibition/super_admin";
+            return "redirect:/exhibition/" + URL_SUPER_ADMIN;
         } else {
             CommandUtility.setUser(request, user.get());
 
             LOGGER.info(user.get() + LOGGED_SUCCESS);
 
-            return "redirect:/exhibition/user";
+            return "redirect:/exhibition/" + URL_USER;
         }
 
     }

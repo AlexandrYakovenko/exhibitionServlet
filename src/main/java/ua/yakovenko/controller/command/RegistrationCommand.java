@@ -3,7 +3,8 @@ package ua.yakovenko.controller.command;
 import ua.yakovenko.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
+
+import static ua.yakovenko.controller.util.Constants.*;
 
 public class RegistrationCommand implements Command {
 
@@ -19,15 +20,11 @@ public class RegistrationCommand implements Command {
         String password = request.getParameter("password");
 
         if (username == null || password == null)
-            return "/registration.jsp";
+            return PAGE_REGISTRATION;
 
-        try {
-            userService.addUser(username, password);
-        } catch (SQLException e) {
-            request.setAttribute("error", true);
-        }
+        userService.addUser(username, password);
 
-        return "redirect:/exhibition/login";
+        return "redirect:/exhibition/" + URL_LOGIN;
     }
 }
 

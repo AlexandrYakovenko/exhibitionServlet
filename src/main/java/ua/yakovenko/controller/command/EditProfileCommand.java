@@ -1,16 +1,20 @@
 package ua.yakovenko.controller.command;
 
+import ua.yakovenko.controller.util.CommandUtility;
 import ua.yakovenko.model.entity.User;
 import ua.yakovenko.model.service.UserService;
-import ua.yakovenko.controller.util.CommandUtility;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static ua.yakovenko.controller.util.Constants.*;
 
 public class EditProfileCommand implements Command {
 
     private static final String USERNAME_SAVED = "Username successfully saved";
 
     private static final String PASSWORD_SAVED = "Password successfully saved";
+
+    private static final String CONFIRM_ERROR = "Invalid confirm password.";
 
     private UserService userService;
 
@@ -20,7 +24,7 @@ public class EditProfileCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Long userId = (Long) request.getSession().getAttribute("userId");
+        Long userId = (Long) request.getSession().getAttribute(USER_ID);
         User currentUser = userService.findById(userId);
 
         String username = request.getParameter("username");
@@ -44,10 +48,10 @@ public class EditProfileCommand implements Command {
                 CommandUtility.setUser(request, currentUser);
                 request.setAttribute("message", PASSWORD_SAVED);
             } else {
-                request.setAttribute("error", "Invalid confirm password.");
+                request.setAttribute("error", CONFIRM_ERROR);
             }
         }
 
-        return "/WEB-INF/user/pages/editProfile.jsp";
+        return PAGE_EDIT_PROFILE;
     }
 }

@@ -8,6 +8,8 @@ import ua.yakovenko.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class BoughtTicketsCommand implements Command {
 
     private ExhibitionService exhibitionService;
@@ -21,7 +23,7 @@ public class BoughtTicketsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Long userId = (Long) request.getSession().getAttribute("userId");
+        Long userId = (Long) request.getSession().getAttribute(USER_ID);
         User user = userService.findById(userId);
 
         String boughtTicketIdStr = request.getParameter("boughtTicketId");
@@ -30,7 +32,7 @@ public class BoughtTicketsCommand implements Command {
             try {
                 userService.buyTicket(user, ticketId);
             } catch (Exception e) {
-                return "redirect:/exhibition/user/buy-ticket";
+                return "redirect:/exhibition/" + URL_BUY_TICKET;
             }
         }
 
@@ -38,6 +40,6 @@ public class BoughtTicketsCommand implements Command {
 
         request.setAttribute("tickets", exhibitions);
 
-        return "/WEB-INF/user/pages/boughtTickets.jsp";
+        return PAGE_BOUGHT_TICKETS;
     }
 }

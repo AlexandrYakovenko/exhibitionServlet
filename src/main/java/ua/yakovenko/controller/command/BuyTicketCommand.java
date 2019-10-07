@@ -8,7 +8,13 @@ import ua.yakovenko.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class BuyTicketCommand implements Command {
+
+    private static final String HAVE_TICKET = "haveTicket";
+
+    private static final String HAVE_TICKET_ERROR = "You have already bought this ticket.";
 
     private ExhibitionService exhibitionService;
 
@@ -21,18 +27,18 @@ public class BuyTicketCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Long userId = (Long) request.getSession().getAttribute("userId");
+        Long userId = (Long) request.getSession().getAttribute(USER_ID);
         User user = userService.findById(userId);
-        request.setAttribute("currentUser", user);
+        request.setAttribute(CURRENT_USER, user);
 
-        String exhibitionIdStr = request.getParameter("exhibitionId");
+        String exhibitionIdStr = request.getParameter(EXHIBITION_ID);
         if (exhibitionIdStr != null) {
             Long exhibitionId = Long.valueOf(exhibitionIdStr);
-            request.getSession().setAttribute("exhibitionId", exhibitionId);
+            request.getSession().setAttribute(EXHIBITION_ID, exhibitionId);
         }
 
         Exhibition exhibition = null;
-        Object exhibitionIdObj = request.getSession().getAttribute("exhibitionId");
+        Object exhibitionIdObj = request.getSession().getAttribute(EXHIBITION_ID);
         if (exhibitionIdObj != null) {
             Long exhibitionId = (Long) exhibitionIdObj;
             exhibition = exhibitionService.findById(exhibitionId);
@@ -42,10 +48,10 @@ public class BuyTicketCommand implements Command {
         List<Exhibition> exhibitions = exhibitionService.findBoughtTickets(user);
         if (exhibitions != null) {
             if (exhibitions.contains(exhibition)) {
-                request.setAttribute("haveTicket", "You have already bought this ticket.");
+                request.setAttribute(HAVE_TICKET, HAVE_TICKET_ERROR);
             }
         }
 
-        return "/WEB-INF/user/pages/buyTicket.jsp";
+        return PAGE_BUY_TICKET;
     }
 }

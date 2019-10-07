@@ -6,6 +6,8 @@ import ua.yakovenko.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class UserListCommand implements Command {
 
     private UserService userService;
@@ -19,6 +21,6 @@ public class UserListCommand implements Command {
         List<User> userList = userService.findAllUsers();
         request.setAttribute("userList", userList);
 
-        return "/WEB-INF/super_admin/pages/userList.jsp";
+        return PAGE_USER_LIST;
     }
 }

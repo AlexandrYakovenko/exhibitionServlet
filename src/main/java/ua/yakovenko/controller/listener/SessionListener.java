@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import java.util.HashSet;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class SessionListener implements HttpSessionListener {
 
     @Override
@@ -15,7 +17,7 @@ public class SessionListener implements HttpSessionListener {
         HashSet<String> loggedUsers = (HashSet<String>) httpSessionEvent
                 .getSession()
                     .getServletContext()
-                        .getAttribute("loggedUsers");
+                        .getAttribute(LOGGED_USERS);
 
         String username = (String) httpSessionEvent
                 .getSession()
@@ -23,6 +25,6 @@ public class SessionListener implements HttpSessionListener {
 
         loggedUsers.remove(username);
 
-        httpSessionEvent.getSession().setAttribute("loggedUsers", loggedUsers);
+        httpSessionEvent.getSession().setAttribute(LOGGED_USERS, loggedUsers);
     }
 }

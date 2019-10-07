@@ -8,6 +8,8 @@ import ua.yakovenko.controller.util.CommandUtility;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class ExhibitionAddCommand implements Command {
 
     private static final String DATE_ERROR = "You choose date before today.";
@@ -39,7 +41,7 @@ public class ExhibitionAddCommand implements Command {
                     request.setAttribute("description", description);
                     request.setAttribute("price", price);
                     request.setAttribute("error", DATE_ERROR);
-                    return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+                    return PAGE_EXHIBITION_ADD;
                 }
 
                 User author = (User) request.getSession().getAttribute("user");
@@ -54,12 +56,12 @@ public class ExhibitionAddCommand implements Command {
 
                 exhibitionService.add(exhibition);
 
-                return "redirect:/exhibition/user/exhibitions";
+                return "redirect:/exhibition/" + URL_EXHIBITIONS;
             }
-            return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+            return PAGE_EXHIBITION_ADD;
         } catch (Exception e) {
             request.setAttribute("error", EXHIBITION_ADD_ERROR);
-            return "/WEB-INF/admin/pages/exhibitionAdd.jsp";
+            return PAGE_EXHIBITION_ADD;
         }
     }
 }

@@ -8,6 +8,8 @@ import ua.yakovenko.controller.util.CommandUtility;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class ExhibitionPageCommand implements Command {
 
     private ExhibitionService exhibitionService;
@@ -20,7 +22,7 @@ public class ExhibitionPageCommand implements Command {
     public String execute(HttpServletRequest request) {
         request.setAttribute("currentPage", 1);
 
-        String exhibitionIdDelete = request.getParameter("exhibitionIdDelete");
+        String exhibitionIdDelete = request.getParameter(EXHIBITION_ID);
         if (exhibitionIdDelete != null) {
             Long idForDelete = Long.valueOf(exhibitionIdDelete);
             exhibitionService.deleteById(idForDelete);
@@ -35,8 +37,8 @@ public class ExhibitionPageCommand implements Command {
         }
 
         User currentUser = (User) request.getSession().getAttribute("user");
-        request.setAttribute("currentUser", currentUser);
+        request.setAttribute(CURRENT_USER, currentUser);
 
-        return "/WEB-INF/user/pages/exhibitionPage.jsp";
+        return PAGE_EXHIBITION_PAGE;
     }
 }

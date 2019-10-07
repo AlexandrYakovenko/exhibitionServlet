@@ -4,7 +4,7 @@ import ua.yakovenko.model.dao.impl.DaoFactoryImpl;
 
 public abstract class DaoFactory  {
 
-    private static DaoFactory daoFactory;
+    private static volatile DaoFactory daoFactory;
 
     public abstract UserDao createUserDao();
 

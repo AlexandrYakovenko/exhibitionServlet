@@ -7,6 +7,8 @@ import ua.yakovenko.model.service.ExhibitionService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class MyExhibitionsCommand implements Command {
 
     private ExhibitionService exhibitionService;
@@ -24,6 +26,6 @@ public class MyExhibitionsCommand implements Command {
         request.setAttribute("exhibitions", exhibitions);
         request.setAttribute("user", author);
 
-        return "/WEB-INF/admin/pages/myExhibitions.jsp";
+        return PAGE_MY_EXHIBITIONS;
     }
 }

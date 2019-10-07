@@ -6,6 +6,8 @@ import ua.yakovenko.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.yakovenko.controller.util.Constants.*;
+
 public class UserEditCommand implements Command {
 
     private UserService userService;
@@ -17,20 +19,20 @@ public class UserEditCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         try {
-            Long editId = Long.valueOf(request.getParameter("userId"));
-            User editUser = userService.findById(editId);
-            request.setAttribute("editUser", editUser);
+            Long userId = Long.valueOf(request.getParameter(USER_ID));
+            User user = userService.findById(userId);
+            request.setAttribute("editUser", user);
 
             String newUsername = request.getParameter("newUsername");
             String newRole = request.getParameter("newRole");
             if (newUsername != null && newRole != null) {
-                editUser.setUsername(newUsername);
-                editUser.setRole(Role.valueOf(newRole));
-                userService.update(editUser);
+                user.setUsername(newUsername);
+                user.setRole(Role.valueOf(newRole));
+                userService.update(user);
             }
         } catch (Exception e) {
             request.setAttribute("error", e);
         }
-        return "/WEB-INF/super_admin/pages/userEdit.jsp";
+        return PAGE_USER_EDIT;
     }
 }

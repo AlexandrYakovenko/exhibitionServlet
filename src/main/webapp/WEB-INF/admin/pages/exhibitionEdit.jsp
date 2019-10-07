@@ -74,9 +74,6 @@
                                    value="<c:if test="${requestScope.exhibition ne null}">${exhibition.date}</c:if>"/>
                         </div>
 
-                        <!-- security_token only to post-methods -->
-                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-
                         <input type="hidden" name="exhibitionId"
                                value="<c:if test="${requestScope.exhibition ne null}">${exhibition.id}</c:if>" />
 
@@ -119,7 +116,7 @@
                             <p class="col align-self-center"></p>
                             <form class="col align-self-center" method="post"
                                   action="${pageContext.request.contextPath}/exhibition/user/exhibitions">
-                                  <input type="hidden" name="exhibitionIdDelete" value="${exhibition.id}"/>
+                                  <input type="hidden" name="exhibitionId" value="${exhibition.id}"/>
                                   <button class="btn btn-secondary" type="submit">
                                       <fmt:message key="button.delete"/>
                                   </button>
